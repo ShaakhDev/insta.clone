@@ -1,0 +1,42 @@
+.auth {
+    width: 50rem;
+    height: 60rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 0.05rem solid #c1c1c1;
+    border-radius: 5px;
+    padding: 6rem;
+    background-color:#fff;
+}
+.box{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.box > *{
+    font-size: 200% !important;
+    user-select: none;
+}
+.brand{
+    width: 27rem;
+    height: 11rem;
+    user-drag: none;
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+.questionText{
+    font-size: 1.5rem;
+    margin-top: 2rem;
+}
+.questionText a{
+    text-decoration: none;
+    color: #1976d2;
+}
