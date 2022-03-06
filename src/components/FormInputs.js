@@ -10,10 +10,14 @@ import {
 } from "@mui/material";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
-import api from "../service/axios"
+import {customStyles} from './customMuiStyles';
+import {useDispatch} from "react-redux";
+import {signUp,login} from "../store/actions/userActions";
+
 
 function FormInputs({authType, button}) {
     const [isDisableButton, setIsDisableButton] = useState(true)
+    const dispatch = useDispatch()
     const usernameRef = useRef();
     const passRef = useRef();
     const emailRef = useRef();
@@ -21,6 +25,7 @@ function FormInputs({authType, button}) {
     const username = usernameRef.current?.value
     const password = passRef.current?.value
     const email = emailRef.current?.value
+    const avatar_url = avatarUrlRef.current?.value
 
     const [values, setValues] = useState({
         password: '',
@@ -49,65 +54,29 @@ function FormInputs({authType, button}) {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
-    const customStyles = {
-        userNameInput: {
-            InputProps: {
-                style: {fontSize: '2rem'}
-            },
-            InputLabelProps: {
-                style: {fontSize: '2rem'}
-            },
-            fullWidth: true,
-            error: false,
-            required: true
-        },
-        passwordInput: {
-            fullWidth: true,
-            error: false,
-            required: true
-        },
-        label: {
-            sx: {
-                fontSize: '2rem'
-            },
-        },
-        avatarUrlInput: {
-            InputProps: {
-                style: {fontSize: '2rem'}
-            },
-            InputLabelProps: {
-                style: {fontSize: '2rem'}
-            },
-            fullWidth: true,
-            error: false,
-            required: false
-        }
 
-    }
-    const signup = ()=>{
-        const requestOptions = {
+    const signUpHandle = ()=>{
+        const formData = {
             username,
             email,
             password,
-            avatar_url: ""
+            avatar_url,
         }
-        api.post('/user',requestOptions)
-            .then(data=>{
-                console.log(data)
-                login()
-            })
-            .catch(err=>console.log(err))
+        dispatch(signUp(formData))
+        loginHandle()
     }
-    const login=()=>{
 
+    const loginHandle = ()=>{
+        const formData = new FormData();
+        formData.append('username',username);
+        formData.append('password',password);
+        dispatch(login(formData))
     }
     const handleSubmit = () => {
         if (authType === "SIGNUP") {
-            console.log('signup handle')
-            signup()
+          signUpHandle()
         } else {
-            console.log("login handle")
-
+          loginHandle()
         }
     }
 
