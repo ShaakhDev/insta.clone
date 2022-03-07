@@ -4,6 +4,7 @@ const userReducer = createSlice({
     name: 'user',
     initialState: {
         user: null,
+        registered: false,
         loading: false,
         token: localStorage.getItem('token') || null,
         token_type: localStorage.getItem('token_type'),
@@ -12,13 +13,13 @@ const userReducer = createSlice({
     reducers: {
         setUser(state, action) {
             state.user = action.payload;
-            state.loading = false;
+            state.registered = true
         },
         setUserId(state, action) {
             state.user_id = action.payload
         },
-        loading(state){
-            state.loading = true
+        loading(state,action) {
+            state.loading = action.payload
         }
     }
 })

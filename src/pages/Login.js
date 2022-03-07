@@ -11,7 +11,7 @@ function Login() {
                      className={styles.brand} alt="brand"/>
                 <FormInputs authType="LOGIN" button="login"/>
             </div>
-            <p className={styles.questionText} >Don't have an account? <Link to="signup">Sign Up</Link></p>
+            <p className={styles.questionText} >Don't have an account? <Link to="/signup">Sign Up</Link></p>
         </form>
     );
 }
