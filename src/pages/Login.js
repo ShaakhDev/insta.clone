@@ -1,4 +1,4 @@
-import FormInputs from "../components/FormInputs";
+import FormInputs from "../components/auth/FormInputs";
 import styles from '../styles/Auth.module.css'
 import {Link} from 'react-router-dom'
 
@@ -11,7 +11,7 @@ function Login() {
                      className={styles.brand} alt="brand"/>
                 <FormInputs authType="LOGIN" button="login"/>
             </div>
-            <p className={styles.questionText} >Don't have an account? <Link to="/signup">Sign Up</Link></p>
+            <p className={styles.questionText} >Don't have an account? <Link to="/accounts/signup">Sign Up</Link></p>
         </form>
     );
 }

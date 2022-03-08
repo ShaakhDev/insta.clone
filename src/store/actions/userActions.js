@@ -3,9 +3,7 @@ import api from "../../service/axios";
 
 const sendRequest = async (endpoint,requestBody)=>{
     const response = await api.post(endpoint, requestBody);
-    if (response.status !== 200) {
-        throw new Error('couldn\'t fetch data')
-    }
+    if (response.status !== 200) throw new Error('couldn\'t fetch data')
     return response;
 }
 
@@ -16,9 +14,7 @@ export const signUp = (formData) => {
         try {
             const userData = await sendRequest('/user',formData);
             console.log(userData)
-            dispatch(
-                userActions.setUser(userData?.data)
-            )
+            dispatch(userActions.setUser(userData?.data))
         } catch (error) {
             console.log(error)
         }

@@ -1,6 +1,7 @@
-import { useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
+import {useNavigate} from 'react-router-dom'
 import {useDispatch, useSelector} from "react-redux";
-import {signUp, login} from "../store/actions/userActions";
+import {signUp, login} from "../../store/actions/userActions";
 import {Button} from "@mui/material";
 import AvatarUrl from "./avatar_url";
 import Username from "./username";
@@ -10,12 +11,13 @@ import Loader from './loader'
 
 function FormInputs({authType, button}) {
     const [isDisableButton, setIsDisableButton] = useState(true)
-    const dispatch = useDispatch()
-    const {registered, loading} = useSelector(state => state?.user)
+    const {registered, loading, token} = useSelector(state => state?.user)
     const [avatar_url, setAvatarUrl] = useState()
     const [username, setUsername] = useState()
     const [password, setPassword] = useState()
     const [email, setEmail] = useState()
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (
@@ -25,16 +27,17 @@ function FormInputs({authType, button}) {
         else setIsDisableButton(true);
     }, [username, password, email])
 
-
     useEffect(() => {
         console.log('loading: ' + loading)
     }, [loading])
-
 
     useEffect(() => {
         if (registered) loginHandle()
     }, [registered])
 
+    useEffect(() => {
+        if (token) navigate('/',{replace:true})
+    }, [token])
 
     const signUpHandle = () => {
         const formData = {

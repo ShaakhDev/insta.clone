@@ -16,10 +16,10 @@ const userReducer = createSlice({
             state.registered = true
         },
         setUserId(state, action) {
-            state.user_id = action.payload
+            state.user_id = action.payload;
         },
         loading(state,action) {
-            state.loading = action.payload
+            state.loading = action.payload;
         }
     }
 })
