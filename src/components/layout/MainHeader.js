@@ -1,10 +1,10 @@
 import {Link,useNavigate} from 'react-router-dom'
 import styles from '../../styles/MainHeader.module.css'
-import HomeFilled from "../icons/homeFilled";
-import HomeOutlined from "../icons/homeOutlined";
-import AddPostFilled from "../icons/addPostFilled";
-import AddPostOutlined from "../icons/addPostOutlined";
-import AvatarDropdown from "../icons/avatarDropdown";
+import HomeFilled from "../mainHeaderIcons/homeFilled";
+import HomeOutlined from "../mainHeaderIcons/homeOutlined";
+import AddPostFilled from "../mainHeaderIcons/addPostFilled";
+import AddPostOutlined from "../mainHeaderIcons/addPostOutlined";
+import AvatarDropdown from "../mainHeaderIcons/avatarDropdown";
 import {useSelector} from "react-redux";
 import {Button} from "@mui/material";
 

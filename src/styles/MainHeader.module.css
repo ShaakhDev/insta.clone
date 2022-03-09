@@ -8,6 +8,7 @@
     align-items: center;
     border-bottom: 0.1rem solid #e0e0e0;
     background: #fff;
+    z-index: 99;
 }
 .behind{
     min-height: 7rem;
