@@ -3,12 +3,15 @@ export const muiStyles = {
         sx:{
             maxWidth:700,
             margin: "3rem auto 0",
-            paddingBottom: '4rem',
         }
     },
     stack:{
         sx:{width:'100%'},
         spacing:2,
         direction:"row",
+    },
+    actions:{
+        disableTouchRipple : true,
+        disableRipple : true,
     }
 }

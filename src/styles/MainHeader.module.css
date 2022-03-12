@@ -16,18 +16,13 @@
 }
 .box{
     margin: 0 auto;
-    width: 70%;
-    max-width: 70%;
+    width: 98%;
+    max-width: 98rem;
     height: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr;
     align-items: center;
-}
-
-.column, .brand{
-    width: 100%;
-    height: 100%;
 }
 .brand a img{
     width: 15rem;
@@ -36,6 +31,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    padding-right: 1.5rem;
 }
 .icons svg, .icons > div > button > div,.icons > div > button{
     width: 2.6rem;
