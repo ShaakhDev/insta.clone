@@ -6,8 +6,9 @@ import MenuItem from '@mui/material/MenuItem';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
+import {Link} from 'react-router-dom'
 
-export default function AvatarDropdown() {
+export default function AvatarDropdown({user}) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
 
@@ -28,7 +29,8 @@ export default function AvatarDropdown() {
                         aria-haspopup="true"
                         aria-expanded={open ? 'true' : undefined}
                     >
-                        <Avatar src={process.env.PUBLIC_URL + '/avatar.webp'} sx={{width: 32, height: 32}}/>
+                        <Avatar src={user?.avatar_url || (process.env.PUBLIC_URL + '/avatar.webp')}
+                                sx={{width: 32, height: 32}}/>
                     </IconButton>
                 </Tooltip>
             </Box>
@@ -70,7 +72,9 @@ export default function AvatarDropdown() {
                 anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
             >
                 <MenuItem sx={{fontSize: "1.5rem"}}>
-                    Profile
+                    <Link style={{textDecoration: "none", color: "inherit"}} to='/user'>
+                        Profile
+                    </Link>
                 </MenuItem>
                 <Divider/>
                 <MenuItem sx={{fontSize: "1.5rem"}}>

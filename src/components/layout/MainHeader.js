@@ -5,12 +5,22 @@ import HomeOutlined from "../mainHeaderIcons/homeOutlined";
 import AddPostFilled from "../mainHeaderIcons/addPostFilled";
 import AddPostOutlined from "../mainHeaderIcons/addPostOutlined";
 import AvatarDropdown from "../mainHeaderIcons/avatarDropdown";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Button} from "@mui/material";
+import {useEffect} from "react";
+import {getCurrentUser} from "../../store/actions/userActions";
 
 function MainHeader(props) {
     const navigate = useNavigate()
-    const token = useSelector(state => state.user.token);
+    const dispatch = useDispatch();
+    const {token,token_type,user} = useSelector(state=>state.user);
+
+
+    useEffect(()=>{
+        dispatch(getCurrentUser(token_type,token))
+    },[dispatch,token])
+
+
     return (
         <>
             <nav className={styles.nav}>
@@ -23,12 +33,14 @@ function MainHeader(props) {
                     <div className={styles.search}></div>
                     {token && (
                         <div className={styles.icons}>
-                            <HomeFilled/>
+                            <Link to="/">
+                                <HomeFilled/>
+                            </Link>
                             {/*<HomeOutlined/>*/}
                             <AddPostOutlined/>
                             {/*<AddPostFilled/>*/}
                             {/*<ProfileAvatar/>*/}
-                            <AvatarDropdown/>
+                            <AvatarDropdown user={user}/>
                         </div>
                     )}
                     { !token && (

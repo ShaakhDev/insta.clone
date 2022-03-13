@@ -4,7 +4,7 @@ import styles from '../../styles/Profile.module.css'
 import {profileMuiStyles} from "./customMuiStyles";
 import {Stack} from "@mui/material";
 import Typography from "@mui/material/Typography";
-import PostsIcon from "./postsIcon";
+import PostsIcon from "./profile icons/postsIcon";
 import Posts from "./Posts";
 
 function ProfileBody(props) {

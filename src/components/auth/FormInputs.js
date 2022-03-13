@@ -35,9 +35,9 @@ function FormInputs({authType, button}) {
         if (registered) loginHandle()
     }, [registered])
 
-    useEffect(() => {
-        if (token) navigate('/',{replace:true})
-    }, [token])
+    // useEffect(() => {
+    //     if (token) navigate('/',{replace:true})
+    // }, [token,navigate])
 
     const signUpHandle = () => {
         const formData = {
@@ -46,6 +46,7 @@ function FormInputs({authType, button}) {
             password,
             avatar_url,
         }
+
         dispatch(signUp(formData))
     }
 

@@ -7,8 +7,10 @@ import Media from "./media";
 import Actions from "./actions";
 import Content from "./content";
 import AddComment from "./addComment";
+import {useSelector} from "react-redux";
 
 function PostCard({postData}) {
+    const {token} =useSelector(state=>state.user);
     const {image_url, user, id, caption, comments, timestamp, likes} = postData;
     return (
         <Card {...muiStyles.card} className={styles.card}>
@@ -23,10 +25,9 @@ function PostCard({postData}) {
                 caption={caption}/>
             <Divider/>
 
-            <AddComment/>
+            {token&& <AddComment/>}
         </Card>
     );
 }
 
-// eslint-disable-next-line react-hooks/rules-of-hooks
 export default PostCard

@@ -5,7 +5,7 @@ import styles from '../../styles/Profile.module.css'
 import {Button, Stack} from "@mui/material";
 import Typography from "@mui/material/Typography";
 
-function ProfileHeader(props) {
+function ProfileHeader({user}) {
     return (
         <>
             <Box className={styles.header}>
@@ -30,9 +30,9 @@ function ProfileHeader(props) {
                         <Typography variant='h5'>
                             <b>93</b> followers
                         </Typography>
-                        <Typography variant='h5'>
-                            <b>123</b> following
-                        </Typography>
+                        {/*<Typography variant='h5'>*/}
+                        {/*    <b>123</b> following*/}
+                        {/*</Typography>*/}
                     </Stack>
                 </section>
 

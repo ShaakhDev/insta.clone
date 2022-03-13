@@ -1,8 +1,16 @@
 import FormInputs from "../components/auth/FormInputs";
 import styles from '../styles/Auth.module.css'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
+import {useEffect} from "react";
+import {useSelector} from "react-redux";
 
 function Login() {
+    const {token} =useSelector(state=>state.user);
+    const navigate = useNavigate()
+    useEffect(() => {
+        if(token )navigate('/',{replace:true})
+
+    },[token,navigate])
 
     return (
         <form className={styles.auth}>

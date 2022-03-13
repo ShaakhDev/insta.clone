@@ -15,10 +15,11 @@ const userReducer = createSlice({
             state.user = action.payload;
             state.registered = true
         },
-        setUserId(state, action) {
-            state.user_id = action.payload;
+        setToken(state) {
+            state.token = localStorage.getItem('token') || null;
+            state.token_type = localStorage.getItem('token_type');
         },
-        loading(state,action) {
+        loading(state, action) {
             state.loading = action.payload;
         }
     }

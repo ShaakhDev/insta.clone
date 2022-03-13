@@ -10,6 +10,12 @@ body {
   width: 100%;
   height: 100%;
   background-color: #fafafa;
+  overflow-y: scroll !important;
+  padding-right: 0px !important;
+}
+body a{
+  text-decoration: none;
+  color: inherit;
 }
 #root{
   width: 100%;

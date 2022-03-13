@@ -7,10 +7,11 @@ import {getPosts} from "../store/actions/postActions";
 function Posts() {
     const {posts} = useSelector(state => state?.post);
     const dispatch = useDispatch();
+
     useEffect(() => {
         dispatch(getPosts())
-    }, [dispatch]);
-    console.log(posts)
+    }, []);
+
 
     return (
         <>

@@ -10,7 +10,7 @@ const sendRequest = async (endpoint)=>{
 
 export const getPosts = () => {
     return async (dispatch) => {
-        dispatch(postActions.loading(true));
+
         try {
             const postData = await sendRequest('/post/all');
             // console.log(postData?.data)
@@ -21,3 +21,15 @@ export const getPosts = () => {
     }
 }
 
+export const getProfileDetails = (username)=>{
+    return async (dispatch) =>{
+        dispatch(postActions.loading(true));
+        try{
+            const profileData = await sendRequest(username);
+            console.log(profileData)
+            dispatch(postActions.setProfileDetails(profileData?.data))
+        }catch(error){
+            console.log(error)
+        }
+    }
+}
