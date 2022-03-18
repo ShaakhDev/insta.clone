@@ -6,15 +6,22 @@ function AvatarUrl({getValue}) {
     const avatarUrlRef = useRef();
     const avatar_url = avatarUrlRef.current?.value;
 
-    useEffect(() => {
+    // useEffect(() => {
+    //     getValue(avatar_url)
+    //     console.log('avatar url component', avatar_url)
+    // })
+    const handleUrl = ()=>{
         getValue(avatar_url)
-    })
+        console.log('avatar url component', avatar_url)
+    }
 
     return (
         <>
             <TextField
                 {...customStyles.avatarUrlInput}
                 inputRef={avatarUrlRef}
+                onChange={handleUrl}
+                onFocus={handleUrl}
                 label='Avatar Url'
             />
         </>

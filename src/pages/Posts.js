@@ -1,16 +1,17 @@
 import React, {useEffect} from 'react';
 import styles from "../styles/Home.module.css";
-import PostCard from "../components/posts/card/card";
+import PostCard from "../components/posts/card/postCard";
 import {useDispatch, useSelector} from "react-redux";
-import {getPosts} from "../store/actions/postActions";
+import {getAllPosts} from "../store/actions/postActions";
 
 function Posts() {
     const {posts} = useSelector(state => state?.post);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getPosts())
+        dispatch(getAllPosts())
     }, []);
+
 
 
     return (

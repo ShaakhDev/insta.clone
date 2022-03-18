@@ -8,7 +8,7 @@ const sendRequest = async (endpoint)=>{
 }
 
 
-export const getPosts = () => {
+export const getAllPosts = () => {
     return async (dispatch) => {
 
         try {
@@ -21,15 +21,3 @@ export const getPosts = () => {
     }
 }
 
-export const getProfileDetails = (username)=>{
-    return async (dispatch) =>{
-        dispatch(postActions.loading(true));
-        try{
-            const profileData = await sendRequest(username);
-            console.log(profileData)
-            dispatch(postActions.setProfileDetails(profileData?.data))
-        }catch(error){
-            console.log(error)
-        }
-    }
-}

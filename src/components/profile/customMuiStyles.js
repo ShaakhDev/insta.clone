@@ -13,6 +13,15 @@ export const profileMuiStyles = {
             fontWeight: '900'
         }
     },
+    followButton:{
+        variant: 'contained',
+        sx:{
+            textTransform: 'capitalize',
+            fontWeight: '600',
+            fontSize: '1.6rem',
+            padding:"0 2rem !important"
+        }
+    },
     bodyStack: {
         justifyContent: "center",
         alignItems: "center",

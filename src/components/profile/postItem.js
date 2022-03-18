@@ -4,16 +4,16 @@ import styles from '../../styles/Profile.module.css'
 import LikeIcon from "./profile icons/likeIcon";
 import CommentIcon from "./profile icons/commentIcon";
 
-function PostItem(props) {
+function PostItem({image,likes,comments,}) {
     return (
         <>
             <Box className={styles.postItem}>
                 <a href="#">
-                    <div className={styles.overlay}>
-                        <LikeIcon/>
-                        <CommentIcon/>
+                    <div  className={styles.overlay}>
+                        <LikeIcon likes={likes}/>
+                        <CommentIcon comments={comments}/>
                     </div>
-                    <img src={process.env.PUBLIC_URL + '/avatar.webp'} alt="post item"/>
+                    <img src={image} alt="post item"/>
                 </a>
             </Box>
         </>);

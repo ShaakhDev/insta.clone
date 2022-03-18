@@ -10,12 +10,12 @@ import AddComment from "./addComment";
 import {useSelector} from "react-redux";
 
 function PostCard({postData}) {
-    const {token} =useSelector(state=>state.user);
+    const {token} =useSelector(state=>state?.user);
     const {image_url, user, id, caption, comments, timestamp, likes} = postData;
     return (
         <Card {...muiStyles.card} className={styles.card}>
             <Header avatar={user?.avatar_url} user={user?.username}/>
-            <Media img={image_url} alt='post'/>
+            <Media img={image_url} id={id} alt='post'/>
             <Actions/>
             <Content
                 likes={likes}

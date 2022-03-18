@@ -5,20 +5,14 @@ import HomeOutlined from "../mainHeaderIcons/homeOutlined";
 import AddPostFilled from "../mainHeaderIcons/addPostFilled";
 import AddPostOutlined from "../mainHeaderIcons/addPostOutlined";
 import AvatarDropdown from "../mainHeaderIcons/avatarDropdown";
-import {useDispatch, useSelector} from "react-redux";
+import { useSelector} from "react-redux";
 import {Button} from "@mui/material";
-import {useEffect} from "react";
-import {getCurrentUser} from "../../store/actions/userActions";
+
+
 
 function MainHeader(props) {
     const navigate = useNavigate()
-    const dispatch = useDispatch();
-    const {token,token_type,user} = useSelector(state=>state.user);
-
-
-    useEffect(()=>{
-        dispatch(getCurrentUser(token_type,token))
-    },[dispatch,token])
+    const {token} = useSelector(state => state?.user);
 
 
     return (
@@ -40,7 +34,7 @@ function MainHeader(props) {
                             <AddPostOutlined/>
                             {/*<AddPostFilled/>*/}
                             {/*<ProfileAvatar/>*/}
-                            <AvatarDropdown user={user}/>
+                            <AvatarDropdown />
                         </div>
                     )}
                     { !token && (

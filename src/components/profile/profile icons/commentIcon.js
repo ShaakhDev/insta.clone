@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from "../../../styles/Profile.module.css";
 
-function CommentIcon(props) {
+function CommentIcon({comments}) {
     return (
         <>
             <div className={styles.icon}>
@@ -11,7 +11,7 @@ function CommentIcon(props) {
                     <path d="M20.656 17.008a9.993 9.993 0 10-3.59 3.615L22 22z" fill="#fff"
                     />
                 </svg>
-                <span>0</span>
+                <span>{comments}</span>
             </div>
 
         </>

@@ -5,12 +5,12 @@ import {useEffect} from "react";
 import {useSelector} from "react-redux";
 
 function Login() {
-    const {token} =useSelector(state=>state.user);
-    const navigate = useNavigate()
-    useEffect(() => {
-        if(token )navigate('/',{replace:true})
+    const {token} = useSelector(state => state.user)
+    const navigate = useNavigate();
 
-    },[token,navigate])
+    useEffect(() => {
+        if (token) navigate('/', {replace: true})
+    }, [token])
 
     return (
         <form className={styles.auth}>
@@ -19,7 +19,7 @@ function Login() {
                      className={styles.brand} alt="brand"/>
                 <FormInputs authType="LOGIN" button="login"/>
             </div>
-            <p className={styles.questionText} >Don't have an account? <Link to="/accounts/signup">Sign Up</Link></p>
+            <p className={styles.questionText}>Don't have an account? <Link to="/accounts/signup">Sign Up</Link></p>
         </form>
     );
 }

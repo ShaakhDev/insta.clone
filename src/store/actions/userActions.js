@@ -6,11 +6,21 @@ const postRequest = async (endpoint, requestBody) => {
     if (response.status !== 200) throw new Error('couldn\'t fetch data')
     return response;
 }
-const getRequest = async (endpoint, config) => {
-
+const getRequest = async (endpoint, config = null) => {
     const response = await api.get(endpoint, config);
-    if (response.status !== 200) throw new Error('couldn\'t fetch data')
+    console.log(response.status)
+    if(response.status===401){
+        localStorage.removeItem('token');
+        window.location.reload(true)
+    }
+
     return response;
+}
+
+const setTokenToLocalstorage = (data) => {
+    const _token = data?.data?.access_token;
+    localStorage.setItem('token', _token)
+    window.location.reload(true)
 }
 
 export const signUp = (formData) => {
@@ -31,31 +41,45 @@ export const login = (formData) => {
         dispatch(userActions.loading(true));
         try {
             const userData = await postRequest('/login', formData);
-            const _token = userData?.data?.access_token;
-            const _token_type = userData?.data?.token_type;
-            localStorage.setItem('token', _token)
-            localStorage.setItem('token_type', _token_type)
-            dispatch(userActions.setToken())
+            setTokenToLocalstorage(userData)
             dispatch(userActions.loading(false))
         } catch (error) {
+            dispatch(userActions.loading(false));
             console.log(error)
         }
     }
 }
 
-export const getCurrentUser = (tokenType, token) => {
+export const getCurrentUser = (token) => {
     return async (dispatch) => {
 
-
-        const head = {'Authorization': `Bearer ${token}`}
-        const config = {headers: head}
+        const head = {'Authorization': `bearer ${token}`}
+        const config = {
+            headers: head,
+        }
         try {
             const user = await getRequest('/profile', config);
             console.log(user);
             dispatch(userActions.setUser(user?.data));
 
         } catch (error) {
+
+            console.log(error.status)
+
+        }
+    }
+}
+
+export const getUserPosts = (username) => {
+    return async (dispatch) => {
+        try {
+            console.log(username)
+            const userPosts = await getRequest(`/${username}`);
+            console.log(userPosts);
+            dispatch(userActions.setUserPosts(userPosts?.data));
+        } catch (error) {
             console.log(error)
+
         }
     }
 }

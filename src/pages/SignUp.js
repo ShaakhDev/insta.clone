@@ -11,8 +11,7 @@ function SignUp() {
 
     useEffect(() => {
         if(token )navigate('/',{replace:true})
-
-    },[token,navigate])
+    },[token])
 
     return (
         <form className={styles.auth}>

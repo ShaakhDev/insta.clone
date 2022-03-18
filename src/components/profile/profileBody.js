@@ -5,9 +5,13 @@ import {profileMuiStyles} from "./customMuiStyles";
 import {Stack} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import PostsIcon from "./profile icons/postsIcon";
-import Posts from "./Posts";
+import UserPosts from "./userPosts";
+import {CameraAltOutlined} from "@mui/icons-material";
+import {useSelector} from "react-redux";
 
-function ProfileBody(props) {
+function ProfileBody() {
+    const {profile}=useSelector(state=>state?.profile);
+
     return (
         <>
             <Box className={styles.body}>
@@ -20,7 +24,15 @@ function ProfileBody(props) {
                         POSTS
                     </Typography>
                 </Stack>
-                <Posts/>
+                {!profile?.items?.length&&(
+                    <div className={styles.noPosts}>
+                        <CameraAltOutlined fontSize="large"/>
+                        <Typography variant="h2">
+                            No Posts Yet
+                        </Typography>
+                    </div>
+                )}
+                <UserPosts/>
             </Box>
         </>
     );

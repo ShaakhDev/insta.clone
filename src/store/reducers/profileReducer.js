@@ -1,14 +1,14 @@
 import {createSlice} from "@reduxjs/toolkit";
 
-const postReducer = createSlice({
-    name: 'post',
+const profileReducer = createSlice({
+    name: 'profile',
     initialState: {
-        posts:[],
+        profile:{},
         loading: false,
     },
     reducers: {
-        setPosts(state, action) {
-            state.posts = action.payload;
+        setProfile(state, action) {
+            state.profile = action.payload;
             state.loading=false
         },
         loading(state,action){
@@ -18,5 +18,5 @@ const postReducer = createSlice({
     }
 })
 
-export const postActions = postReducer.actions;
-export default postReducer.reducer;
+export const profileActions = profileReducer.actions;
+export default profileReducer.reducer;

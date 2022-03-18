@@ -1,0 +1,55 @@
+
+.box{
+    border: 1px solid #e8e8e8;
+    text-align:center;
+    text-transform:capitalize;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.heading{
+    padding: 3rem 0;
+}
+.heading h2 {
+    font-size: 1.7rem;
+}
+
+
+.buttons {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: stretch;
+    flex-direction: column;
+    padding-bottom: 0;
+}
+
+.buttons button {
+    border: none;
+    border-top: 1px solid #dbdbdb;
+    background: transparent;
+    font-weight: bold;
+    font-size: 1.3rem;
+    text-transform: capitalize;
+    width: 100%;
+    padding: 1.5rem;
+}
+.buttons button:active{
+    background-color: rgb(239, 239, 239);
+}
+.upload{
+    color: #1976d2;
+}
+.remove{
+    color: #f44336;
+}
+.buttons .cancel{
+    font-weight: 300;
+    overflow: hidden;
+}
+.cancel:active{
+    border-bottom-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+}

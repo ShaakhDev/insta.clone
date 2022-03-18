@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {useState,useEffect}from 'react';
 import Box from '@mui/material/Box';
 import {Avatar} from '@mui/material';
 import Menu from '@mui/material/Menu';
@@ -6,12 +6,22 @@ import MenuItem from '@mui/material/MenuItem';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import {Link} from 'react-router-dom'
+import {Link,useNavigate} from 'react-router-dom'
+import {useSelector, useDispatch} from "react-redux";
+import {getCurrentUser} from "../../store/actions/userActions";
 
-export default function AvatarDropdown({user}) {
-    const [anchorEl, setAnchorEl] = React.useState(null);
+export default function AvatarDropdown() {
+    const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
+    const { user} = useSelector(state => state?.user);
 
+
+    const logOutHandle = (e)=>{
+        localStorage.removeItem('token');
+        localStorage.removeItem('token_type');
+        console.log('logged out')
+        window.location.reload(true)
+    }
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -72,12 +82,12 @@ export default function AvatarDropdown({user}) {
                 anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
             >
                 <MenuItem sx={{fontSize: "1.5rem"}}>
-                    <Link style={{textDecoration: "none", color: "inherit"}} to='/user'>
+                    <Link style={{textDecoration: "none", color: "inherit"}} to={user?.username}>
                         Profile
                     </Link>
                 </MenuItem>
                 <Divider/>
-                <MenuItem sx={{fontSize: "1.5rem"}}>
+                <MenuItem onClick={()=>logOutHandle()} sx={{fontSize: "1.5rem"}}>
                     Log Out
                 </MenuItem>
             </Menu>

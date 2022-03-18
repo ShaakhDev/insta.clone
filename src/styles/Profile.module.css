@@ -20,7 +20,7 @@
 }
 
 .photo button img {
-    width: 100%;
+    height: 100%;
 }
 
 .photo button {
@@ -34,6 +34,7 @@
     align-items: center;
     overflow: hidden;
     border-radius: 50%;
+    cursor: pointer;
 }
 
 .info {
@@ -74,13 +75,24 @@
 }
 
 .postItem img {
-    width: 100%;
+   width: 100%;
+  /*height: 100%;*/
 }
 
 .postItem {
     position: relative;
-}
+    width: 29.3rem;
 
+}
+.body .noPosts{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 8rem;
+
+}
 .overlay {
     position: absolute;
     top: 0;

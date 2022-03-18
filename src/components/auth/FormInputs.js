@@ -25,7 +25,7 @@ function FormInputs({authType, button}) {
             (username && password?.length > 7)
         ) setIsDisableButton(false);
         else setIsDisableButton(true);
-    }, [username, password, email])
+    }, [username, password, email,avatar_url])
 
     useEffect(() => {
         console.log('loading: ' + loading)
@@ -35,18 +35,15 @@ function FormInputs({authType, button}) {
         if (registered) loginHandle()
     }, [registered])
 
-    // useEffect(() => {
-    //     if (token) navigate('/',{replace:true})
-    // }, [token,navigate])
-
     const signUpHandle = () => {
+
         const formData = {
             username,
             email,
             password,
             avatar_url,
         }
-
+        console.log(formData)
         dispatch(signUp(formData))
     }
 
