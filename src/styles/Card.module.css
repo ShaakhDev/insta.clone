@@ -5,6 +5,10 @@
 .card button{
     font-size: 1.4rem;
 }
+.card .media {
+    width: 61.4rem;
+    height: 61.4rem !important;
+}
 .card  span{
     font-weight: 800;
     cursor: pointer;

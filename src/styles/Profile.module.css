@@ -9,7 +9,7 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    padding: 3rem 1.5rem 6rem 1.5rem;
+    padding: 1rem 0 6rem 0;
 }
 
 .photo {
@@ -17,15 +17,18 @@
     -webkit-flex-grow: 1;
     flex-basis: 0;
     -webkit-flex-basis: 0;
+    margin-right: 3rem;
+
 }
 
 .photo button img {
     height: 100%;
+    width: 100%;
 }
 
 .photo button {
-    width: 17rem;
-    height: 17rem;
+    width: 15rem;
+    height: 15rem;
     margin: 0 auto;
     border: none;
     background: transparent;
@@ -75,16 +78,19 @@
 }
 
 .postItem img {
-   width: 100%;
-  /*height: 100%;*/
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
 }
 
 .postItem {
     position: relative;
     width: 29.3rem;
+    height: 29.3rem;
 
 }
-.body .noPosts{
+
+.body .noPosts {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -93,6 +99,7 @@
     padding-top: 8rem;
 
 }
+
 .overlay {
     position: absolute;
     top: 0;

@@ -18,7 +18,6 @@ export default function AvatarDropdown() {
 
     const logOutHandle = (e)=>{
         localStorage.removeItem('token');
-        localStorage.removeItem('token_type');
         console.log('logged out')
         window.location.reload(true)
     }

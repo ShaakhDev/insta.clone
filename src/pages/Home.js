@@ -9,7 +9,7 @@ function Home() {
     const {token} = useSelector(state => state?.user);
 
     useEffect(() => {
-        if (token) dispatch(getCurrentUser(token))
+        if (token!==null) dispatch(getCurrentUser())
     }, [dispatch, token])
     //
     // useEffect(() => {

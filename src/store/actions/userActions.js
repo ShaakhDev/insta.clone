@@ -1,5 +1,6 @@
 import {userActions} from "../reducers/userReducer";
 import api from "../../service/axios";
+import {profileActions} from "../reducers/profileReducer";
 
 const postRequest = async (endpoint, requestBody) => {
     const response = await api.post(endpoint, requestBody);
@@ -8,12 +9,11 @@ const postRequest = async (endpoint, requestBody) => {
 }
 const getRequest = async (endpoint, config = null) => {
     const response = await api.get(endpoint, config);
-    console.log(response.status)
-    if(response.status===401){
-        localStorage.removeItem('token');
-        window.location.reload(true)
-    }
+    return response;
+}
 
+const patchRequest = async (endpoint,config)=>{
+    const response = await api.put(endpoint,config);
     return response;
 }
 
@@ -42,7 +42,10 @@ export const login = (formData) => {
         try {
             const userData = await postRequest('/login', formData);
             setTokenToLocalstorage(userData)
+            console.log('login qilindi:', userData)
             dispatch(userActions.loading(false))
+            dispatch(userActions.setUser(userData.data));
+
         } catch (error) {
             dispatch(userActions.loading(false));
             console.log(error)
@@ -50,25 +53,24 @@ export const login = (formData) => {
     }
 }
 
-export const getCurrentUser = (token) => {
+//login qilgan foydalanuvchining profil ma'lumotlarini olish
+export const getCurrentUser = ()=>{
     return async (dispatch) => {
-
-        const head = {'Authorization': `bearer ${token}`}
+        const token = localStorage.getItem('token')
+        const head = {'Authorization': `Bearer ${token}`};
         const config = {
             headers: head,
         }
         try {
             const user = await getRequest('/profile', config);
-            console.log(user);
-            dispatch(userActions.setUser(user?.data));
-
+            dispatch(userActions.setUser(user.data));
         } catch (error) {
-
-            console.log(error.status)
-
+            console.log(error?.response)
         }
     }
 }
+
+
 
 export const getUserPosts = (username) => {
     return async (dispatch) => {
@@ -79,7 +81,6 @@ export const getUserPosts = (username) => {
             dispatch(userActions.setUserPosts(userPosts?.data));
         } catch (error) {
             console.log(error)
-
         }
     }
 }

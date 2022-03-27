@@ -1,10 +1,11 @@
-import React, {useEffect} from 'react';
+import React, {useEffect,memo} from 'react';
 import styles from "../styles/Home.module.css";
 import PostCard from "../components/posts/card/postCard";
 import {useDispatch, useSelector} from "react-redux";
 import {getAllPosts} from "../store/actions/postActions";
 
 function Posts() {
+
     const {posts} = useSelector(state => state?.post);
     const dispatch = useDispatch();
 
@@ -27,4 +28,4 @@ function Posts() {
     );
 }
 
-export default Posts;
+export default memo(Posts);

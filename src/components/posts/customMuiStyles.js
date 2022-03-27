@@ -1,7 +1,7 @@
 export const muiStyles = {
     card:{
         sx:{
-            maxWidth:700,
+            maxWidth: 614,
             margin: "3rem auto 0",
         }
     },

@@ -6,10 +6,7 @@ function AvatarUrl({getValue}) {
     const avatarUrlRef = useRef();
     const avatar_url = avatarUrlRef.current?.value;
 
-    // useEffect(() => {
-    //     getValue(avatar_url)
-    //     console.log('avatar url component', avatar_url)
-    // })
+
     const handleUrl = ()=>{
         getValue(avatar_url)
         console.log('avatar url component', avatar_url)

@@ -13,10 +13,10 @@ export const getProfileDetails = (username)=>{
         dispatch(profileActions.loading(true));
         try{
             const profileData = await sendRequest(`/${username}`);
-            console.log(profileData)
             dispatch(profileActions.setProfile(profileData?.data))
         }catch(error){
-            console.log(error)
+            console.error(error.response)
         }
     }
 }
+

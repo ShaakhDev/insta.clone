@@ -15,7 +15,7 @@ function PostCard({postData}) {
     return (
         <Card {...muiStyles.card} className={styles.card}>
             <Header avatar={user?.avatar_url} user={user?.username}/>
-            <Media img={image_url} id={id} alt='post'/>
+            <Media className={styles.media} img={image_url} id={id} alt='post'/>
             <Actions/>
             <Content
                 likes={likes}

@@ -10,7 +10,6 @@ import {getProfileDetails} from "../store/actions/profileActions";
 
 function Profile() {
     const params = useParams()
-    console.log('params: ',params);
     const dispatch = useDispatch();
     const {user, token, token_type} = useSelector(state => state?.user);
 

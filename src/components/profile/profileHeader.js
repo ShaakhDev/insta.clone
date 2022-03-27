@@ -5,7 +5,7 @@ import styles from '../../styles/Profile.module.css'
 import {Button, Stack} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import {useSelector} from "react-redux";
-import BasicModal from "../modals/profileImgModal";
+import BasicModal from "../modals/editProfile";
 
 function ProfileHeader() {
     const {profile}=useSelector(state=>state?.profile);
@@ -20,7 +20,7 @@ function ProfileHeader() {
             <BasicModal open={openModal} setOpen={setOpenModal}/>
             <Box className={styles.header}>
                 <div className={styles.photo}>
-                    <button onClick={handleOpenModal} title="Change profile image">
+                    <button title="Change profile image">
                         <img  src={profile?.avatar_url||(process.env.PUBLIC_URL + 'avatar.webp')} alt='profile'/>
                     </button>
                 </div>
@@ -30,7 +30,7 @@ function ProfileHeader() {
                             {profile?.username}
                         </Typography>
                         {isMyProfile&&(
-                            <Button  title="edit your profile" {...profileMuiStyles.editButton} >
+                            <Button onClick={handleOpenModal}   title="edit your profile" {...profileMuiStyles.editButton} >
                                 edit profile
                             </Button>
                         )}

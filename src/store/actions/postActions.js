@@ -13,7 +13,6 @@ export const getAllPosts = () => {
 
         try {
             const postData = await sendRequest('/post/all');
-            // console.log(postData?.data)
             dispatch(postActions.setPosts(postData?.data))
         } catch (error) {
             console.log(error)
