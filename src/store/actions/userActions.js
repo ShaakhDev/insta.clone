@@ -70,17 +70,27 @@ export const getCurrentUser = ()=>{
     }
 }
 
-
-
-export const getUserPosts = (username) => {
-    return async (dispatch) => {
-        try {
-            console.log(username)
-            const userPosts = await getRequest(`/${username}`);
-            console.log(userPosts);
-            dispatch(userActions.setUserPosts(userPosts?.data));
-        } catch (error) {
-            console.log(error)
+export const updateProfile = (formData,image)=>{
+    return async (dispatch)=>{
+        try{
+            console.log(image)
+            let imgForm = new FormData()
+            imgForm.append("image",image)
+            const imagePath= await postRequest('/user/image', imgForm);
+            console.log(imagePath)
+            if(imagePath){
+                const token = localStorage.getItem('token')
+                const head = {'Authorization': `Bearer ${token}`};
+                const config = {
+                    body: {...formData,avatar_url:imagePath?.path},
+                    headers: head,
+                }
+                const updatedProfile = await patchRequest('/update',config)
+                console.log(updatedProfile)
+            }
+        }catch(error){
+            console.log(error.response)
         }
     }
 }
+
