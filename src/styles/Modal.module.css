@@ -55,7 +55,11 @@
     font-weight: 300;
 }
 
+.box .upload{
+    max-width: 3rem;
+    white-space: break-spaces;
 
+}
 
 
 

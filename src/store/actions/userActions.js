@@ -12,8 +12,8 @@ const getRequest = async (endpoint, config = null) => {
     return response;
 }
 
-const patchRequest = async (endpoint,config)=>{
-    const response = await api.put(endpoint,config);
+const patchRequest = async (endpoint,body,config)=>{
+    const response = await api.patch(endpoint,body,config);
     return response;
 }
 
@@ -74,18 +74,30 @@ export const updateProfile = (formData,image)=>{
     return async (dispatch)=>{
         try{
             console.log(image)
-            let imgForm = new FormData()
-            imgForm.append("image",image)
-            const imagePath= await postRequest('/user/image', imgForm);
+            const imgForm = new FormData()
+            imgForm.append("file",image);
+            const config = {
+                // body:imgForm,
+                headers:{
+                    "Content-Type":"multipart/form-data"
+                }
+            }
+
+            // console.log(imgForm)
+            const imagePath= await api.post('/user/image',imgForm,config)
             console.log(imagePath)
             if(imagePath){
                 const token = localStorage.getItem('token')
-                const head = {'Authorization': `Bearer ${token}`};
+                const body =  {...formData, avatar_url: imagePath?.data.path};
                 const config = {
-                    body: {...formData,avatar_url:imagePath?.path},
-                    headers: head,
+                    headers:{
+                        'Authorization': `Bearer ${token}`,
+                    },
                 }
-                const updatedProfile = await patchRequest('/update',config)
+                console.log(config)
+                const updatedProfile = await patchRequest('/update',body,config)
+                dispatch(userActions.setUser(updatedProfile?.data));
+
                 console.log(updatedProfile)
             }
         }catch(error){

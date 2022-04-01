@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import {profileImgModalStyle} from "./customMiuStyles";
@@ -12,10 +12,16 @@ import {updateProfile} from "../../store/actions/userActions";
 export default function BasicModal({open, setOpen,}) {
     const dispatch = useDispatch()
     const {profile} = useSelector(state => state?.profile)
-    const [username, setUsername] = useState(profile?.username)
-    const [password, setPassword] = useState()
-    const [email, setEmail] = useState(profile?.email);
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('');
     const [img,setImg]= useState(null)
+
+    useEffect(()=>{
+        setUsername(profile?.username)
+        setEmail(profile?.email)
+    },[profile]);
+
 
     const handleClose = () => setOpen(false);//close modal.
 
@@ -48,6 +54,7 @@ export default function BasicModal({open, setOpen,}) {
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                             type='text'
+                            placeholder={username}
                         />
                     </label>
                     <label>
@@ -63,11 +70,13 @@ export default function BasicModal({open, setOpen,}) {
                         <input
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            type='text'/>
+                            type='text'
+                            placeholder="New password..."
+                        />
                     </label>
                     <label >
                         Upload profile photo:
-                        <span>{img?.name}</span>
+                        <span className={styles.upload}>{img?.name}</span>
                         <UploadButton getValue={data=>setImg(data)}/>
                     </label>
                     <Button sx={{width:"100%",fontSize:"1.6rem",marginTop:'4rem'}} variant="contained" onClick={handleUpload}>Update profile</Button>
