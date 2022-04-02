@@ -1,5 +1,5 @@
 .nav{
-    min-height: 7rem;
+    min-height: 5rem;
     position: fixed;
     width: 100%;
     top: 0;
@@ -52,7 +52,8 @@
 }
 .buttons > button{
     margin-left: 2.5rem ;
-    font-size: 1.4rem;
-
+    font-size: 1.3rem;
+    text-transform: capitalize;
+    padding: .2rem .5rem;
 }
 

@@ -9,6 +9,7 @@ export const muiStyles = {
         sx:{width:'100%'},
         spacing:2,
         direction:"row",
+
     },
     actions:{
         disableTouchRipple : true,

@@ -81,9 +81,9 @@ export default function AvatarDropdown() {
                 anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
             >
                 <MenuItem sx={{fontSize: "1.5rem"}}>
-                    <Link style={{textDecoration: "none", color: "inherit"}} to={user?.username}>
+                    {user?(<Link style={{textDecoration: "none", color: "inherit"}} to={user?.username}>
                         Profile
-                    </Link>
+                    </Link>):('Profile')}
                 </MenuItem>
                 <Divider/>
                 <MenuItem onClick={()=>logOutHandle()} sx={{fontSize: "1.5rem"}}>

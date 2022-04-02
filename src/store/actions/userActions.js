@@ -70,6 +70,8 @@ export const getCurrentUser = ()=>{
     }
 }
 
+
+//Joriy foydalanuvchining profil  ma'lumotlarini o'zgartirish.
 export const updateProfile = (formData,image)=>{
     return async (dispatch)=>{
         try{

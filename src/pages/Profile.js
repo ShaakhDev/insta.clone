@@ -16,7 +16,7 @@ function Profile() {
     useEffect(() => {
         dispatch(getCurrentUser(token_type, token))
     }, [dispatch, token, token_type])
-
+console.log(params)
     useEffect(() => {
         if (user) dispatch(getProfileDetails(params?.user))
     }, [user, dispatch,params])

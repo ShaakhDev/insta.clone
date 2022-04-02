@@ -1,23 +1,25 @@
-import React from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import CardMedia from "@mui/material/CardMedia";
-import {useSelector} from 'react-redux'
-import {Skeleton} from "@mui/material";
 
 function Media({img}) {
-    const {loading} = useSelector(state=>state?.post)
+    const [url, setUrl] = useState('')
+
+    useEffect(() => {
+        setUrl(img)
+    }, [img])
     return (
         <>
-            {
-                loading ? (
-                    <Skeleton sx={{ height: 614 }} animation="wave" variant="rectangular" />
-                ) : (
+            {useMemo(() => {
+                return (
                     <CardMedia
                         component="img"
                         height="614rem"
-                        image={img || process.env.PUBLIC_URL + "/avatar.webp"}
+                        image={url}
                         alt="post"
                     />
                 )
+            }, [url])
+                // <Memo/>
             }
         </>
     );

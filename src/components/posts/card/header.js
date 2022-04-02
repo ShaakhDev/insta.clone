@@ -9,9 +9,12 @@ import {Skeleton} from "@mui/material";
 
 function Header({avatar, user}) {
     const {loading} = useSelector(state => state?.post)
+
+
     return (
         <>
             <CardHeader
+                sx={{padding: "1.2rem 1.5rem"}}
                 avatar={
                     loading ? (
                         <Skeleton animation="wave" variant="circular" width={40} height={40}/>
@@ -26,7 +29,7 @@ function Header({avatar, user}) {
                 action={
                     loading ? null : (
                         <IconButton aria-label="settings">
-                            <MoreHorizIcon/>
+                            <MoreHorizIcon fontSize="large"/>
                         </IconButton>
                     )
                 }

@@ -39,3 +39,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.likeAnimation{
+  animation: likeAnimation 300ms ease-out;
+
+}
+
+@keyframes likeAnimation{
+  0%{
+    transform: scale(1);
+  }
+  50%{
+    transform: scale(1.30);
+  }
+  100%{
+    transform: scale(1);
+  }
+}

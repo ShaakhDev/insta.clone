@@ -12,6 +12,7 @@ export const getAllPosts = () => {
     return async (dispatch) => {
 
         try {
+            dispatch(postActions.loading(true))
             const postData = await sendRequest('/post/all');
             dispatch(postActions.setPosts(postData?.data))
         } catch (error) {
