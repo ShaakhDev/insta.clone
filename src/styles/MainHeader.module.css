@@ -56,4 +56,6 @@
     text-transform: capitalize;
     padding: .2rem .5rem;
 }
-
+.avatarDropdown svg{
+    margin-left: 0 !important;
+}

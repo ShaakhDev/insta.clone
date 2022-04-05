@@ -1,50 +1,51 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
-// import {getAllPosts} from "../store/actions/postActions";
 import CurrentPostCard from "../components/currentPost/currentPostCard";
+import {postActions} from "../store/reducers/postReducer";
+import {getCurrentPost} from "../store/actions/postActions";
+
+const CURRENT_POST = [];
 
 function CurrentPost() {
-    // const dispatch = useDispatch()
-    const [post]=useState({
-        "id": 6,
-        "image_url": "https://insta-clone.deta.dev/post/download/cute-cats-4_IYSJAa.jpg",
-        "caption": "Such a cute cat🙂",
-        "timestamp": "2022-01-16T07:13:23.427571",
-        "likes": 1,
-        "user": {
-            "username": "ixtiyor",
-            "avatar_url": "https://insta-clone.deta.dev/profile/ixtiyor_hyuWgb.jpg"
-        },
-        "comments": [
-            {
-                "id": 4,
-                "text": "Yeah, it is really pretty.",
-                "user": {
-                    "username": "azamat",
-                    "avatar_url": "https://insta-clone.deta.dev/profile/azamat_HWqOCu.jpg"
-                },
-                "timestamp": "2022-01-16T07:36:39.277724"
-            },
-            {
-                "id": 8,
-                "text": "It looks like to my cat😂",
-                "user": {
-                    "username": "sardor",
-                    "avatar_url": "https://insta-clone.deta.dev/profile/Arsenal-1024x1024_UDjLdP.jpg"
-                },
-                "timestamp": "2022-01-16T07:42:25.978187"
-            }
-        ]
-    })
-    const params = useParams()
-    const {posts} = useSelector(state => state?.post);
+    const dispatch = useDispatch()
+    const params = useParams();
+    const {currentPost,error} = useSelector(state => state?.post);
+    console.log(currentPost)
 
+    useEffect(() => {
+     if(CURRENT_POST.length===0){
+         dispatch(getCurrentPost(params.postId))
+         if(currentPost)
+             CURRENT_POST.push(currentPost)
+
+     } else if(CURRENT_POST[0].id===params.postId){
+         postActions.setCurrentPost(CURRENT_POST[0]);
+     }else{
+         dispatch(getCurrentPost(params.postId))
+         CURRENT_POST.length = 0;
+         if(currentPost)
+             CURRENT_POST.push(currentPost)
+     }
+    }, [dispatch,params.postId])
+
+
+
+    if(error){
+        return <h1>{error}</h1>
+    }
 
 
     return (
         <div>
-          <CurrentPostCard user={post.user} caption={post.caption} comments={post.comments} time={post.timestamp} likes={5}/>
+            <CurrentPostCard
+                user={currentPost?.user}
+                caption={currentPost?.caption}
+                comments={currentPost?.comments}
+                time={currentPost?.timestamp}
+                image={currentPost?.image_url}
+                likes={currentPost?.likes}
+            />
         </div>
     );
 }

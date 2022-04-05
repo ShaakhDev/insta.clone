@@ -12,11 +12,11 @@ import CurrentPost from "./pages/CurrentPost";
 function App() {
     const {token} = useSelector(state => state?.user)
 
-
     return (
         <Routes>
             <Route path='/' element={<Home/>}>
-                <Route path=':user' element={token ? (<Profile/>) : (<Navigate to="/" replace={true}/>)}/>
+                {/*<Route path=':user' element={token ? (<Profile/>) : (<Navigate to="/" replace={true}/>)}/>*/}
+                <Route path=':user' element={<Profile/>}/>
                 <Route index element={<Posts/>}/>
                 <Route path="/p/*">
                     <Route path=":postId" element={<CurrentPost/>}/>

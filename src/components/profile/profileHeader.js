@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Box from "@mui/material/Box";
 import {profileMuiStyles} from "./customMuiStyles";
 import styles from '../../styles/Profile.module.css'
@@ -8,12 +8,18 @@ import {useSelector} from "react-redux";
 import BasicModal from "../modals/editProfile";
 
 function ProfileHeader() {
+    const [isMyProfile,setIsMyProfile]=useState(false)
     const {profile}=useSelector(state=>state?.profile);
     const {user}= useSelector(state=>state?.user)
     const [openModal, setOpenModal] = useState(false);
     const handleOpenModal = () => setOpenModal(true);
 
-    const isMyProfile = user?.username ===profile?.username
+    useEffect(() => {
+       if(user?.username===profile?.username)
+           setIsMyProfile(true);
+       else setIsMyProfile(false)
+    }, [user?.username,profile?.username]);
+
 
     return (
         <>
@@ -25,7 +31,7 @@ function ProfileHeader() {
                     </button>
                 </div>
                 <section className={styles.info}>
-                    <Stack direction="row" spacing={4}>
+                    <Stack  direction="row" spacing={4}>
                         <Typography variant='h2'>
                             {profile?.username}
                         </Typography>

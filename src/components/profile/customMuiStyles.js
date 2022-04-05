@@ -19,7 +19,8 @@ export const profileMuiStyles = {
             textTransform: 'capitalize',
             fontWeight: '600',
             fontSize: '1.6rem',
-            padding:"0 2rem !important"
+            padding:"0 2rem !important",
+            margin: "0.5rem 0"
         }
     },
     bodyStack: {
@@ -27,6 +28,6 @@ export const profileMuiStyles = {
         alignItems: "center",
         direction: "row",
         spacing: 1,
-        padding: '2rem 0 2rem 0'
+        padding: '2rem 0'
     }
 };

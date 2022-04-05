@@ -2,6 +2,9 @@
     font-size: 1.4rem;
     color: #333;
 }
+.card{
+    position: relative;
+}
 .card button{
     font-size: 1.4rem;
 }
@@ -40,7 +43,12 @@
     border:none;
     outline:none;
 }
+.addComment button{
+    border: none;
+    outline: none;
+    background:transparent;
+}
 .post{
-    text-transform: capitalize;
-    font-size: 1.4rem;
+    text-transform: capitalize !important;
+    font-size: 1.4rem !important;
 }

@@ -7,8 +7,9 @@ import ShareIcon from "../../postIcons/shareIcon";
 import {muiStyles} from '../customMuiStyles'
 import {useSelector} from 'react-redux'
 import {Skeleton} from "@mui/material";
+import {Link} from 'react-router-dom'
 
-function Actions() {
+function Actions({postId}) {
     const {loading} = useSelector(state => state?.post)
 
     return (
@@ -22,8 +23,10 @@ function Actions() {
                             <IconButton {...muiStyles.actions} aria-label="add to favorites">
                                 <FavoriteIcon/>
                             </IconButton>
-                            <IconButton {...muiStyles.actions} aria-label="share">
-                                <CommentIcon/>
+                            <IconButton  {...muiStyles.actions} aria-label="share">
+                                <Link to={`/p/${postId}`}>
+                                    <CommentIcon/>
+                                </Link>
                             </IconButton>
                             <IconButton {...muiStyles.actions} aria-label="comment">
                                 <ShareIcon/>

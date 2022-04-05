@@ -32,14 +32,16 @@ function PostCard({postData}) {
             {loading ? <Skeleton sx={{height: 614}} animation="wave" variant="rectangular"/> : (
                 <Media className={styles.media} img={image_url} id={id} alt='post'/>
             )}
-            <Actions/>
+            <Actions postId={id}/>
             {loading ? <LoaderSkeleton/> : (
                 <Content
                     likes={likes}
                     comments={comments}
                     time={timestamp}
                     user={user?.username}
-                    caption={caption}/>
+                    caption={caption}
+                    postId={id}
+                />
             )}
             <Divider/>
             {token && <AddComment/>}

@@ -10,9 +10,8 @@ const userReducer = createSlice({
     },
     reducers: {
         setUser(state, action) {
-            console.log(action.payload)
             state.user = action.payload
-            state.registered = true
+
         },
         loading(state, action) {
             state.loading = action.payload;

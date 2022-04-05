@@ -2,11 +2,12 @@ import React, {useState} from 'react';
 import Typography from "@mui/material/Typography";
 import CardContent from "@mui/material/CardContent";
 import styles from '../../../styles/Card.module.css'
-import useCalculateTime from "../../../hooks/useCalculateTime";
+import {useCalculateDate, useCalculatePostedTime} from "../../../hooks/useCalculateTime";
 
 
-function Content({user, caption, comments, time, likes}) {
-    const postedTime = useCalculateTime(time);
+function Content({postId,user, caption, comments, time, likes}) {
+    const postedTime = useCalculatePostedTime(time);
+    const postedDate = useCalculateDate(time);
     const [like, setLike] = useState(likes);
 
 
@@ -27,18 +28,18 @@ function Content({user, caption, comments, time, likes}) {
                 {comments.length > 0 ? (
                     <Typography variant="body1">
                         {comments.length > 1 ? (
-                            <a href="#">
+                            <a href={`/p/${postId}`}>
                                 View all {comments.length} comments
                             </a>
                         ) : (
-                            <a href="#">
+                            <a href={`/p/${postId}`}>
                                 View {comments.length} comment
                             < /a>
                         )}
                     </Typography>
                 ) : null}
                 {
-                    <Typography className={styles.time} variant="body1" color='info'>
+                    <Typography title={postedDate} className={styles.time} variant="body1" color='info'>
                         {postedTime}
                     </Typography>
                 }

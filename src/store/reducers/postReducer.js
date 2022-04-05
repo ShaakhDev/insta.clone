@@ -4,15 +4,22 @@ const postReducer = createSlice({
     name: 'post',
     initialState: {
         posts:[],
+        currentPost: {},
         loading: false,
+        error:''
     },
     reducers: {
         setPosts(state, action) {
             state.posts = action.payload;
-            state.loading=false
         },
         loading(state,action){
             state.loading = action.payload
+        },
+        setCurrentPost(state,action){
+            state.currentPost=action.payload
+        },
+        setError(state,action){
+            state.error = action.payload
         }
 
     }

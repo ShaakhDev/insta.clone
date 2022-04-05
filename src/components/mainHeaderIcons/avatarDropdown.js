@@ -1,14 +1,14 @@
-import {useState,useEffect}from 'react';
+import {useState}from 'react';
 import Box from '@mui/material/Box';
 import {Avatar} from '@mui/material';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
+import styles from '../../styles/MainHeader.module.css'
 import Tooltip from '@mui/material/Tooltip';
-import {Link,useNavigate} from 'react-router-dom'
-import {useSelector, useDispatch} from "react-redux";
-import {getCurrentUser} from "../../store/actions/userActions";
+import {Link} from 'react-router-dom'
+import {useSelector} from "react-redux";
 
 export default function AvatarDropdown() {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -31,15 +31,15 @@ export default function AvatarDropdown() {
         <>
             <Box sx={{display: 'flex', alignItems: 'center', textAlign: 'center'}}>
                 <Tooltip title="Account settings">
-                    <IconButton
+                    <IconButton className={styles.avatarDropdown}
                         onClick={handleClick}
                         size="small"
                         aria-controls={open ? 'account-menu' : undefined}
                         aria-haspopup="true"
                         aria-expanded={open ? 'true' : undefined}
                     >
-                        <Avatar src={user?.avatar_url || (process.env.PUBLIC_URL + '/avatar.webp')}
-                                sx={{width: 32, height: 32}}/>
+                        <Avatar src={user?.avatar_url || process.env.PUBLIC_URL + 'avatar.webp'}
+                                sx={{width: 32, height: 32,}}/>
                     </IconButton>
                 </Tooltip>
             </Box>
