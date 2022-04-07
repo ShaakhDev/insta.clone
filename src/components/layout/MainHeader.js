@@ -8,17 +8,20 @@ import AvatarDropdown from "../mainHeaderIcons/avatarDropdown";
 import { useSelector} from "react-redux";
 import {Button} from "@mui/material";
 import {useState} from "react";
+import CreatePostModal from "../modals/createPostModal";
 
 
 
 function MainHeader(props) {
+    const [openModal, setOpenModal] =useState(false)
     const navigate = useNavigate()
     const {token} = useSelector(state => state?.user);
 
-
+    const handleOpenModal = () => setOpenModal(true);
 
     return (
         <>
+            <CreatePostModal open={openModal} setOpen={setOpenModal}/>
             <nav className={styles.nav}>
                 <div className={styles.box}>
                     <div className={styles.brand}>
@@ -33,7 +36,7 @@ function MainHeader(props) {
                                 <HomeFilled/>
                             </Link>
                             {/*<HomeOutlined/>*/}
-                            <AddPostOutlined/>
+                            <AddPostOutlined handleOpenModal={handleOpenModal}/>
                             {/*<AddPostFilled/>*/}
                             {/*<ProfileAvatar/>*/}
                             <AvatarDropdown />

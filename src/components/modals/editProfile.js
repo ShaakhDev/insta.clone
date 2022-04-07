@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import {profileImgModalStyle} from "./customMiuStyles";
+import {customModalStyle} from "./customMiuStyles";
 import styles from '../../styles/Modal.module.css'
 import {useSelector} from "react-redux";
 import UploadButton from "./uploadBtn";
@@ -43,7 +43,7 @@ export default function BasicModal({open, setOpen,}) {
                 onClose={handleClose}
                 BackdropProps={{background: 'rgba(0,0,0,0.65)'}}
             >
-                <Box {...profileImgModalStyle.box} className={styles.box}>
+                <Box {...customModalStyle.box} className={styles.box}>
                     <div className={styles.heading}>
                         <h2>Edit your profile</h2>
                         <p>You can edit and update your profile details.</p>
