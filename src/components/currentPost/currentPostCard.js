@@ -17,7 +17,7 @@ import {useSelector} from "react-redux";
 import Comment from "./comment";
 
 function CurrentPostCard({time, likes, caption, user, comments, image}) {
-    const postedTime = useCalculatePostedTime(time);
+    const postedTime = useCalculatePostedTime(time)
     const postedDate = useCalculateDate(time)
     const {token} = useSelector(state => state?.user)
 

@@ -5,14 +5,17 @@ const profileReducer = createSlice({
     initialState: {
         profile:{},
         loading: false,
+        error:0
     },
     reducers: {
         setProfile(state, action) {
             state.profile = action.payload;
-            state.loading=false
         },
         loading(state,action){
             state.loading = action.payload
+        },
+        setError(state,action){
+            state.error = action.payload;
         }
 
     }

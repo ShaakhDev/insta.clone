@@ -1,4 +1,4 @@
-export const useCalculatePostedTime = (timestamp) => {
+export const useCalculatePostedTime = timestamp => {
     const timePostCreated = new Date(timestamp);
     const timeNow = new Date();
     const difference = (timeNow.getTime() - timePostCreated.getTime()) / 1000;
@@ -44,10 +44,10 @@ export const useCalculateCommentedTime = (timestamp) => {
     else if (difference < ONE_HOUR) return `${Math.round(difference / ONE_MINUTE)}m`;
     else if (difference < ONE_DAY) return `${Math.round(difference / ONE_HOUR)}h`;
     else if (difference < ONE_WEEK) return `${Math.floor(difference / ONE_DAY)}d`;
-    else return `${Math.floor(difference/ONE_WEEK)}w`;
+    else return `${Math.floor(difference / ONE_WEEK)}w`;
 }
 
-export const useCalculateDate=(timestamp)=>{
+export const useCalculateDate = (timestamp) => {
     const timeCommentCreated = new Date(timestamp);
 
     const MONTHS = [

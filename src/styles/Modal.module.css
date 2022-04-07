@@ -48,6 +48,7 @@
     color: #1976d2;
     height: 3rem;
     margin: 2rem 0;
+    margin-right: 4rem;
 }
 .box label:nth-child(5) span:nth-child(1){
     color: #333333;
@@ -56,8 +57,10 @@
 }
 
 .box .upload{
-    max-width: 3rem;
-    white-space: break-spaces;
+    width: auto;
+
+overflow: hidden;
+    text-overflow: ellipsis;
 
 }
 

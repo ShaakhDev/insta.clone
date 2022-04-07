@@ -27,6 +27,7 @@
     font-size: 1.1rem;
     margin-top: 1rem;
     color: #8e8e8e;
+    cursor: pointer;
 }
 .card .content p{
     padding: .3rem;
@@ -51,4 +52,16 @@
 .post{
     text-transform: capitalize !important;
     font-size: 1.4rem !important;
+}
+.card .more{
+    color: #8e8e8e;
+    font-weight: 400;
+}
+.card .user{
+    cursor: pointer;
+    color: #333333;
+    margin-right: 0.5rem;
+}
+.card .user:hover{
+    text-decoration: underline;
 }

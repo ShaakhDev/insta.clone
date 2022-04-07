@@ -1,31 +1,27 @@
-import React, {useEffect,memo} from 'react';
+import React, {useEffect, memo, useState} from 'react';
 import styles from "../styles/Home.module.css";
 import PostCard from "../components/posts/card/postCard";
 import {useDispatch, useSelector} from "react-redux";
 import {getAllPosts} from "../store/actions/postActions";
 import {postActions} from "../store/reducers/postReducer";
-const POSTS = []
 
 function Posts() {
-
     const {posts,error} = useSelector(state => state?.post);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if(POSTS.length!==0){
-            postActions.setPosts(POSTS)
+        if(posts.length!==0){
+            postActions.setPosts(posts);
         }else{
-            dispatch(getAllPosts())
-            if(posts)
-                POSTS.push((posts));
+            dispatch(getAllPosts());
         }
     }, [dispatch,posts]);
 
 
-if(error){
+if(error>499){
     return (
         <h1>
-            {error}
+            Serverda xatolik yuz berdi!!!
         </h1>
     )
 }

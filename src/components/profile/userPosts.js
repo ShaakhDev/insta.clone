@@ -1,10 +1,8 @@
 import React from 'react';
-import Box from "@mui/material/Box";
 import styles from '../../styles/Profile.module.css'
 import PostItem from "./postItem";
 import {useSelector} from "react-redux";
-import {CameraAltOutlined} from "@mui/icons-material";
-import Typography from "@mui/material/Typography";
+
 
 
 function UserPosts() {

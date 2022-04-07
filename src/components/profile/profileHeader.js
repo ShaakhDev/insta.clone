@@ -9,7 +9,7 @@ import BasicModal from "../modals/editProfile";
 
 function ProfileHeader() {
     const [isMyProfile,setIsMyProfile]=useState(false)
-    const {profile}=useSelector(state=>state?.profile);
+    const {profile,loading}=useSelector(state=>state?.profile);
     const {user}= useSelector(state=>state?.user)
     const [openModal, setOpenModal] = useState(false);
     const handleOpenModal = () => setOpenModal(true);
@@ -26,7 +26,7 @@ function ProfileHeader() {
             <BasicModal open={openModal} setOpen={setOpenModal}/>
             <Box className={styles.header}>
                 <div className={styles.photo}>
-                    <button title="Change profile image">
+                    <button onClick={isMyProfile? handleOpenModal:null} title="Change profile image">
                         <img  src={profile?.avatar_url||(process.env.PUBLIC_URL + 'avatar.webp')} alt='profile'/>
                     </button>
                 </div>
@@ -53,9 +53,7 @@ function ProfileHeader() {
                         <Typography variant='h5'>
                             <b>{profile?.subscribers}</b> followers
                         </Typography>
-                        {/*<Typography variant='h5'>*/}
-                        {/*    <b>123</b> following*/}
-                        {/*</Typography>*/}
+
                     </Stack>
                 </section>
 

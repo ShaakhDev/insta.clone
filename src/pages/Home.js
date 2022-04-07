@@ -10,18 +10,23 @@ const CURRENT_USER = []
 
 function Home() {
     const dispatch = useDispatch();
-    const {token,user} = useSelector(state => state?.user);
+    const {user,token} = useSelector(state => state?.user);
 
     useEffect(() => {
-        if(CURRENT_USER[0]!==undefined&&token){
-            userActions.setUser(CURRENT_USER[0])
-        }
-        else if (token) {
+        // if(CURRENT_USER[0]!==undefined&&token){
+        //     userActions.setUser(CURRENT_USER[0])
+        // }
+        // else if (token) {
+        //     dispatch(getCurrentUser())
+        //     if (user)
+        //         CURRENT_USER.push(user)
+        // }
+        if(user){
+            userActions.setUser(user);
+        }else if(token){
             dispatch(getCurrentUser())
-            if (user)
-                CURRENT_USER.push(user)
         }
-    }, [dispatch, token])
+    }, [dispatch, user,token])
     //
     // useEffect(() => {
     //     if (user) dispatch(getUserPosts(user?.username))

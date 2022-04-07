@@ -6,7 +6,7 @@ const postReducer = createSlice({
         posts:[],
         currentPost: {},
         loading: false,
-        error:''
+        error: 0
     },
     reducers: {
         setPosts(state, action) {

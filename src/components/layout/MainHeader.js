@@ -7,12 +7,14 @@ import AddPostOutlined from "../mainHeaderIcons/addPostOutlined";
 import AvatarDropdown from "../mainHeaderIcons/avatarDropdown";
 import { useSelector} from "react-redux";
 import {Button} from "@mui/material";
+import {useState} from "react";
 
 
 
 function MainHeader(props) {
     const navigate = useNavigate()
     const {token} = useSelector(state => state?.user);
+
 
 
     return (
