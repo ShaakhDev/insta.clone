@@ -5,15 +5,23 @@ import {useEffect} from "react";
 import {useSelector} from "react-redux";
 
 function Login() {
-    const {token} = useSelector(state => state.user)
+    const {token,error} = useSelector(state => state?.user)
     const navigate = useNavigate();
 
     useEffect(() => {
         if (token) navigate('/', {replace: true})
     }, [token])
 
+
     return (
         <form className={styles.auth}>
+            {
+                error>499&&(
+                    <div className={styles.error}>
+                        <p>Serverda xatolik yuzaga keldi</p>
+                    </div>
+                )
+            }
             <div style={{height: '65%'}} className={styles.box}>
                 <img src={process.env.PUBLIC_URL + '/brand.webp'}
                      className={styles.brand} alt="brand"/>

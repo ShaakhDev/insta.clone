@@ -14,7 +14,7 @@ function Actions({postId}) {
 
     return (
         <>
-            <CardActions disableSpacing>
+            <CardActions sx={{paddingBottom:'0'}} disableSpacing>
                 {
                     loading ? (
                         <Skeleton animation="wave" height={40} width={120} style={{marginLeft: 10}} />

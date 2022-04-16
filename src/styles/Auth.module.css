@@ -9,6 +9,23 @@
     border-radius: 5px;
     padding: 6rem;
     background-color: #fff;
+    overflow: hidden;
+}
+
+.auth .error{
+     position: absolute;
+     top: 0;
+     left: 0;
+     color: #FFF;
+    background-color: #F00;
+     font-size: 1.8rem;
+     font-weight: bold;
+     text-align: center;
+     width: 100%;
+     padding: 1rem;
+     border-top-right-radius: 5px;
+     border-top-left-radius: 5px;
+    animation: error 400ms ease;
 }
 .box{
     width: 100%;
@@ -42,4 +59,16 @@
 }
 .box button{
     color: #fff;
+}
+
+@keyframes error {
+    0% {
+        opacity: 0;
+
+        transform: translateY(-4rem);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

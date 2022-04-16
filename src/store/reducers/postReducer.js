@@ -6,7 +6,8 @@ const postReducer = createSlice({
         posts:[],
         currentPost: {},
         loading: false,
-        error: 0
+        error: 0,
+        postImagePath:''
     },
     reducers: {
         setPosts(state, action) {
@@ -20,6 +21,9 @@ const postReducer = createSlice({
         },
         setError(state,action){
             state.error = action.payload
+        },
+        setPostImagePath(state,action){
+            state.postImagePath = action.payload
         }
 
     }

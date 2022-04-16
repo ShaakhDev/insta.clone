@@ -6,7 +6,7 @@ import {useEffect} from "react";
 
 
 function SignUp() {
-    const {token} =useSelector(state=>state.user);
+    const {token,error} =useSelector(state=>state?.user);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -15,6 +15,13 @@ function SignUp() {
 
     return (
         <form className={styles.auth}>
+            {
+                error>499&&(
+                    <div className={styles.error}>
+                        <p>Serverda xatolik yuzaga keldi</p>
+                    </div>
+                )
+            }
             <div style={{height: "95%"}} className={styles.box}>
                 <img src={process.env.PUBLIC_URL + '/brand.webp'}
                      className={styles.brand} alt="brand"/>

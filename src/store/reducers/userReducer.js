@@ -7,6 +7,7 @@ const userReducer = createSlice({
         registered: false,
         loading: false,
         token: localStorage.getItem('token') ,
+        error:0
     },
     reducers: {
         setUser(state, action) {
@@ -14,6 +15,9 @@ const userReducer = createSlice({
         },
         loading(state, action) {
             state.loading = action.payload;
+        },
+        setError(state,action){
+            state.error = action.payload
         }
     }
 })

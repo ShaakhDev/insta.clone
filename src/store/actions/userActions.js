@@ -14,8 +14,11 @@ export const signUp = (formData) => {
             const userData = await api.post('/user', formData);
             console.log(userData)
             dispatch(userActions.setUser(userData?.data))
+            dispatch(userActions.loading(false));
         } catch (error) {
-            console.log(error)
+            dispatch(userActions.loading(false));
+            dispatch(userActions.setError(error?.response.status))
+            console.log(error.response)
         }
     }
 }
@@ -31,6 +34,7 @@ export const login = (formData) => {
             dispatch(userActions.setUser(userData.data));
         } catch (error) {
             dispatch(userActions.loading(false));
+            dispatch(userActions.setError(error?.response.status))
             console.log(error)
         }
     }

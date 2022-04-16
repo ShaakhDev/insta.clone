@@ -31,13 +31,13 @@ function Content({postId, user, caption, comments, time, likes}) {
                 {comments.length > 0 ? (
                     <Typography variant="body1">
                         {comments.length > 1 ? (
-                            <a href={`/p/${postId}/`}>
+                            <Link to={`/p/${postId}/`}>
                                 View all {comments.length} comments
-                            </a>
+                            </Link>
                         ) : (
-                            <a href={`/p/${postId}/`}>
+                            <Link to={`/p/${postId}/`}>
                                 View {comments.length} comment
-                            < /a>
+                            < /Link>
                         )}
                     </Typography>
                 ) : null}

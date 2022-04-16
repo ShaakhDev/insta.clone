@@ -3,7 +3,6 @@ import {useNavigate} from 'react-router-dom'
 import {useDispatch, useSelector} from "react-redux";
 import {signUp, login} from "../../store/actions/userActions";
 import {Button} from "@mui/material";
-import AvatarUrl from "./avatar_url";
 import Username from "./username";
 import Password from "./password";
 import Email from "./email";
@@ -12,12 +11,10 @@ import Loader from './loader'
 function FormInputs({authType, button}) {
     const [isDisableButton, setIsDisableButton] = useState(true)
     const {registered, loading, token} = useSelector(state => state?.user)
-    const [avatar_url, setAvatarUrl] = useState()
     const [username, setUsername] = useState()
     const [password, setPassword] = useState()
     const [email, setEmail] = useState()
     const dispatch = useDispatch()
-    const navigate = useNavigate()
 
     useEffect(() => {
         if (
@@ -25,7 +22,7 @@ function FormInputs({authType, button}) {
             (username && password?.length > 7)
         ) setIsDisableButton(false);
         else setIsDisableButton(true);
-    }, [username, password, email,avatar_url])
+    }, [username, password, email])
 
     useEffect(() => {
         console.log('loading: ' + loading)
@@ -41,7 +38,7 @@ function FormInputs({authType, button}) {
             username,
             email,
             password,
-            avatar_url,
+            avatar_url:""
         }
         console.log(formData)
         dispatch(signUp(formData))
@@ -68,7 +65,7 @@ function FormInputs({authType, button}) {
 
             <Password getValue={data => setPassword(data)}/>
 
-            {authType === 'SIGNUP' ? <AvatarUrl getValue={data => setAvatarUrl(data)}/> : ""}
+
 
             <Button
                 fullWidth

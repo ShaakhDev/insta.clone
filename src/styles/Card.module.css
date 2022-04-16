@@ -25,12 +25,14 @@
 }
 .card .time{
     font-size: 1.1rem;
-    margin-top: 1rem;
     color: #8e8e8e;
     cursor: pointer;
 }
 .card .content p{
     padding: .3rem;
+}
+.card .content{
+    padding-top: 0;
 }
 .card svg:hover{
     color: #8e8e8e;
