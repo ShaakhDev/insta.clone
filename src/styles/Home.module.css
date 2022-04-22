@@ -9,3 +9,14 @@
     margin: 0 auto;
 
 }
+.home .error{
+    position: fixed;
+   width: 100%;
+    left: 0;
+    top: 0;
+    text-align: center;
+    padding: 1rem;
+    background: #FF0000;
+    color: #fff;
+    z-index: 99999999999;
+}

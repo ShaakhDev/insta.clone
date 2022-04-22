@@ -60,13 +60,13 @@ function CurrentPostCard({time, likes, caption, user, comments, image}) {
 
                             <Box className={styles.comments}>
                                 {caption && <Comment time={time} text={caption} user={user}/>}
-                                {comments?.length && comments.map(comment => (
+                                {comments?.length ? comments.map(comment => (
                                     <Comment
                                         time={comment.timestamp}
                                         text={comment.text}
                                         user={comment.user}
                                         key={comment.id}/>
-                                ))}
+                                )):null}
 
                             </Box>
                             <CardContent className={styles.content}>

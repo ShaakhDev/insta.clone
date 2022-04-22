@@ -1,0 +1,48 @@
+.popup{
+
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #333;
+    padding: 1rem 3rem;
+    color: #fff;
+    text-align: left;
+    font-size: 1.5rem;
+    animation: popup 3.5s ease-in-out forwards;
+    -webkit-animation: popup 3.5s ease-in-out forwards;
+    -moz-animation: popup 3.5s ease-in-out forwards;
+    -o-animation: popup 3.5s ease-in-out forwards;
+    -ms-animation: popup 3.5s ease-in-out forwards;
+}
+
+@keyframes popup{
+    0%{transform: translateY(100%);}
+    10%{transform: translateY(0);}
+    90%{transform: translateY(0);}
+    100%{transform: translateY(100%);}
+}
+@-moz-keyframes popup{
+    0%{transform: translateY(100%);}
+    10%{transform: translateY(0);}
+    90%{transform: translateY(0);}
+    100%{transform: translateY(100%);}
+}
+@-webkit-keyframes popup{
+    0%{transform: translateY(100%);}
+    10%{transform: translateY(0);}
+    90%{transform: translateY(0);}
+    100%{transform: translateY(100%);}
+}
+@-o-keyframes popup{
+    0%{transform: translateY(100%);}
+    10%{transform: translateY(0);}
+    90%{transform: translateY(0);}
+    100%{transform: translateY(100%);}
+}
+@-ms-keyframes popup{
+    0%{transform: translateY(100%);}
+    10%{transform: translateY(0);}
+    90%{transform: translateY(0);}
+    100%{transform: translateY(100%);}
+}

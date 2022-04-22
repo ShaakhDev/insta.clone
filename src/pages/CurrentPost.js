@@ -11,7 +11,6 @@ function CurrentPost() {
     const dispatch = useDispatch()
     const params = useParams();
     const {currentPost,error} = useSelector(state => state?.post);
-    console.log(currentPost)
 
     useEffect(() => {
      if(CURRENT_POST.length===0){

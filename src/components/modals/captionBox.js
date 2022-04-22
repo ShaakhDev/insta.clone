@@ -1,60 +1,38 @@
 import React, {useEffect, useState} from 'react';
 import Box from "@mui/material/Box";
-import CreatePostIcon from "./createPostIcon";
-import Typography from "@mui/material/Typography";
-import {Button, Input, Stack, TextareaAutosize} from "@mui/material";
-import {customModalStyle} from "./customMiuStyles";
-import {useDispatch, useSelector} from "react-redux";
-import {uploadImage} from "../../store/actions/postActions";
+import {updateCustomStyles} from "./customMiuStyles";
 import CardHeader from "@mui/material/CardHeader";
 import {Link} from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import {muiStyles} from "../currentPost/customMuiStyles";
+import {Stack, TextareaAutosize} from "@mui/material";
 import EmojiBtn from "../posts/card/emojiBtn";
 import EmojiPicker from "emoji-picker-react";
+import Typography from "@mui/material/Typography";
+import {useSelector} from "react-redux";
 
-function SelectPostImage({getCaption}) {
-    const dispatch = useDispatch();
-    const {postImagePath} = useSelector(state => state?.post);
+function CaptionBox({getCaption}) {
     const {user} = useSelector(state => state?.user);
-    const [img, setImg] = useState(null);
     const [input, setInput] = useState('')
     const [click, setClick] = useState(false);
+
 
     const handleChoseEmoji = (event, emojiObject) => {
         setInput(input + emojiObject.emoji);
     }
-
     const handleCaption = (e) => {
         setInput(e.target.value);
     }
 
-    const handleImage = (e) => {
-        setImg(e.target.files[0])
-    }
-
-    useEffect(() => {
-        if (img !== null) {
-            console.log(img)
-            dispatch(uploadImage(img))
-        }
-    }, [img, dispatch]);
-
-    useEffect(() => {
+    useEffect(()=>{
         getCaption(input)
-    }, [input, getCaption]);
+    },[input,getCaption])
 
-    return (<>
-        {postImagePath  && (<Box
-            {...customModalStyle.overviewBox}
-        >
-            <Box
-                {...customModalStyle.imgBox}
-            >
-                <img style={{width: '100%'}} src={postImagePath} alt="img"/>
-            </Box>
+
+    return (
+        <>
             <Box //caption box
-                {...customModalStyle.captionBox}
+                {...updateCustomStyles.captionBox}
             >
                 <CardHeader
                     sx={{padding: 0}}
@@ -72,7 +50,7 @@ function SelectPostImage({getCaption}) {
                         </Link>}
                 />
                 <TextareaAutosize
-                    {...customModalStyle.textarea}
+                    {...updateCustomStyles.textarea}
                     placeholder="Write a caption..."
                     maxLength={2200}
                     autoComplete="off"
@@ -95,24 +73,9 @@ function SelectPostImage({getCaption}) {
 
                 </Stack>
             </Box>
-        </Box>)}
 
-        {!postImagePath  && (<Box
-            {...customModalStyle.uploadBox}
-        >
-            <CreatePostIcon/>
-            <Typography variant="h3">
-                Upload Photo
-            </Typography>
-            <label htmlFor="contained-button-file">
-                <Input onChange={e => handleImage(e)} sx={{display: "none"}} accept="image/*"
-                       id="contained-button-file" type="file"/>
-                <Button {...customModalStyle.selectBtn} variant="contained" component="span">
-                    Select from computer
-                </Button>
-            </label>
-        </Box>)}
-    </>);
+        </>
+    );
 }
 
-export default SelectPostImage;
+export default CaptionBox;

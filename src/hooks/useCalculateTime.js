@@ -1,7 +1,8 @@
 export const useCalculatePostedTime = timestamp => {
-    const timePostCreated = new Date(timestamp);
+    const GMT_5 = 18000 *1000
+    const timePostCreated = new Date(timestamp) ;
     const timeNow = new Date();
-    const difference = (timeNow.getTime() - timePostCreated.getTime()) / 1000;
+    const difference = Math.floor((timeNow.getTime() - (timePostCreated.getTime() + GMT_5)) / 1000);
     const isCurrentYear = !(timeNow.getFullYear() > timePostCreated.getFullYear())
     const ONE_MINUTE = 60
     const ONE_HOUR = 3600;
@@ -32,9 +33,10 @@ export const useCalculatePostedTime = timestamp => {
 }
 
 export const useCalculateCommentedTime = (timestamp) => {
+    const GMT_5 = 18000 *1000
     const timeCommentCreated = new Date(timestamp);
     const timeNow = new Date();
-    const difference = (timeNow.getTime() - timeCommentCreated.getTime()) / 1000;
+    const difference = (timeNow.getTime() - (timeCommentCreated.getTime()+GMT_5)) / 1000;
     const ONE_MINUTE = 60
     const ONE_HOUR = 3600;
     const ONE_DAY = 86400;
@@ -48,7 +50,9 @@ export const useCalculateCommentedTime = (timestamp) => {
 }
 
 export const useCalculateDate = (timestamp) => {
-    const timeCommentCreated = new Date(timestamp);
+    const GMT_5 = 18000 *1000
+    const milliseconds = new Date(timestamp).getTime() + GMT_5;
+    const timeCommentCreated = new Date(milliseconds);
 
     const MONTHS = [
         "Jan",

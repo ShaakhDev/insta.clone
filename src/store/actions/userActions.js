@@ -6,6 +6,14 @@ const setTokenToLocalstorage = (data) => {
     localStorage.setItem('token', _token)
     window.location.reload(true)
 }
+const unAuthorized = (error)=>{
+    if(error.status===401){
+        const formData = new FormData();
+        formData.append('username', 'shakhzod');
+        formData.append('password', 'shakhzod123');
+        login(formData)
+    }
+}
 
 export const signUp = (formData) => {
     return async (dispatch) => {
@@ -53,9 +61,7 @@ export const getCurrentUser = ()=>{
             dispatch(userActions.setUser(user.data));
             localStorage.setItem('user',user.data)
         } catch (error) {
-            if(error?.response.status === 401){
-                alert('avtorizatsiyadan o\'ting')
-            }
+            unAuthorized(error?.response);
             console.log(error?.response)
         }
     }
@@ -91,6 +97,7 @@ export const updateProfile = (formData,image)=>{
                 console.log(updatedProfile)
             }
         }catch(error){
+            unAuthorized(error?.response)
             console.log(error.response)
         }
     }

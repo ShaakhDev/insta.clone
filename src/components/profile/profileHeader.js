@@ -5,7 +5,7 @@ import styles from '../../styles/Profile.module.css'
 import {Button, Stack} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import {useSelector} from "react-redux";
-import BasicModal from "../modals/editProfile";
+import BasicModal from "../modals/editProfileModal";
 
 function ProfileHeader() {
     const [isMyProfile,setIsMyProfile]=useState(false)

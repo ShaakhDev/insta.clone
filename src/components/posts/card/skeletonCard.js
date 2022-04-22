@@ -9,16 +9,6 @@ import CardActions from "@mui/material/CardActions";
 
 function SkeletonCard() {
 
-    const LoaderSkeleton = () => {
-        return (
-            <div style={{padding: "0 1.6rem"}}>
-                <Skeleton animation="wave" height={22} width={150} style={{marginBottom: 6}}/>
-                <Skeleton animation="wave" height={22} style={{marginBottom: 6}}/>
-                <Skeleton animation="wave" height={22} width={140} style={{marginBottom: 10}}/>
-                <Skeleton animation="wave" height={22} width={70} style={{marginBottom: 10}}/>
-            </div>
-        )
-    }
     return (
         <Card {...muiStyles.card} className={styles.card}>
             {/*header section of card*/}
@@ -43,7 +33,13 @@ function SkeletonCard() {
                 <Skeleton animation="wave" height={40} width={120} style={{marginLeft: 10}}/>
             </CardActions>
             {/*content section of card*/}
-            <LoaderSkeleton/>
+            <div style={{padding: "0 1.6rem"}}>
+                <Skeleton animation="wave" height={22} width={150} style={{marginBottom: 6}}/>
+                <Skeleton animation="wave" height={22} style={{marginBottom: 6}}/>
+                <Skeleton animation="wave" height={22} width={140} style={{marginBottom: 10}}/>
+                <Skeleton animation="wave" height={22} width={70} style={{marginBottom: 10}}/>
+            </div>
+
         </Card>
     );
 }
