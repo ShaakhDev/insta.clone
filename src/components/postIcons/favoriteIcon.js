@@ -7,6 +7,7 @@ import {like} from '../../store/actions/postActions';
 
 function FavoriteIcon({postId}) {
     const dispatch = useDispatch()
+
     const [click, setClick] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
     const {token} = useSelector(state => state?.user);
@@ -14,10 +15,12 @@ function FavoriteIcon({postId}) {
 
 
     const handleClick = () => {
+
         if (token) {
             setClick( !click)
-            console.log(postId)
-            dispatch(like(postId,{status:click}))
+
+            // console.log(postId)
+            // dispatch(like(postId,!click))
 
         } else {
             handleShowPopup()

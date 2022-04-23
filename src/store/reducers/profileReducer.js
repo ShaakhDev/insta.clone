@@ -3,19 +3,23 @@ import {createSlice} from "@reduxjs/toolkit";
 const profileReducer = createSlice({
     name: 'profile',
     initialState: {
-        profile:{},
+        profile: {},
+        mySubscribtions: [],
         loading: false,
-        error:0
+        error: 0
     },
     reducers: {
         setProfile(state, action) {
             state.profile = action.payload;
         },
-        loading(state,action){
+        loading(state, action) {
             state.loading = action.payload
         },
-        setError(state,action){
+        setError(state, action) {
             state.error = action.payload;
+        },
+        setSubscriptions(state, action) {
+            state.mySubscriptions = action.payload;
         }
 
     }

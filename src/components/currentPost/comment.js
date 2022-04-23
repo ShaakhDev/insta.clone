@@ -29,8 +29,6 @@ function Comment({user,time,text}) {
                     {commentedTime}
                 </Typography>
             </div>
-
-
         </div>
     );
 }

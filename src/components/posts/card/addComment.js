@@ -1,17 +1,16 @@
-import React, {useRef, useState} from 'react';
+import React, { useState} from 'react';
 import {Button, Stack} from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import {muiStyles} from "../customMuiStyles";
 import styles from '../../../styles/Card.module.css'
 import EmojiPicker from "emoji-picker-react";
-import emojiBtn from "./emojiBtn";
 import EmojiBtn from "./emojiBtn";
 
 function AddComment(props) {
 
     const [inputValue, setInputValue] = useState('');
     const [click, setClick] = useState(false);
-    const [chosenEmoji, setChoseEmoji] = useState(null);
+    const [ setChoseEmoji] = useState(null);
     const handleInput = (e) => {
         setInputValue(e.target.value)
     }

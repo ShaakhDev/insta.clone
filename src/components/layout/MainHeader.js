@@ -1,8 +1,6 @@
 import {Link, useNavigate} from 'react-router-dom'
 import styles from '../../styles/MainHeader.module.css'
 import HomeFilled from "../mainHeaderIcons/homeFilled";
-import HomeOutlined from "../mainHeaderIcons/homeOutlined";
-import AddPostFilled from "../mainHeaderIcons/addPostFilled";
 import AddPostOutlined from "../mainHeaderIcons/addPostOutlined";
 import AvatarDropdown from "../mainHeaderIcons/avatarDropdown";
 import { useSelector} from "react-redux";
@@ -25,9 +23,9 @@ function MainHeader(props) {
             <nav className={styles.nav}>
                 <div className={styles.box}>
                     <div className={styles.brand}>
-                        <a href="/">
+                        <Link to="/">
                             <img src={process.env.PUBLIC_URL + '/brand.webp'} alt="brand"/>
-                        </a>
+                        </Link>
                     </div>
                     <div className={styles.search}></div>
                     {token && (

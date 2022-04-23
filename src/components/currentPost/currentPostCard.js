@@ -15,14 +15,23 @@ import Actions from "../posts/card/actions";
 import AddComment from "../posts/card/addComment";
 import {useSelector} from "react-redux";
 import Comment from "./comment";
+import MoreActionsModal from "../modals/moreActionsModal";
+import React, {useState} from "react";
 
-function CurrentPostCard({time, likes, caption, user, comments, image}) {
+function CurrentPostCard({time, likes, caption, user:postUser, comments, image,id}) {
     const postedTime = useCalculatePostedTime(time)
     const postedDate = useCalculateDate(time)
-    const {token} = useSelector(state => state?.user)
+    const {token,user} = useSelector(state => state?.user);
+    const isMyPost = user?.username === postUser?.username
+    const [openModal,setOpenModal] = useState(false);
+
+    const handleOpenModal=()=>{
+        setOpenModal(true)
+    }
 
     return (
         <>
+            <MoreActionsModal imgUrl id={id} isMyPost={isMyPost} open={openModal} setOpen={setOpenModal}/>
             <div className={styles.home}>
                 <div className={styles.box}>
                     <Card {...muiStyles.card}>
@@ -38,28 +47,28 @@ function CurrentPostCard({time, likes, caption, user, comments, image}) {
                             <CardHeader
                                 {...muiStyles.header}
                                 avatar={
-                                    <Link to={`/${user?.username}`}>
+                                    <Link to={`/${postUser?.username}`}>
                                         <Avatar
                                             {...muiStyles.avatar}
-                                            alt={user?.username}
-                                            src={user?.avatar_url}
+                                            alt={postUser?.username}
+                                            src={postUser?.avatar_url}
                                         />
                                     </Link>
                                 }
                                 action={
-                                    <IconButton aria-label="settings">
+                                    <IconButton onClick={handleOpenModal} aria-label="settings">
                                         <MoreHorizIcon fontSize='large'/>
                                     </IconButton>
                                 }
                                 title={
                                     <Link style={{color: "#333"}} to={`/${user?.username}`}>
-                                        <b>{user?.username}</b>
+                                        <b>{postUser?.username}</b>
                                     </Link>
                                 }
                             />
 
                             <Box className={styles.comments}>
-                                {caption && <Comment time={time} text={caption} user={user}/>}
+                                {caption && <Comment time={time} text={caption} user={postUser}/>}
                                 {comments?.length ? comments.map(comment => (
                                     <Comment
                                         time={comment.timestamp}
@@ -70,7 +79,7 @@ function CurrentPostCard({time, likes, caption, user, comments, image}) {
 
                             </Box>
                             <CardContent className={styles.content}>
-                                <Actions/>
+                                <Actions postId={id}/>
                                 {likes > 0 ? (
                                     <Typography variant="body1">
                                         <b>{likes} likes</b>

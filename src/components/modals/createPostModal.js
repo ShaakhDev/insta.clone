@@ -7,24 +7,18 @@ import SelectPostImage from "./selectPostImage";
 import {postActions} from "../../store/reducers/postReducer";
 import {Button} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
-import {createPost, reset} from "../../store/actions/postActions";
+import {createPost} from "../../store/actions/postActions";
 
 function CreatePostModal({open, setOpen}) {
     const dispatch = useDispatch();
-    const {postImagePath, loading, statusNewPost} = useSelector(state => state?.post);
+    const {postImagePath, loading} = useSelector(state => state?.post);
     const [caption, setCaption] = useState("");
-    const [status] = useState({
-        pending: "PENDING",
-        success: "SUCCESS",
-        error: "ERROR"
-    })
+
 
     const handleClose = () => {
         setOpen(false)
-
         postActions.setPostImagePath('')
         console.log('click')
-
     };//close modal.
 
     const handleCreatePost = () => {

@@ -30,15 +30,38 @@ const postReducer = createSlice({
             state.error = 0
 
         },
-        reset(state){
-            state.postImagePath = null
-        },
+
         setNewPost(state,action){
              state.posts.unshift(action.payload);
             state.error = 0
         },
+        editPost(state,action){
+          state.posts = state.posts.map(post=>{
+              if(action.payload.id===post.id){
+                  return {
+                      ...post,
+                      caption:action.payload.caption
+                  }
+              }else return post
+          })
+        },
         setStatus(state,action){
              state.statusNewPost = action.payload
+
+        },
+        setLike(state,action){
+            state.posts = state.posts.map(post=> {
+                if (action.payload.id === post.id) {
+                 return {
+                     ...post,
+                     likes:action.payload.likes
+                 }
+                }
+                else return post
+
+            })
+            console.log('from reducer: ',state.posts)
+
 
         }
 

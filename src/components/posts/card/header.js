@@ -6,9 +6,9 @@ import CardHeader from '@mui/material/CardHeader';
 import {Link} from 'react-router-dom'
 import {useSelector} from 'react-redux';
 import {Skeleton} from "@mui/material";
-import MoreActionsBtn from "../../modals/moreActionsBtn";
+import MoreActionsModal from "../../modals/moreActionsModal";
 
-function Header({avatar, user:postUser,id}) {
+function Header({avatar, user:postUser,id,imgUrl}) {
     const {user} = useSelector(state=>state?.user)
     const {loading} = useSelector(state => state?.post)
     const isMyPost = user?.username === postUser
@@ -20,7 +20,7 @@ function Header({avatar, user:postUser,id}) {
 
     return (
         <>
-            <MoreActionsBtn  id={id} isMyPost={isMyPost} open={openModal} setOpen={setOpenModal}/>
+            <MoreActionsModal imgUrl id={id} isMyPost={isMyPost} open={openModal} setOpen={setOpenModal}/>
             <CardHeader
                 sx={{padding: "1.2rem 1.5rem"}}
                 avatar={

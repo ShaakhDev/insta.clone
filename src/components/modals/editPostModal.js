@@ -4,13 +4,13 @@ import {updateCustomStyles} from "./customMiuStyles";
 import Typography from "@mui/material/Typography";
 import {Button} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
-import {createPost} from "../../store/actions/postActions";
+import { editPost} from "../../store/actions/postActions";
 import React, {useState} from "react";
 import CaptionBox from "./captionBox";
 
-function UpdatePostModal({open, setOpen}) {
+function EditPostModal({open, setOpen,id,imgUrl}) {
     const dispatch = useDispatch();
-    const {postImagePath, loading} = useSelector(state => state?.post);
+    const { loading} = useSelector(state => state?.post);
     const [caption, setCaption] = useState("");
 
     const handleClose = () => {
@@ -18,11 +18,11 @@ function UpdatePostModal({open, setOpen}) {
     };
     const handleUpdatePost = () => {
         const data = {
-            image_url: postImagePath,
+            image_url: imgUrl,
             caption
         }
-        dispatch(createPost(data))
-        console.log(caption)
+        dispatch(editPost(id,data))
+        setOpen(false)
     }
 
     return (
@@ -59,4 +59,4 @@ function UpdatePostModal({open, setOpen}) {
     );
 }
 
-export default UpdatePostModal;
+export default EditPostModal;

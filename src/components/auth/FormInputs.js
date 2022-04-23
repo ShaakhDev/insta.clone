@@ -1,5 +1,4 @@
 import {useState, useEffect} from 'react';
-import {useNavigate} from 'react-router-dom'
 import {useDispatch, useSelector} from "react-redux";
 import {signUp, login} from "../../store/actions/userActions";
 import {Button} from "@mui/material";
@@ -10,7 +9,7 @@ import Loader from './loader'
 
 function FormInputs({authType, button}) {
     const [isDisableButton, setIsDisableButton] = useState(true)
-    const {registered, loading, token} = useSelector(state => state?.user)
+    const {registered, loading} = useSelector(state => state?.user)
     const [username, setUsername] = useState()
     const [password, setPassword] = useState()
     const [email, setEmail] = useState()

@@ -1,13 +1,11 @@
 import {postActions} from "../reducers/postReducer";
 import api from "../../service/axios";
-import {login} from "./userActions";
+import {getConfig} from "./authConfig";
 
-const unAuthorized = (error)=>{
-    if(error.status===401){
-        const formData = new FormData();
-        formData.append('username', 'shakhzod');
-        formData.append('password', 'shakhzod123');
-        login(formData)
+const unAuthorized = (error) => {
+    if (error.status === 401) {
+        localStorage.removeItem('token')
+        window.location.reload(false)
     }
 }
 
@@ -28,57 +26,54 @@ export const getAllPosts = () => {
     }
 }
 
-export const getCurrentPost  = (id) => async (dispatch)=>{
+export const getCurrentPost = (id) => async (dispatch) => {
     try {
         dispatch(postActions.loading(true));
         const currentPost = await api.get(`/post/${id}`);
         dispatch(postActions.setCurrentPost(currentPost?.data));
         dispatch(postActions.loading(false));
-    }catch(error){
+    } catch (error) {
         console.log(error.response)
         unAuthorized(error?.response)
         dispatch(postActions.setError(error.response.statusText))
     }
 }
 
-
-export const uploadImage = (image) => async dispatch =>{
-    try{
+export const uploadImage = (image) => async dispatch => {
+    try {
         const token = localStorage.getItem('token')
         const head = {
             'Authorization': `Bearer ${token}`,
-            "Content-Type":"multipart/form-data"
+            "Content-Type": "multipart/form-data"
         };
         const config = {
             headers: head,
         }
         const imgForm = new FormData()
-        imgForm.append('file',image);
-        const imagePath = await api.post('/post/image',imgForm,config);
+        imgForm.append('file', image);
+        const imagePath = await api.post('/post/image', imgForm, config);
         console.log(imagePath)
         dispatch(postActions.setPostImagePath(imagePath.data.path))
 
-    }catch(error){
+    } catch (error) {
         unAuthorized(error?.response)
         console.log(error.response)
     }
 }
 
-export const createPost = data => async (dispatch)=>{
-    try{
+export const createPost = data => async (dispatch) => {
+    try {
         dispatch(postActions.loading(true));
         dispatch(postActions.setStatus("PENDING"))
-        const token = localStorage.getItem('token')
-        const config = {
-            headers:{ 'Authorization': `Bearer ${token}`},
-        };
-       const newPost = await api.post('/post/',data,config);
-       dispatch(postActions.setNewPost(newPost.data));
+
+        const config = getConfig()
+        const newPost = await api.post('/post/', data, config);
+        dispatch(postActions.setNewPost(newPost.data));
         dispatch(postActions.setStatus("SUCCESS"))
         dispatch(postActions.loading(false));
-       console.log(newPost)
+        console.log(newPost)
 
-    }catch(error){
+    } catch (error) {
         dispatch(postActions.setError(error?.response.status));
         dispatch(postActions.loading(false));
         dispatch(postActions.setStatus("ERROR"))
@@ -87,37 +82,48 @@ export const createPost = data => async (dispatch)=>{
     }
 }
 
-export const deletePost = (id)=>async(dispatch)=>{
-    try{
+export const deletePost = (id) => async (dispatch) => {
+    try {
         dispatch(postActions.loading(true));
-        const token = localStorage.getItem('token')
-        const config = {
-            headers:{ 'Authorization': `Bearer ${token}`},
-        };
-        const response = await api.delete(`/post/delete/${id}`,config);
+        const config = getConfig()
+        const response = await api.delete(`/post/delete/${id}`, config);
         console.log(response)
         dispatch(postActions.loading(false));
 
-    }catch(error){
+    } catch (error) {
         console.log(error.response)
-        unAuthorized(error?.response)
-        dispatch(postActions.setError(error?.response.status));
         dispatch(postActions.loading(false));
+        dispatch(postActions.setError(error?.response.status));
+        unAuthorized(error?.response)
 
     }
 }
 
-export const like = (id,status)=> async(dispatch)=>{
-    try{
+export const editPost = (id, postData) => async (dispatch) => {
+    try {
+        const config = getConfig()
+        const post = await api.patch(`/post/${id}`, postData, config);
+        dispatch(postActions.editPost(post.data))
+
+    } catch (error) {
+        console.log(error?.response)
+    }
+}
+
+export const like = (id, status) => async (dispatch) => {
+    try {
         const token = localStorage.getItem('token')
         const config = {
-            headers:{ 'Authorization': `Bearer ${token}`},
-            params:status
+            headers: {'Authorization': `Bearer ${token}`},
+            params: {
+                status: status
+            }
         };
-        const res  = await api.post(`/post/${id}/like`,config );
 
-        console.log('like response:',res)
-    }catch(error){
+        const res = await api.post(`/post/${id}/like`, null, config);
+        dispatch(postActions.setLike(res.data))
+        console.log('like response:', res)
+    } catch (error) {
         console.log(error?.response)
     }
 }

@@ -4,16 +4,15 @@ import Box from "@mui/material/Box";
 import {Button} from "@mui/material";
 import {Link} from 'react-router-dom'
 import {customStyles} from "./customMiuStyles";
-import styles from '../../styles/Card.module.css'
 import {useDispatch} from "react-redux";
 import {deletePost} from "../../store/actions/postActions";
-import UpdatePostModal from "./updatePostModal";
+import EditPostModal from "./editPostModal";
 import Popup from "../popup";
 
-function MoreActionsBtn({open, setOpen, isMyPost, id}) {
+function MoreActionsModal({open, setOpen, isMyPost, id,imgUrl}) {
     const dispatch = useDispatch();
     const [isCopied, setIsCopied] = useState(false);
-    const [updateModalOpen,setUpdateModalOpen] =useState(false)
+    const [editModalOpen,setEditModalOpen] =useState(false)
     const linkToPost = `${window.location.origin}/p/${id}`
 
     async function copyLinkToClipboard(link) {
@@ -41,7 +40,7 @@ function MoreActionsBtn({open, setOpen, isMyPost, id}) {
 
     const handleEditModalOpen = () => {
         setOpen(false);
-        setUpdateModalOpen(true)
+        setEditModalOpen(true)
     }
     const handleClose = () => {
         setOpen(false)
@@ -54,7 +53,7 @@ function MoreActionsBtn({open, setOpen, isMyPost, id}) {
     return (
         <>
             {isCopied &&<Popup text='Link copied to clipboard'/>}
-            <UpdatePostModal open={updateModalOpen} setOpen={setUpdateModalOpen}/>
+            <EditPostModal imgUrl id={id} open={editModalOpen} setOpen={setEditModalOpen}/>
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -86,4 +85,4 @@ function MoreActionsBtn({open, setOpen, isMyPost, id}) {
     );
 }
 
-export default MoreActionsBtn;
+export default MoreActionsModal;
