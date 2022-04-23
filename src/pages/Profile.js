@@ -22,7 +22,7 @@ function Profile() {
         if (token) {
             dispatch(getSubscriptions())
         }
-    })
+    },[token,dispatch])
 
     useEffect(() => {
 
