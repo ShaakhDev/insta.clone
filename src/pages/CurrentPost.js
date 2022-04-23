@@ -27,7 +27,7 @@ function CurrentPost() {
             if (currentPost)
                 CURRENT_POST.push(currentPost)
         }
-    }, [currentPost,dispatch, params.postId])
+    }, [dispatch, params.postId])
 
     if (error) {
         return <h1>{error}</h1>
