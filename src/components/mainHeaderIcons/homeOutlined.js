@@ -1,6 +1,6 @@
 import React from 'react';
 
-function HomeOutlined() {
+export function HomeOutlined() {
     return (
         <svg aria-label="Home" color="#262626" fill="#262626" height="24" role="img"
              viewBox="0 0 24 24" width="24">

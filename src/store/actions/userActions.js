@@ -9,7 +9,7 @@ const setTokenToLocalstorage = (data) => {
 }
 
 const unAuthorized = (error) => {
-    if (error.status === 401) {
+    if (error?.status === 401) {
 
         localStorage.removeItem('token')
         window.location.reload(false)
@@ -68,23 +68,29 @@ export const getCurrentUser = () => {
 export const updateProfile = (formData, image) => {
     return async (dispatch) => {
         try {
-            console.log(image)
-            const imgForm = new FormData()
-            imgForm.append("file", image);
-            const config = {
-                headers: {
-                    "Content-Type": "multipart/form-data"
+            let imagePath;
+            if (typeof image === 'string') imagePath = image
+            else if (typeof image === 'object') {
+                const imgForm = new FormData()
+                imgForm.append("file", image);
+                const config = {
+                    headers: {
+                        "Content-Type": "multipart/form-data"
+                    }
                 }
+                imagePath = await api.post('/user/image', imgForm, config)
+                imagePath = imagePath?.data.path;
+                console.log(imagePath)
             }
-            const imagePath = await api.post('/user/image', imgForm, config)
-            console.log(imagePath)
+
             if (imagePath) {
-                const body = {...formData, avatar_url: imagePath?.data.path};
+
+                const body = {...formData, avatar_url: imagePath};
                 const config = getConfig()
-                const updatedProfile = api.patch('/update', body, config);
+                const updatedProfile = await api.patch('/update', body, config);
                 dispatch(userActions.setUser(updatedProfile?.data));
-                window.location.reload(false)
             }
+
         } catch (error) {
             unAuthorized(error?.response)
             console.log(error.response)

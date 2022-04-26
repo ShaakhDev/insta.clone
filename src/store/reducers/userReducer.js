@@ -18,7 +18,8 @@ const userReducer = createSlice({
         },
         setError(state,action){
             state.error = action.payload
-        }
+        },
+
     }
 })
 

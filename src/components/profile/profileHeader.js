@@ -14,6 +14,8 @@ function ProfileHeader() {
     const {profile, mySubscriptions} = useSelector(state => state?.profile);
     const {user, token} = useSelector(state => state?.user)
     const [openModal, setOpenModal] = useState(false);
+    const isFollowed = mySubscriptions.some(sub=>sub.username === profile?.username)
+
     const handleOpenModal = () => setOpenModal(true);
     const handleFollow = () => {
         if ( !token) {
@@ -56,9 +58,16 @@ function ProfileHeader() {
                             </Button>
                         )}
                         { !isMyProfile && (
-                            <Button onClick={handleFollow} {...profileMuiStyles.followButton}>
-                                follow
-                            </Button>
+                           isFollowed ? (
+                               <Button
+                                       title="edit your profile" {...profileMuiStyles.editButton} >
+                                   followed
+                               </Button>
+                           ):(
+                               <Button onClick={handleFollow} {...profileMuiStyles.followButton}>
+                                   follow
+                               </Button>
+                           )
                         )}
                     </Stack>
                     <Stack direction="row" mt={'2rem'} spacing={5}>
@@ -69,7 +78,7 @@ function ProfileHeader() {
                             <b>{profile?.subscribers}</b> followers
                         </Typography>
                         {isMyProfile && <Typography variant='h5'>
-                            <b>{mySubscriptions?.length}</b> following
+                            <b>{mySubscriptions?.length ||0}</b> following
                         </Typography>}
 
                     </Stack>

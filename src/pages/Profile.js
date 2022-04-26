@@ -15,7 +15,7 @@ import SkeletonProfile from "../components/profile/skeletonProfile";
 function Profile() {
     const params = useParams()
     const dispatch = useDispatch();
-    const {user, token} = useSelector(state => state?.user);
+    const {user, token,} = useSelector(state => state?.user);
     const {error, profile, loading} = useSelector(state => state?.profile);
 
     useEffect(() => {

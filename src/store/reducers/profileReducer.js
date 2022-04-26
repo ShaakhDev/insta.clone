@@ -4,7 +4,7 @@ const profileReducer = createSlice({
     name: 'profile',
     initialState: {
         profile: {},
-        mySubscribtions: [],
+        mySubscriptions: [],
         loading: false,
         error: 0
     },

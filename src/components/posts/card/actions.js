@@ -12,15 +12,15 @@ function Actions({postId}) {
     return (
         <>
             <CardActions sx={{paddingBottom: '0'}} disableSpacing>
-                    <IconButton {...muiStyles.actions} aria-label="add to favorites">
+                    <IconButton {...muiStyles.actions} >
                         <FavoriteIcon postId={postId}/>
                     </IconButton>
-                    <IconButton  {...muiStyles.actions} aria-label="share">
+                    <IconButton  {...muiStyles.actions} >
                         <Link to={`/p/${postId}`}>
                             <CommentIcon/>
                         </Link>
                     </IconButton>
-                    <IconButton {...muiStyles.actions} aria-label="comment">
+                    <IconButton {...muiStyles.actions} >
                         <ShareIcon/>
                     </IconButton>
             </CardActions>

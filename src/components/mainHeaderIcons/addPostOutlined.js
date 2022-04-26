@@ -1,6 +1,6 @@
 import React from 'react';
 
-function AddPostOutlined({handleOpenModal}) {
+export function AddPostOutlined({handleOpenModal}) {
     return (
         <>
             <svg onClick={handleOpenModal} aria-label="New Post" color="#262626" fill="#262626" height="24" role="img"

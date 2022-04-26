@@ -1,21 +1,35 @@
 import {Link, useNavigate} from 'react-router-dom'
 import styles from '../../styles/MainHeader.module.css'
 import HomeFilled from "../mainHeaderIcons/homeFilled";
+import HomeOutlined from "../mainHeaderIcons/homeOutlined";
 import AddPostOutlined from "../mainHeaderIcons/addPostOutlined";
 import AvatarDropdown from "../mainHeaderIcons/avatarDropdown";
-import { useSelector} from "react-redux";
-import {Button} from "@mui/material";
-import {useState} from "react";
+import {useSelector} from "react-redux";
+import {Button, IconButton} from "@mui/material";
+import {useEffect, useState} from "react";
 import CreatePostModal from "../modals/createPostModal";
+import AddPostFilled from "../mainHeaderIcons/addPostFilled";
 
-
+const FOCUSED_BTN = {
+    home: "HOME",
+    addPost: "ADD_POST",
+    profile: "PROFILE"
+}
 
 function MainHeader(props) {
-    const [openModal, setOpenModal] =useState(false)
+    const [openModal, setOpenModal] = useState(false)
     const navigate = useNavigate()
     const {token} = useSelector(state => state?.user);
+    const [focused, setFocused] = useState(FOCUSED_BTN.home)
 
     const handleOpenModal = () => setOpenModal(true);
+
+    useEffect(() => {
+            if(!openModal){
+                setFocused(FOCUSED_BTN.home)
+            }
+    }, [openModal]);
+
 
     return (
         <>
@@ -27,17 +41,30 @@ function MainHeader(props) {
                             <img src={process.env.PUBLIC_URL + '/brand.webp'} alt="brand"/>
                         </Link>
                     </div>
-                    <div className={styles.search}></div>
+                    <div className={styles.search}>
+                        <label htmlFor='search'>
+                            <input placeholder="Search"  name="search" type="text"/>
+                        </label>
+                    </div>
                     {token && (
                         <div className={styles.icons}>
                             <Link to="/">
-                                <HomeFilled/>
+                                <IconButton onClick={() => setFocused(FOCUSED_BTN.home)} disableRipple>
+                                    {
+                                        focused === "HOME" ?
+                                            <HomeFilled/> :
+                                            <HomeOutlined/>
+                                    }
+                                </IconButton>
                             </Link>
-                            {/*<HomeOutlined/>*/}
-                            <AddPostOutlined handleOpenModal={handleOpenModal}/>
-                            {/*<AddPostFilled/>*/}
-                            {/*<ProfileAvatar/>*/}
-                            <AvatarDropdown />
+                            <IconButton onClick={() => setFocused(FOCUSED_BTN.addPost)} disableRipple>
+                                {
+                                    focused === "ADD_POST" ?
+                                        <AddPostFilled handleOpenModal={handleOpenModal}/> :
+                                        <AddPostOutlined handleOpenModal={handleOpenModal}/>
+                                }
+                            </IconButton>
+                            <AvatarDropdown/>
                         </div>
                     )}
                     { !token && (

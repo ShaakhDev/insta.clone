@@ -1,5 +1,5 @@
 
-function HomeFilled(props) {
+export function HomeFilled(props) {
 
     return (
         <>

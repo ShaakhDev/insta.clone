@@ -87,7 +87,8 @@ export const deletePost = (id) => async (dispatch) => {
         dispatch(postActions.loading(true));
         const config = getConfig()
         const response = await api.delete(`/post/delete/${id}`, config);
-        console.log(response)
+        console.log(response);
+        dispatch(postActions.deletePost(id))
         dispatch(postActions.loading(false));
 
     } catch (error) {
@@ -124,6 +125,22 @@ export const like = (id, status) => async (dispatch) => {
         dispatch(postActions.setLike(res.data))
         console.log('like response:', res)
     } catch (error) {
+        console.log(error?.response)
+    }
+}
+
+
+export const comment = (data)=> async (dispatch)=>{
+    try{
+        const config = getConfig();
+        dispatch(postActions.setCommentLoading(true))
+        const resComment = await api.post('/comment/',data,config);
+        console.log(resComment)
+        dispatch(postActions.setCurrentPostComment(resComment?.data));
+        dispatch(postActions.setCommentLoading(false));
+
+    }
+    catch(error){
         console.log(error?.response)
     }
 }

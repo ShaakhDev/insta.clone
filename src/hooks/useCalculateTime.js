@@ -36,13 +36,13 @@ export const useCalculateCommentedTime = (timestamp) => {
     const GMT_5 = 18000 *1000
     const timeCommentCreated = new Date(timestamp);
     const timeNow = new Date();
-    const difference = (timeNow.getTime() - (timeCommentCreated.getTime()+GMT_5)) / 1000;
+    const difference = (timeNow.getTime() - (timeCommentCreated.getTime())) / 1000;
     const ONE_MINUTE = 60
     const ONE_HOUR = 3600;
     const ONE_DAY = 86400;
     const ONE_WEEK = 604800;
 
-    if (difference < ONE_MINUTE) return `${difference}s`;
+    if (difference < ONE_MINUTE) return `${Math.round(difference)}s`;
     else if (difference < ONE_HOUR) return `${Math.round(difference / ONE_MINUTE)}m`;
     else if (difference < ONE_DAY) return `${Math.round(difference / ONE_HOUR)}h`;
     else if (difference < ONE_WEEK) return `${Math.floor(difference / ONE_DAY)}d`;

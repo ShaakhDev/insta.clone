@@ -16,7 +16,7 @@ import AddComment from "../posts/card/addComment";
 import {useSelector} from "react-redux";
 import Comment from "./comment";
 import MoreActionsModal from "../modals/moreActionsModal";
-import React, {useState} from "react";
+import React, {useCallback, useState} from "react";
 
 function CurrentPostCard({time, likes, caption, user:postUser, comments, image,id}) {
     const postedTime = useCalculatePostedTime(time)
@@ -28,6 +28,26 @@ function CurrentPostCard({time, likes, caption, user:postUser, comments, image,i
     const handleOpenModal=()=>{
         setOpenModal(true)
     }
+
+    const CommentsBox = useCallback(
+        () => {
+            return(
+                <>
+                    {
+                        comments.map(comment => (
+                            <Comment
+                                time={comment.timestamp}
+                                text={comment.text}
+                                user={comment.user}
+                                key={comment.id}/>
+                        ))
+                    }
+                </>
+            )
+        },
+        [comments],
+    );
+
 
     return (
         <>
@@ -61,7 +81,7 @@ function CurrentPostCard({time, likes, caption, user:postUser, comments, image,i
                                     </IconButton>
                                 }
                                 title={
-                                    <Link style={{color: "#333"}} to={`/${user?.username}`}>
+                                    <Link style={{color: "#333"}} to={`/${postUser?.username}`}>
                                         <b>{postUser?.username}</b>
                                     </Link>
                                 }
@@ -69,13 +89,7 @@ function CurrentPostCard({time, likes, caption, user:postUser, comments, image,i
 
                             <Box className={styles.comments}>
                                 {caption && <Comment time={time} text={caption} user={postUser}/>}
-                                {comments?.length ? comments.map(comment => (
-                                    <Comment
-                                        time={comment.timestamp}
-                                        text={comment.text}
-                                        user={comment.user}
-                                        key={comment.id}/>
-                                )):null}
+                                {comments?.length ? <CommentsBox/> :null}
 
                             </Box>
                             <CardContent className={styles.content}>
@@ -96,7 +110,7 @@ function CurrentPostCard({time, likes, caption, user:postUser, comments, image,i
                                     </Typography>
                                 }
                             </CardContent>
-                            {token ? <AddComment/> : (
+                            {token ? <AddComment postId={id}/> : (
                                 <Typography className={styles.noComment}>
                                     <Link to="/accounts/login">
                                         Log in

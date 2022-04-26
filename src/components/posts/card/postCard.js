@@ -13,6 +13,11 @@ function PostCard({postData}) {
     const {token} = useSelector(state => state?.user);
     const {image_url, user, id, caption, comments, timestamp, likes} = postData;
 
+    // const Card = useCallback(()=>{
+    //     return(
+    //
+    //     )
+    // },[postData,token])
     return (
         <Card {...muiStyles.card} className={styles.card}>
 
@@ -32,7 +37,7 @@ function PostCard({postData}) {
             />
 
             <Divider/>
-            {token && <AddComment/>}
+            {token && <AddComment postId={id}/>}
         </Card>
     );
 }

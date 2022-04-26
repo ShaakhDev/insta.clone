@@ -15,24 +15,23 @@ export default function BasicModal({open, setOpen,}) {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [email, setEmail] = useState('');
-    const [img,setImg]= useState(null)
+    const [img, setImg] = useState(null)
 
-    useEffect(()=>{
+    useEffect(() => {
         setUsername(profile?.username)
         setEmail(profile?.email)
-    },[profile]);
-
+    }, [profile]);
 
     const handleClose = () => setOpen(false);//close modal.
 
-    const handleUpload = (e)=>{
-       const data = {
-           username,
-           email,
-           password
-       }
-       console.log(img)
-       dispatch(updateProfile(data,img))
+    const handleUpload = (e) => {
+        const data = {
+            username,
+            email,
+            password
+        }
+        if (img === null)  dispatch(updateProfile(data, profile?.avatar_url))
+        else dispatch(updateProfile(data, img))
 
     }
 
@@ -74,12 +73,13 @@ export default function BasicModal({open, setOpen,}) {
                             placeholder="New password..."
                         />
                     </label>
-                    <label >
+                    <label>
                         Upload profile photo:
                         <span className={styles.upload}>{img?.name}</span>
-                        <UploadButton getValue={data=>setImg(data)}/>
+                        <UploadButton getValue={data => setImg(data)}/>
                     </label>
-                    <Button sx={{width:"100%",fontSize:"1.6rem",marginTop:'4rem'}} variant="contained" onClick={handleUpload}>Update profile</Button>
+                    <Button sx={{width: "100%", fontSize: "1.6rem", marginTop: '4rem'}} variant="contained"
+                            onClick={handleUpload}>Update profile</Button>
                 </Box>
             </Modal>
         </div>
