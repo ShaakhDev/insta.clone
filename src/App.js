@@ -1,17 +1,13 @@
 import "./App.css";
 import { lazy, Suspense } from 'react'
-
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import { Routes, Route } from 'react-router-dom'
-// import Home from "./pages/Home";
 const Home = lazy(() => import('./pages/Home'));
 const Profile = lazy(() => import('./pages/Profile'));
 const Posts = lazy(() => import('./pages/Posts'))
 const CurrentPost = lazy(() => import('./pages/CurrentPost'))
-// import Profile from "./pages/Profile";
-// import Posts from "./pages/Posts";
-// import CurrentPost from "./pages/CurrentPost";
+
 
 function App() {
 

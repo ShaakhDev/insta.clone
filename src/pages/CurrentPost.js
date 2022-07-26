@@ -1,49 +1,30 @@
-import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import {useParams} from "react-router-dom";
+import React, { useEffect } from 'react';
+import { useParams } from "react-router-dom";
 import CurrentPostCard from "../components/currentPost/currentPostCard";
-import {postActions} from "../store/reducers/postReducer";
-import {getCurrentPost} from "../store/actions/postActions";
 import SkeletonCurrentPost from "../components/currentPost/skeletonCurrentPost";
+import { useGetPostQuery } from '../rtk';
 
-const CURRENT_POST = [];
 
 function CurrentPost() {
-    const dispatch = useDispatch()
+
     const params = useParams();
-    const {currentPost, error, loading} = useSelector(state => state?.post);
+    const { data, isLoading, error, isError } = useGetPostQuery(params.postId);
 
-    useEffect(() => {
-        if (CURRENT_POST.length === 0) {
-            dispatch(getCurrentPost(params.postId))
-            if (currentPost)
-                CURRENT_POST.push(currentPost)
-
-        } else if (CURRENT_POST[0].id === params.postId) {
-            postActions.setCurrentPost(CURRENT_POST[0]);
-        } else {
-            dispatch(getCurrentPost(params.postId))
-            CURRENT_POST.length = 0;
-            if (currentPost)
-                CURRENT_POST.push(currentPost)
-        }
-    }, [dispatch, params.postId])
-
-    if (error) {
-        return <h1>{error}</h1>
+    if (isError) {
+        return <h1>{error.message}</h1>
     }
 
     return (
         <div>
-            {loading ? (<SkeletonCurrentPost/>) : (
+            {isLoading ? (<SkeletonCurrentPost />) : (
                 <CurrentPostCard
-                    user={currentPost?.user}
-                    caption={currentPost?.caption}
-                    comments={currentPost?.comments}
-                    time={currentPost?.timestamp}
-                    image={currentPost?.image_url}
-                    likes={currentPost?.likes}
-                    id={currentPost?.id}
+                    user={data?.user}
+                    caption={data?.caption}
+                    comments={data?.comments}
+                    time={data?.timestamp}
+                    image={data?.image_url}
+                    likes={data?.likes}
+                    id={data?.id}
                 />
             )}
         </div>

@@ -1,26 +1,34 @@
-import React, {useEffect, memo, useCallback} from 'react';
+import React, { useEffect, memo, useCallback } from 'react';
 import styles from "../styles/Home.module.css";
 import PostCard from "../components/posts/card/postCard";
-import {useDispatch, useSelector} from "react-redux";
-import {getAllPosts} from "../store/actions/postActions";
+// import {useDispatch, useSelector} from "react-redux";
+import { useGetAllPostsQuery } from '../rtk';
+// import {getAllPosts} from "../store/actions/postActions";
 import SkeletonCard from "../components/posts/card/skeletonCard";
 
 function Posts() {
-    const {posts, loading} = useSelector(state => state?.post);
-    const dispatch = useDispatch();
+    const { data: posts, isSuccess, isLoading } = useGetAllPostsQuery(1);
+    // const {posts, loading} = useSelector(state => state?.post);
+    // const dispatch = useDispatch();
+
+    // useEffect(() => {
+    //     if (posts.length === 0) {
+    //         dispatch(getAllPosts());
+    //     }
+    // }, [dispatch, posts]);
 
     useEffect(() => {
-        if (posts.length === 0) {
-            dispatch(getAllPosts());
+        if (posts) {
+            console.log(posts);
         }
-    }, [dispatch, posts]);
+    }, [isSuccess, posts])
 
 
     const AllPosts = useCallback(() => {
         return (
             <>
                 {posts?.map(post => (
-                    <PostCard postData={post} key={post.id}/>
+                    <PostCard postData={post} key={post.id} />
                 ))}
             </>
         )
@@ -29,7 +37,7 @@ function Posts() {
         <>
             <main className={styles.home}>
                 <div className={styles.box}>
-                    {loading ? <SkeletonCard/> : <AllPosts/>}
+                    {isLoading ? <SkeletonCard /> : <AllPosts />}
                 </div>
             </main>
         </>

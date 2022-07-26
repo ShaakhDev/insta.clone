@@ -1,26 +1,24 @@
 import MainHeader from "../components/layout/MainHeader";
-import {Outlet} from "react-router-dom";
-import {useEffect} from "react";
-import {getCurrentUser} from "../store/actions/userActions";
-import {useDispatch, useSelector} from "react-redux";
+import { Outlet } from "react-router-dom";
+import { useEffect } from "react";
+import { useGetCurrentUserQuery } from "../rtk/usersApi";
 
 
 
 function Home() {
-    const dispatch = useDispatch();
-    const {user,token} = useSelector(state => state?.user);
+    const { data, isSuccess } = useGetCurrentUserQuery(1);
 
     useEffect(() => {
-        if(!user&&token){
-            dispatch(getCurrentUser())
+        if (data) {
+            console.log(data);
         }
-    }, [dispatch, user,token])
+    }, [isSuccess, data])
 
 
     return (
         <>
-            <MainHeader/>
-            <Outlet/>
+            <MainHeader />
+            <Outlet />
         </>
     );
 }

@@ -7,31 +7,31 @@ import IconButton from "@mui/material/IconButton";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import styles from "../../styles/CurrentPost.module.css";
-import {muiStyles} from './customMuiStyles'
-import {Link} from "react-router-dom";
+import { muiStyles } from './customMuiStyles'
+import { Link } from "react-router-dom";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import {useCalculateDate, useCalculatePostedTime} from "../../hooks/useCalculateTime";
+import { useCalculateDate, useCalculatePostedTime } from "../../hooks/useCalculateTime";
 import Actions from "../posts/card/actions";
 import AddComment from "../posts/card/addComment";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import Comment from "./comment";
 import MoreActionsModal from "../modals/moreActionsModal";
-import React, {useCallback, useState} from "react";
+import React, { useCallback, useState } from "react";
 
-function CurrentPostCard({time, likes, caption, user:postUser, comments, image,id}) {
+function CurrentPostCard({ time, likes, caption, user: postUser, comments, image, id }) {
     const postedTime = useCalculatePostedTime(time)
     const postedDate = useCalculateDate(time)
-    const {token,user} = useSelector(state => state?.user);
-    const isMyPost = user?.username === postUser?.username
-    const [openModal,setOpenModal] = useState(false);
+    const token = localStorage.getItem('access_token')
+    const isMyPost = false
+    const [openModal, setOpenModal] = useState(false);
 
-    const handleOpenModal=()=>{
+    const handleOpenModal = () => {
         setOpenModal(true)
     }
 
     const CommentsBox = useCallback(
         () => {
-            return(
+            return (
                 <>
                     {
                         comments.map(comment => (
@@ -39,7 +39,7 @@ function CurrentPostCard({time, likes, caption, user:postUser, comments, image,i
                                 time={comment.timestamp}
                                 text={comment.text}
                                 user={comment.user}
-                                key={comment.id}/>
+                                key={comment.id} />
                         ))
                     }
                 </>
@@ -51,7 +51,7 @@ function CurrentPostCard({time, likes, caption, user:postUser, comments, image,i
 
     return (
         <>
-            <MoreActionsModal imgUrl id={id} isMyPost={isMyPost} open={openModal} setOpen={setOpenModal}/>
+            {/* <MoreActionsModal imgUrl id={id} isMyPost={isMyPost} open={openModal} setOpen={setOpenModal} /> */}
             <div className={styles.home}>
                 <div className={styles.box}>
                     <Card {...muiStyles.card}>
@@ -77,23 +77,23 @@ function CurrentPostCard({time, likes, caption, user:postUser, comments, image,i
                                 }
                                 action={
                                     <IconButton onClick={handleOpenModal} aria-label="settings">
-                                        <MoreHorizIcon fontSize='large'/>
+                                        <MoreHorizIcon fontSize='large' />
                                     </IconButton>
                                 }
                                 title={
-                                    <Link style={{color: "#333"}} to={`/${postUser?.username}`}>
+                                    <Link style={{ color: "#333" }} to={`/${postUser?.username}`}>
                                         <b>{postUser?.username}</b>
                                     </Link>
                                 }
                             />
 
                             <Box className={styles.comments}>
-                                {caption && <Comment time={time} text={caption} user={postUser}/>}
-                                {comments?.length ? <CommentsBox/> :null}
+                                {caption && <Comment time={time} text={caption} user={postUser} />}
+                                {comments?.length ? <CommentsBox /> : null}
 
                             </Box>
                             <CardContent className={styles.content}>
-                                <Actions postId={id}/>
+                                <Actions postId={id} />
                                 {likes > 0 ? (
                                     <Typography variant="body1">
                                         <b>{likes} likes</b>
@@ -110,7 +110,7 @@ function CurrentPostCard({time, likes, caption, user:postUser, comments, image,i
                                     </Typography>
                                 }
                             </CardContent>
-                            {token ? <AddComment postId={id}/> : (
+                            {token ? <AddComment postId={id} /> : (
                                 <Typography className={styles.noComment}>
                                     <Link to="/accounts/login">
                                         Log in

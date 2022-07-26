@@ -1,31 +1,27 @@
 import Card from '@mui/material/Card';
 import Divider from "@mui/material/Divider";
-import {muiStyles} from '../customMuiStyles'
+import { muiStyles } from '../customMuiStyles'
 import styles from '../../../styles/Card.module.css'
 import Header from "./header";
 import Media from "./media";
 import Actions from "./actions";
 import Content from "./content";
 import AddComment from "./addComment";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
-function PostCard({postData}) {
-    const {token} = useSelector(state => state?.user);
-    const {image_url, user, id, caption, comments, timestamp, likes} = postData;
+function PostCard({ postData }) {
+    const { token } = localStorage.getItem('access_token');
+    const { image_url, user, id, caption, comments, timestamp, likes } = postData;
 
-    // const Card = useCallback(()=>{
-    //     return(
-    //
-    //     )
-    // },[postData,token])
+
     return (
         <Card {...muiStyles.card} className={styles.card}>
 
-            <Header imgUrl={image_url} id={id} avatar={user?.avatar_url} user={user?.username}/>
+            <Header imgUrl={image_url} id={id} avatar={user?.avatar_url} user={user?.username} />
 
-            <Media className={styles.media} img={image_url} id={id} alt='post'/>
+            <Media className={styles.media} img={image_url} id={id} alt='post' />
 
-            <Actions postId={id}/>
+            <Actions postId={id} />
 
             <Content
                 likes={likes}
@@ -36,8 +32,8 @@ function PostCard({postData}) {
                 postId={id}
             />
 
-            <Divider/>
-            {token && <AddComment postId={id}/>}
+            <Divider />
+            {token !== undefined && <AddComment postId={id} />}
         </Card>
     );
 }
