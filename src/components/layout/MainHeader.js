@@ -4,7 +4,6 @@ import HomeFilled from "../mainHeaderIcons/homeFilled";
 import HomeOutlined from "../mainHeaderIcons/homeOutlined";
 import AddPostOutlined from "../mainHeaderIcons/addPostOutlined";
 import AvatarDropdown from "../mainHeaderIcons/avatarDropdown";
-import { useSelector } from "react-redux";
 import { Button, IconButton } from "@mui/material";
 import { useEffect, useState } from "react";
 import CreatePostModal from "../modals/createPostModal";
@@ -19,7 +18,7 @@ const FOCUSED_BTN = {
 function MainHeader(props) {
     const [openModal, setOpenModal] = useState(false)
     const navigate = useNavigate()
-    const { token } = localStorage.getItem('access_token')
+    const token = localStorage.getItem('access_token')
     const [focused, setFocused] = useState(FOCUSED_BTN.home)
 
     const handleOpenModal = () => setOpenModal(true);

@@ -9,7 +9,7 @@ function FavoriteIcon({ postId }) {
 
     const [click, setClick] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
-    const { token } = localStorage.getItem('access_token');
+    const token = useSelector(state => state?.auth?.token);
 
 
 

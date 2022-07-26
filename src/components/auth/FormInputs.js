@@ -1,19 +1,26 @@
-import {useState, useEffect} from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import {signUp, login} from "../../store/actions/userActions";
-import {Button} from "@mui/material";
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { useLoginMutation, useSignUpMutation } from '../../rtk/usersApi';
+import { setCredentials } from '../../rtk/authSlice';
+import { Button } from "@mui/material";
 import Username from "./username";
 import Password from "./password";
 import Email from "./email";
 import Loader from './loader'
+import { useNavigate } from 'react-router-dom'
 
-function FormInputs({authType, button}) {
+
+
+
+function FormInputs({ authType, button }) {
+    const [login, { data: loginData, isSuccess: loginIsSuccess, isLoading: loginIsLoading }] = useLoginMutation();
+    const [signUp, { data: signUpData, isSuccess: signUpIsSuccess, isLoading: signUpIsLoading }] = useSignUpMutation();
     const [isDisableButton, setIsDisableButton] = useState(true)
-    const {registered, loading} = useSelector(state => state?.user)
     const [username, setUsername] = useState()
     const [password, setPassword] = useState()
     const [email, setEmail] = useState()
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (
@@ -23,13 +30,19 @@ function FormInputs({authType, button}) {
         else setIsDisableButton(true);
     }, [username, password, email])
 
-    useEffect(() => {
-        console.log('loading: ' + loading)
-    }, [loading])
 
     useEffect(() => {
-        if (registered) loginHandle()
-    }, [registered])
+        if (signUpIsSuccess) {
+            loginHandle()
+        }
+    }, [signUpIsSuccess])
+
+    useEffect(() => {
+        if (loginIsSuccess) {
+            dispatch(setCredentials(loginData))
+            navigate('/')
+        }
+    })
 
     const signUpHandle = () => {
 
@@ -37,17 +50,17 @@ function FormInputs({authType, button}) {
             username,
             email,
             password,
-            avatar_url:""
+            avatar_url: ""
         }
         console.log(formData)
-        dispatch(signUp(formData))
+        signUp(formData)
     }
 
     const loginHandle = () => {
         const formData = new FormData();
         formData.append('username', username);
         formData.append('password', password);
-        dispatch(login(formData))
+        login(formData)
     }
 
     const handleSubmit = (e) => {
@@ -58,11 +71,11 @@ function FormInputs({authType, button}) {
 
     return (
         <>
-            <Username getValue={data => setUsername(data)}/>
+            <Username getValue={data => setUsername(data)} />
 
-            {authType === 'SIGNUP' ? <Email getValue={data => setEmail(data)}/> : ""}
+            {authType === 'SIGNUP' ? <Email getValue={data => setEmail(data)} /> : ""}
 
-            <Password getValue={data => setPassword(data)}/>
+            <Password getValue={data => setPassword(data)} />
 
 
 
@@ -72,7 +85,7 @@ function FormInputs({authType, button}) {
                 onClick={handleSubmit}
                 variant="contained"
             >
-                {loading ? (<Loader/>) : button}
+                {loginIsLoading || signUpIsLoading ? (<Loader />) : button}
             </Button>
         </>
     );

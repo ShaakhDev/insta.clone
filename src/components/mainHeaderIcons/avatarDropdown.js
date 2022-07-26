@@ -1,22 +1,34 @@
-import {useState}from 'react';
+import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
-import {Avatar} from '@mui/material';
+import { Avatar } from '@mui/material';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import styles from '../../styles/MainHeader.module.css'
 import Tooltip from '@mui/material/Tooltip';
-import {Link} from 'react-router-dom'
-import {useSelector} from "react-redux";
+import { Link } from 'react-router-dom'
+import { useSelector } from "react-redux";
+import { useGetCurrentUserMutation } from '../../rtk/usersApi';
 
 export default function AvatarDropdown() {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
-    const { user} = useSelector(state => state?.user);
+    const [getCurrentUser, { data: user, isLoading, isSuccess }] = useGetCurrentUserMutation(2)
+
+    useEffect(() => {
+        getCurrentUser()
+    }, [])
+
+    useEffect(() => {
+        if (isSuccess) {
+            console.log(user)
+        }
+    }, [isSuccess, user])
 
 
-    const logOutHandle = (e)=>{
+
+    const logOutHandle = (e) => {
         localStorage.removeItem('token');
         console.log('logged out')
         window.location.reload(true)
@@ -29,7 +41,7 @@ export default function AvatarDropdown() {
     };
     return (
         <>
-            <Box sx={{display: 'flex', alignItems: 'center', textAlign: 'center'}}>
+            <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
                 <Tooltip title="Account settings">
                     <IconButton className={styles.avatarDropdown}
                         onClick={handleClick}
@@ -39,7 +51,7 @@ export default function AvatarDropdown() {
                         aria-expanded={open ? 'true' : undefined}
                     >
                         <Avatar src={user?.avatar_url || process.env.PUBLIC_URL + 'avatar.webp'}
-                                sx={{width: 32, height: 32,}}/>
+                            sx={{ width: 32, height: 32, }} />
                     </IconButton>
                 </Tooltip>
             </Box>
@@ -77,16 +89,16 @@ export default function AvatarDropdown() {
                         },
                     },
                 }}
-                transformOrigin={{horizontal: 'right', vertical: 'top'}}
-                anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
+                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
-                <MenuItem sx={{fontSize: "1.5rem"}}>
-                    {user?(<Link style={{textDecoration: "none", color: "inherit"}} to={user?.username}>
+                <MenuItem sx={{ fontSize: "1.5rem" }}>
+                    {user ? (<Link style={{ textDecoration: "none", color: "inherit" }} to={user?.username}>
                         Profile
-                    </Link>):('Profile')}
+                    </Link>) : ('Profile')}
                 </MenuItem>
-                <Divider/>
-                <MenuItem onClick={()=>logOutHandle()} sx={{fontSize: "1.5rem"}}>
+                <Divider />
+                <MenuItem onClick={() => logOutHandle()} sx={{ fontSize: "1.5rem" }}>
                     Log Out
                 </MenuItem>
             </Menu>

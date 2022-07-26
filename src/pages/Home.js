@@ -1,12 +1,14 @@
 import MainHeader from "../components/layout/MainHeader";
 import { Outlet } from "react-router-dom";
 import { useEffect } from "react";
-import { useGetCurrentUserQuery } from "../rtk/usersApi";
-
+import { useGetCurrentUserMutation } from "../rtk/usersApi";
+import { GetToken, CurrentUser } from "../rtk/authSlice";
 
 
 function Home() {
-    const { data, isSuccess } = useGetCurrentUserQuery(1);
+    const user = CurrentUser();
+    const token = GetToken();
+    const [getCurrentUser, { data, isSuccess, isError, error }] = useGetCurrentUserMutation(1);
 
     useEffect(() => {
         if (data) {
@@ -14,6 +16,11 @@ function Home() {
         }
     }, [isSuccess, data])
 
+    useEffect(() => {
+        if (token && user) {
+            getCurrentUser();
+        }
+    }, [token, user, getCurrentUser])
 
     return (
         <>
@@ -23,4 +30,10 @@ function Home() {
     );
 }
 
+
+
 export default Home;
+
+
+
+

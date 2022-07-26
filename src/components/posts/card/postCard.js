@@ -7,10 +7,10 @@ import Media from "./media";
 import Actions from "./actions";
 import Content from "./content";
 import AddComment from "./addComment";
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux'
 
 function PostCard({ postData }) {
-    const { token } = localStorage.getItem('access_token');
+    const token = useSelector(state => state?.auth?.token)
     const { image_url, user, id, caption, comments, timestamp, likes } = postData;
 
 

@@ -7,12 +7,6 @@ export const postsApi = createApi({
     keepUnusedDataFor: 60,
     baseQuery: fetchBaseQuery({
         baseUrl: BASE_URL,
-        // prepareHeaders: (headers, { getState }) => {
-        //     const token = localStorage.getItem('access_token');
-        //     if (token !== undefined) {
-        //         headers.Authorization = `Bearer ${token}`;
-        //     }
-        // }
     }),
     endpoints: (build) => ({
         getAllPosts: build.query({
