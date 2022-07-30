@@ -1,39 +1,36 @@
 import React, { useEffect } from 'react';
+import Layout from '../components/layout/MainHeader';
 import { useParams } from "react-router-dom";
 import ProfileHeader from "../components/profile/profileHeader";
 import ProfileBody from "../components/profile/profileBody";
 import styles from '../styles/Profile.module.css'
-import { useDispatch, useSelector } from "react-redux";
-import { getCurrentUser } from "../store/actions/userActions";
-import { getProfileDetails, getSubscriptions } from "../store/actions/profileActions";
-import { userActions } from "../store/reducers/userReducer";
-import { profileActions } from "../store/reducers/profileReducer";
-import { GetToken, CurrentUser } from '../rtk/authSlice';
+import { useSelector } from "react-redux";
+
 import SkeletonProfile from "../components/profile/skeletonProfile";
+import {
+    useGetProfileDetailsQuery,
+    useGetProfileSubscriptionsMutation
+} from '../rtk/usersApi';
 
 
 
 function Profile() {
     const params = useParams()
-    const dispatch = useDispatch();
-    const token = useSelector(GetToken);
-    const user = useSelector(CurrentUser);
-    // const {error, profile, loading} = useSelector(state => state?.profile);
+    const { token } = useSelector(state => state?.auth);
+    const { user } = useSelector(state => state?.auth);
+    const [getProfileSubscriptions, { data: mySubscriptions, isLoading: subsIsLoading }] = useGetProfileSubscriptionsMutation(1);
+    // const [getProfileDetails, { data: profile, isLoading: profileIsLoading }] = useGetProfileDetailsMutation(1);
+    const { data: profile, isLoading: profileIsLoading } = useGetProfileDetailsQuery(params?.user, 1)
 
-    // useEffect(() => {
-    //     if (token) {
-    //         dispatch(getSubscriptions())
-    //     }
-    // },[token,dispatch])
+    useEffect(() => {
+        if (token && user) {
+            getProfileSubscriptions()
+        }
+    }, [token, getProfileSubscriptions, user]);
 
 
-    // useEffect(() => {
-    //     if (profile && profile.username === params.user) {
-    //         profileActions.setProfile(profile)
-    //     } else {
-    //         dispatch(getProfileDetails(params?.user))
-    //     }
-    // }, [dispatch, params, profile])
+
+
 
     // if (error > 499) {
     //     return (
@@ -44,14 +41,15 @@ function Profile() {
     // }
 
     return (
-        <main className={styles.profile}>
-            {/* {loading ? (<SkeletonProfile />
-            ) : (<>
-                <ProfileHeader />
-                <ProfileBody />
-            </>)} */}
-            Profile
-        </main>
+        <Layout>
+            <main className={styles.profile}>
+                {profileIsLoading || subsIsLoading ? (<SkeletonProfile />
+                ) : (<>
+                    <ProfileHeader mySubscriptions={mySubscriptions} profile={profile} />
+                    <ProfileBody profile={profile} />
+                </>)}
+            </main>
+        </Layout>
     );
 }
 

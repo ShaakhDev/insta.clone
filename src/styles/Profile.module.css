@@ -1,135 +1,142 @@
 .profile {
-    padding: 2rem;
-    max-width: 98rem;
-    width: 98%;
-    margin: 0 auto;
+	padding: 10rem 2rem 2rem;
+	max-width: 98rem;
+	width: 98%;
+	margin: 0 auto;
 }
 
 .header {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    padding: 1rem 0 6rem 0;
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	padding: 1rem 0 6rem 0;
 }
 
 .photo {
-    flex-grow: 1;
-    -webkit-flex-grow: 1;
-    flex-basis: 0;
-    -webkit-flex-basis: 0;
-    margin-right: 3rem;
-    user-select: none;
+	flex-grow: 1;
+	-webkit-flex-grow: 1;
+	flex-basis: 0;
+	-webkit-flex-basis: 0;
+	margin-right: 3rem;
+	user-select: none;
 }
 
 .photo button img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
 }
 
 .photo button {
-    width: 15rem;
-    height: 15rem;
-    margin: 0 auto;
-    border: none;
-    background: transparent;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    border-radius: 50%;
-    cursor: pointer;
+	width: 15rem;
+	height: 15rem;
+	margin: 0 auto;
+	border: none;
+	background: transparent;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+	border-radius: 50%;
+	cursor: pointer;
 }
 
 .info {
-    flex-grow: 2;
-    -webkit-flex-grow: 2;
-    flex-basis: 0;
-    -webkit-flex-basis: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+	flex-grow: 2;
+	-webkit-flex-grow: 2;
+	flex-basis: 0;
+	-webkit-flex-basis: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
-
+.info h3 {
+	font-weight: 300;
+}
+.info h6 {
+	font-weight: 700;
+	font-size: 1.5rem;
+	color: #333;
+}
+.info h5 {
+	font-weight: 400;
+	color: #333;
+}
 .body {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .bodyLine {
-    width: 10%;
-    height: 0.15rem;
-    margin: -0.025rem auto;
-    background: #333;
+	width: 10%;
+	height: 0.15rem;
+	margin: -0.025rem auto;
+	background: #333;
 }
 
 .divider {
-    width: 100%;
-    height: 1px;
-    background: #bdbdbd;
+	width: 100%;
+	height: 1px;
+	background: #bdbdbd;
 }
 
 .posts {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 3rem;
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-gap: 3rem;
 }
 
 .postItem img {
-    width: 100%;
-    object-fit: cover;
-    height: 100%;
+	width: 100%;
+	object-fit: cover;
+	height: 100%;
 }
 
 .postItem {
-    position: relative;
-    width: 29.3rem;
-    height: 29.3rem;
-
+	position: relative;
+	width: 29.3rem;
+	height: 29.3rem;
 }
 
 .body .noPosts {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 8rem;
-
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	padding-top: 8rem;
 }
 
 .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: none;
-
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
 }
 
 .postItem:hover .overlay {
-    display: flex;
-    background: rgba(0, 0, 0, 0.2);
-    justify-content: center;
-    align-items: center;
-    transition: all 200ms ease-in-out;
+	display: flex;
+	background: rgba(0, 0, 0, 0.2);
+	justify-content: center;
+	align-items: center;
+	transition: all 200ms ease-in-out;
 }
 
-.overlay span, .overlay svg {
-    font-size: 1.8rem;
-    color: #fff;
-    fill: #fff;
-    padding-left: .5rem;
+.overlay span,
+.overlay svg {
+	font-size: 1.8rem;
+	color: #fff;
+	fill: #fff;
+	padding-left: 0.5rem;
 }
 
 .icon {
-    margin: 0 1rem;
-    display: flex;
-    align-items: center;
-
+	margin: 0 1rem;
+	display: flex;
+	align-items: center;
 }

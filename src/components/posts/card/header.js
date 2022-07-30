@@ -52,7 +52,7 @@ function Header({ avatar, user: postUser, id, imgUrl }) {
                         />
                     ) : (
                         <Link style={{ color: "#333" }} to={postUser}>
-                            <b onClick={() => console.log('clicked')}>{postUser}</b>
+                            <b >{postUser}</b>
                         </Link>
                     )
                 }

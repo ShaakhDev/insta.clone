@@ -1,22 +1,28 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from "@mui/material/Box";
 import CreatePostIcon from "./createPostIcon";
 import Typography from "@mui/material/Typography";
-import {Button, Input, Stack, TextareaAutosize} from "@mui/material";
-import {customModalStyle} from "./customMiuStyles";
-import {useDispatch, useSelector} from "react-redux";
-import {uploadImage} from "../../store/actions/postActions";
+import { Button, Input, Stack, TextareaAutosize } from "@mui/material";
+import { customModalStyle } from "./customMiuStyles";
+import { useDispatch, useSelector } from "react-redux";
+import { uploadImage } from "../../store/actions/postActions";
 import CardHeader from "@mui/material/CardHeader";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
-import {muiStyles} from "../currentPost/customMuiStyles";
-import EmojiBtn from "../posts/card/emojiBtn";
+import { muiStyles } from "../currentPost/customMuiStyles";
+import EmojiBtn from "../emojiBtn";
 import EmojiPicker from "emoji-picker-react";
+import { useGetCurrentUserQuery } from '../../rtk/usersApi'
+import { useSavePostImageMutation } from '../../rtk/postsApi'
 
-function SelectPostImage({getCaption}) {
+
+
+function SelectPostImage({ getCaption }) {
     const dispatch = useDispatch();
-    const {postImagePath} = useSelector(state => state?.post);
-    const {user} = useSelector(state => state?.user);
+    // const { postImagePath } = useSelector(state => state?.post);
+    // const { user } = useSelector(state => state?.user);
+    const { data: user } = useGetCurrentUserQuery(1);
+    const [savePostImage, { data: postImagePath, isLoading: imageLoading }] = useSavePostImageMutation();
     const [img, setImg] = useState(null);
     const [input, setInput] = useState('')
     const [click, setClick] = useState(false);
@@ -36,28 +42,30 @@ function SelectPostImage({getCaption}) {
     useEffect(() => {
         if (img !== null) {
             console.log(img)
-            dispatch(uploadImage(img))
+            const imageForm = new FormData();
+            imageForm.append('file', img);
+            savePostImage(imageForm)
         }
-    }, [img, dispatch]);
+    }, [img, savePostImage]);
 
     useEffect(() => {
         getCaption(input)
     }, [input, getCaption]);
 
     return (<>
-        {postImagePath  && (<Box
+        {postImagePath && (<Box
             {...customModalStyle.overviewBox}
         >
             <Box
                 {...customModalStyle.imgBox}
             >
-                <img style={{width: '100%'}} src={postImagePath} alt="img"/>
+                <img style={{ width: '100%' }} src={postImagePath} alt="img" />
             </Box>
             <Box //caption box
                 {...customModalStyle.captionBox}
             >
                 <CardHeader
-                    sx={{padding: 0}}
+                    sx={{ padding: 0 }}
                     avatar={
                         <Link to={`/${user?.username}`}>
                             <Avatar
@@ -67,7 +75,7 @@ function SelectPostImage({getCaption}) {
                             />
                         </Link>}
                     title={
-                        <Link style={{color: "#000", fontSize: '1.5rem'}} to={`/${user?.username}`}>
+                        <Link style={{ color: "#000", fontSize: '1.5rem' }} to={`/${user?.username}`}>
                             <b>{user?.username}</b>
                         </Link>}
                 />
@@ -81,10 +89,10 @@ function SelectPostImage({getCaption}) {
                 />
 
                 <Stack direction="row" justifyContent="space-between">
-                    <EmojiBtn click={() => setClick( !click)}/>
+                    <EmojiBtn click={() => setClick(!click)} />
 
                     {click && <EmojiPicker
-                        pickerStyle={{position: 'absolute', bottom: '7rem', height: '20rem'}}
+                        pickerStyle={{ position: 'absolute', bottom: '7rem', height: '20rem' }}
                         disableSearchBar={true}
                         onEmojiClick={handleChoseEmoji}
                     />}
@@ -97,16 +105,16 @@ function SelectPostImage({getCaption}) {
             </Box>
         </Box>)}
 
-        {!postImagePath  && (<Box
+        {!postImagePath && (<Box
             {...customModalStyle.uploadBox}
         >
-            <CreatePostIcon/>
+            <CreatePostIcon />
             <Typography variant="h3">
                 Upload Photo
             </Typography>
             <label htmlFor="contained-button-file">
-                <Input onChange={e => handleImage(e)} sx={{display: "none"}} accept="image/*"
-                       id="contained-button-file" type="file"/>
+                <Input onChange={e => handleImage(e)} sx={{ display: "none" }} accept="image/*"
+                    id="contained-button-file" type="file" />
                 <Button {...customModalStyle.selectBtn} variant="contained" component="span">
                     Select from computer
                 </Button>

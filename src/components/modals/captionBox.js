@@ -1,18 +1,18 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from "@mui/material/Box";
-import {updateCustomStyles} from "./customMiuStyles";
+import { updateCustomStyles } from "./customMiuStyles";
 import CardHeader from "@mui/material/CardHeader";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
-import {muiStyles} from "../currentPost/customMuiStyles";
-import {Stack, TextareaAutosize} from "@mui/material";
-import EmojiBtn from "../posts/card/emojiBtn";
+import { muiStyles } from "../currentPost/customMuiStyles";
+import { Stack, TextareaAutosize } from "@mui/material";
+import EmojiBtn from "../emojiBtn";
 import EmojiPicker from "emoji-picker-react";
 import Typography from "@mui/material/Typography";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
-function CaptionBox({getCaption}) {
-    const {user} = useSelector(state => state?.user);
+function CaptionBox({ getCaption }) {
+    const { user } = useSelector(state => state?.user);
     const [input, setInput] = useState('')
     const [click, setClick] = useState(false);
 
@@ -24,9 +24,9 @@ function CaptionBox({getCaption}) {
         setInput(e.target.value);
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         getCaption(input)
-    },[input,getCaption])
+    }, [input, getCaption])
 
 
     return (
@@ -35,7 +35,7 @@ function CaptionBox({getCaption}) {
                 {...updateCustomStyles.captionBox}
             >
                 <CardHeader
-                    sx={{padding: 0}}
+                    sx={{ padding: 0 }}
                     avatar={
                         <Link to={`/${user?.username}`}>
                             <Avatar
@@ -45,7 +45,7 @@ function CaptionBox({getCaption}) {
                             />
                         </Link>}
                     title={
-                        <Link style={{color: "#000", fontSize: '1.5rem'}} to={`/${user?.username}`}>
+                        <Link style={{ color: "#000", fontSize: '1.5rem' }} to={`/${user?.username}`}>
                             <b>{user?.username}</b>
                         </Link>}
                 />
@@ -59,10 +59,10 @@ function CaptionBox({getCaption}) {
                 />
 
                 <Stack direction="row" justifyContent="space-between">
-                    <EmojiBtn click={() => setClick( !click)}/>
+                    <EmojiBtn click={() => setClick(!click)} />
 
                     {click && <EmojiPicker
-                        pickerStyle={{position: 'absolute', bottom: '7rem', height: '20rem'}}
+                        pickerStyle={{ position: 'absolute', bottom: '7rem', height: '20rem' }}
                         disableSearchBar={true}
                         onEmojiClick={handleChoseEmoji}
                     />}

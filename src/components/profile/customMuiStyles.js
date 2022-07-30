@@ -8,18 +8,18 @@ export const profileMuiStyles = {
                 background: 'transparent'
             },
             color: "#333",
-            fontSize: '1.5rem',
+            fontSize: '1.3rem',
             textTransform: 'capitalize',
-            fontWeight: '900'
+            fontWeight: '500'
         }
     },
-    followButton:{
+    followButton: {
         variant: 'contained',
-        sx:{
+        sx: {
             textTransform: 'capitalize',
-            fontWeight: '600',
-            fontSize: '1.6rem',
-            padding:"0 2rem !important",
+            fontWeight: '500',
+            fontSize: '1.4rem',
+            padding: "0 2rem !important",
             margin: "0.5rem 0"
         }
     },

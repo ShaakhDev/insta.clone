@@ -8,23 +8,12 @@ import IconButton from '@mui/material/IconButton';
 import styles from '../../styles/MainHeader.module.css'
 import Tooltip from '@mui/material/Tooltip';
 import { Link } from 'react-router-dom'
-import { useSelector } from "react-redux";
-import { useGetCurrentUserMutation } from '../../rtk/usersApi';
+import { useGetCurrentUserQuery } from '../../rtk/usersApi';
 
 export default function AvatarDropdown() {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
-    const [getCurrentUser, { data: user, isLoading, isSuccess }] = useGetCurrentUserMutation(2)
-
-    useEffect(() => {
-        getCurrentUser()
-    }, [])
-
-    useEffect(() => {
-        if (isSuccess) {
-            console.log(user)
-        }
-    }, [isSuccess, user])
+    const { data: user } = useGetCurrentUserQuery(1)
 
 
 
@@ -93,7 +82,7 @@ export default function AvatarDropdown() {
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
                 <MenuItem sx={{ fontSize: "1.5rem" }}>
-                    {user ? (<Link style={{ textDecoration: "none", color: "inherit" }} to={user?.username}>
+                    {user ? (<Link style={{ textDecoration: "none", color: "inherit" }} to={`/${user?.username}`}>
                         Profile
                     </Link>) : ('Profile')}
                 </MenuItem>

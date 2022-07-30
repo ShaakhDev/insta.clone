@@ -1,12 +1,9 @@
 import "./App.css";
-import { lazy, Suspense } from 'react'
-import Login from "./pages/Login";
-import SignUp from "./pages/SignUp";
+import React, { Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
-const Home = lazy(() => import('./pages/Home'));
-const Profile = lazy(() => import('./pages/Profile'));
-const Posts = lazy(() => import('./pages/Posts'))
-const CurrentPost = lazy(() => import('./pages/CurrentPost'))
+import { ROUTES } from './routes'
+import FancyRoute from "./components/tools/FancyRoute";
+
 
 
 function App() {
@@ -14,22 +11,26 @@ function App() {
     return (
         <Suspense fallback={<h1>Loading...</h1>}>
             <Routes>
-                <Route path='/' element={<Home />}>
-                    <Route path=':user' element={<Profile />} />
-                    <Route index element={<Posts />} />
-                    <Route path="/p/*">
-                        <Route path=":postId" element={<CurrentPost />} />
-                    </Route>
-                </Route>
-                <Route path="/accounts/*">
-                    <Route path="login" element={<Login />} />
-                    <Route path="signup" element={<SignUp />} />
-                </Route>
-
+                {/* <Route path='/' element={<Home />} />
+                <Route path='/:user' element={<Profile />} />
+                <Route path="/p/:postId" element={<CurrentPost />} />
+                <Route path="/accounts/login" element={<Login />} />
+                <Route path="/accounts/signup" element={<SignUp />} /> */}
+                {
+                    ROUTES.map((route, i) => {
+                        return (
+                            <Route key={i} path={route.path} element={
+                                <FancyRoute>
+                                    <route.element />
+                                </FancyRoute>} />
+                        )
+                    })
+                }
             </Routes>
         </Suspense>
 
     );
 }
+
 
 export default App;

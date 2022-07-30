@@ -1,10 +1,10 @@
-import React, {useEffect, useRef} from 'react';
-import {TextField} from "@mui/material";
-import {customStyles} from "./customMuiStyles";
+import React, { useEffect, useRef } from 'react';
+import { TextField } from "@mui/material";
+import { customStyles } from "./customMuiStyles";
 
-function Username({getValue}) {
+function Username({ getValue }) {
     const usernameRef = useRef();
-    const username = usernameRef.current?.value
+    const username = (usernameRef.current?.value)?.toLowerCase();
     useEffect(() => {
         getValue(username)
     })

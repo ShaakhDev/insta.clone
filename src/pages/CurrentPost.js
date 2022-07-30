@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import Layout from "../components/layout/MainHeader";
 import { useParams } from "react-router-dom";
 import CurrentPostCard from "../components/currentPost/currentPostCard";
 import SkeletonCurrentPost from "../components/currentPost/skeletonCurrentPost";
@@ -15,7 +16,7 @@ function CurrentPost() {
     }
 
     return (
-        <div>
+        <Layout>
             {isLoading ? (<SkeletonCurrentPost />) : (
                 <CurrentPostCard
                     user={data?.user}
@@ -27,7 +28,7 @@ function CurrentPost() {
                     id={data?.id}
                 />
             )}
-        </div>
+        </Layout>
     );
 }
 

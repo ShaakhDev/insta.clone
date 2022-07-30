@@ -1,15 +1,9 @@
 import FormInputs from "../components/auth/FormInputs";
 import styles from '../styles/Auth.module.css'
 import { Link, useNavigate } from 'react-router-dom'
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { GetToken } from "../rtk/authSlice";
+
 
 function Login() {
-
-
-
-
 
     return (
         <form className={styles.auth}>

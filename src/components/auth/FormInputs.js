@@ -30,7 +30,6 @@ function FormInputs({ authType, button }) {
         else setIsDisableButton(true);
     }, [username, password, email])
 
-
     useEffect(() => {
         if (signUpIsSuccess) {
             loginHandle()
@@ -39,7 +38,9 @@ function FormInputs({ authType, button }) {
 
     useEffect(() => {
         if (loginIsSuccess) {
-            dispatch(setCredentials(loginData))
+            localStorage.setItem('access_token', loginData?.access_token)
+            localStorage.setItem('user', loginData?.username)
+            console.log(loginData)
             navigate('/')
         }
     })

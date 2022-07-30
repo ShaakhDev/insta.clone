@@ -1,68 +1,73 @@
-
 .box {
-    border: 1px solid #e8e8e8;
-    width: 40vw;
-    text-align: center;
-    text-transform: capitalize;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 2rem 4rem;
+	border: 1px solid #e8e8e8;
+	width: 45vw;
+	min-width: 580px;
+	text-align: center;
+	text-transform: capitalize;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 2rem 4rem;
 }
 
 .heading {
-    padding: 3rem 0;
+	padding: 3rem 0;
 }
 
 .heading p {
-    font-size: 1.3rem;
-    text-transform: initial;
+	font-size: 1.3rem;
+	text-transform: initial;
 }
 
 .heading h2 {
-    font-size: 2rem;
+	font-size: 2rem;
 }
 
 .box label {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    font-size: 1.6rem;
-    font-weight: bold;
-    margin: 1rem 0;
-    padding: 0.5rem;
-    cursor: pointer;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	font-size: 1.6rem;
+	font-weight: bold;
+	margin: 1rem 0;
+	padding: 0.5rem;
+	cursor: pointer;
 }
 
-.box label input[type="text"] {
-    width: 80%;
-    padding: 0.5rem;
-    border: 1.5px solid #dbdbdb;
-    border-radius: 0.5rem;
-    font-size: 1.6rem;
-    outline: none;
+.box label input[type="text"],
+.box label textarea {
+	padding: 0.5rem;
+	border-radius: 0.5rem;
+	width: 80%;
+	border: 1.5px solid #dbdbdb;
+	font-size: 1.6rem;
+	outline: none;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
-.box label:nth-child(5){
-    color: #1976d2;
-    height: 3rem;
-    margin: 2rem 0;
-    margin-right: 4rem;
+.box label input[type="text"]::placeholder,
+.box label textarea::placeholder {
+	color: #c1c1c1;
 }
-.box label:nth-child(5) span:nth-child(1){
-    color: #333333;
-    text-transform: initial;
-    font-weight: 300;
+.box label textarea {
+	min-height: 6rem;
+	resize: vertical;
+}
+.box label.uploadLabel {
+	color: #1976d2;
+	height: 3rem;
+	margin: 2rem 0;
+	margin-right: 4rem;
+}
+.box label.uploadLabel span:nth-child(1) {
+	color: #333333;
+	text-transform: initial;
+	font-weight: 300;
 }
 
-.box .upload{
-    width: auto;
-
-overflow: hidden;
-    text-overflow: ellipsis;
-
+.box .upload {
+	width: auto;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
-
-
-

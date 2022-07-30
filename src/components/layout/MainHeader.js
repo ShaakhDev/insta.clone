@@ -78,7 +78,8 @@ function MainHeader(props) {
                     )}
                 </div>
             </nav>
-            <div className={styles.behind} />
+            {/* <div className={styles.behind} /> */}
+            {props.children}
         </>
     );
 }
