@@ -17,10 +17,7 @@ import { useSavePostImageMutation } from '../../rtk/postsApi'
 
 
 
-function SelectPostImage({ getCaption }) {
-    const dispatch = useDispatch();
-    // const { postImagePath } = useSelector(state => state?.post);
-    // const { user } = useSelector(state => state?.user);
+function SelectPostImage({ getCaption, getImg }) {
     const { data: user } = useGetCurrentUserQuery(1);
     const [savePostImage, { data: postImagePath, isLoading: imageLoading }] = useSavePostImageMutation();
     const [img, setImg] = useState(null);
@@ -36,30 +33,32 @@ function SelectPostImage({ getCaption }) {
     }
 
     const handleImage = (e) => {
-        setImg(e.target.files[0])
+        const url = URL.createObjectURL(e.target.files[0]);
+        setImg(url)
+        getImg(e.target.files[0])
     }
 
-    useEffect(() => {
-        if (img !== null) {
-            console.log(img)
-            const imageForm = new FormData();
-            imageForm.append('file', img);
-            savePostImage(imageForm)
-        }
-    }, [img, savePostImage]);
+    // useEffect(() => {
+    //     if (img !== null) {
+    //         console.log(img)
+    //         const imageForm = new FormData();
+    //         imageForm.append('file', img);
+    //         savePostImage(imageForm)
+    //     }
+    // }, [img, savePostImage]);
 
     useEffect(() => {
         getCaption(input)
     }, [input, getCaption]);
 
     return (<>
-        {postImagePath && (<Box
+        {img && (<Box
             {...customModalStyle.overviewBox}
         >
             <Box
                 {...customModalStyle.imgBox}
             >
-                <img style={{ width: '100%' }} src={postImagePath} alt="img" />
+                <img style={{ width: '100%' }} src={img} alt="img" />
             </Box>
             <Box //caption box
                 {...customModalStyle.captionBox}
@@ -105,7 +104,7 @@ function SelectPostImage({ getCaption }) {
             </Box>
         </Box>)}
 
-        {!postImagePath && (<Box
+        {!img && (<Box
             {...customModalStyle.uploadBox}
         >
             <CreatePostIcon />
@@ -113,7 +112,7 @@ function SelectPostImage({ getCaption }) {
                 Upload Photo
             </Typography>
             <label htmlFor="contained-button-file">
-                <Input onChange={e => handleImage(e)} sx={{ display: "none" }} accept="image/*"
+                <input onChange={e => handleImage(e)} style={{ display: "none" }} accept="image/*"
                     id="contained-button-file" type="file" />
                 <Button {...customModalStyle.selectBtn} variant="contained" component="span">
                     Select from computer

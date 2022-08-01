@@ -26,7 +26,7 @@ export const postsApi = createApi({
                     ]
                     : [{ type: 'Posts', id: 'LIST' }],
             transformResponse: (result) => {
-                return result.sort((a, b) => b.id - a.id)
+                return result?.items?.sort((a, b) => b.id - a.id)
             }
         }),
 

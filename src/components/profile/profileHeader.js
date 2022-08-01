@@ -33,9 +33,9 @@ function ProfileHeader({ mySubscriptions, profile }) {
         if (user === profile?.username)
             setIsMyProfile(true);
         else setIsMyProfile(false)
-        return () => setIsMyProfile(false);
 
-    }, [user, profile?.username]);
+
+    }, [user, profile]);
 
 
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from '@mui/material/Modal';
 import Box from "@mui/material/Box";
 import { customModalStyle } from "./customMiuStyles";
@@ -8,20 +8,32 @@ import { Button } from '@mui/material';
 import { postActions } from "../../store/reducers/postReducer";
 import { useDispatch } from "react-redux";
 import { createPost } from "../../store/actions/postActions";
-import { useSavePostImageMutation } from "../../rtk/postsApi";
+import { useSavePostImageMutation, useCreatePostMutation } from "../../rtk/postsApi";
 
 function CreatePostModal({ open, setOpen }) {
-    const [savePostImage, { data: postImagePath, isLoading: imageLoading }] = useSavePostImageMutation();
- 
+    const [savePostImage, { data: postImagePath, isLoading: imageLoading, isSuccess }] = useSavePostImageMutation();
+    const [createPost] = useCreatePostMutation();
     const [caption, setCaption] = useState("");
+    const [img, setImg] = useState(null);
 
 
-   
+    useEffect(() => {
+        if (isSuccess) {
+            const body = {
+                caption: caption,
+                image_url: postImagePath
+            }
+            createPost(body)
+            setImg(null)
+            setCaption("")
+        }
+    }, [isSuccess])
 
-    const handleCreatePost = () => {
-        
-      
-       
+    const handleCreatePost = async () => {
+        const imageForm = new FormData();
+        imageForm.append('file', img);
+        await savePostImage(imageForm);
+
     }
 
     return (
@@ -32,26 +44,26 @@ function CreatePostModal({ open, setOpen }) {
                 BackdropProps={{ background: 'rgba(255,255,255,1)' }}
                 closeAfterTransition={true}
                 disableScrollLock={true}
-                onBackdropClick={(e)=>setOpen(false)}
+                onBackdropClick={(e) => setOpen(false)}
             >
                 <Box {...customModalStyle.box}>
-                    <Box{...customModalStyle.headerBox}>
+                    <Box {...customModalStyle.headerBox}>
                         <Typography
                             {...customModalStyle.modalTitle}
                             variant="h4"
                         >
                             Create new post
                         </Typography>
-                        {postImagePath && (<Button
+                        {img && (<Button
                             {...customModalStyle.shareBtn}
                             onClick={handleCreatePost}>
                             Share
-                        </Button>)
-                        }
+                        </Button>)}
+
                     </Box>
                     {imageLoading && <img alt="loading gif" src={process.env.PUBLIC_URL + 'loader.gif'} />}
 
-                    <SelectPostImage getCaption={data => setCaption(data)} />
+                    <SelectPostImage getImg={(image) => setImg(image)} getCaption={data => setCaption(data)} />
                 </Box>
             </Modal>
 

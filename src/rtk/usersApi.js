@@ -1,17 +1,26 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { result } from 'lodash';
+import { rtkQueryErrorLogger } from './errorHandler';
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
+
+const baseQuery = fetchBaseQuery({ baseUrl: BASE_URL })
+const baseQueryWithLoggedOut = async (args, api) => {
+    let result = await baseQuery(args, api)
+    if (result.error && result.error.status === 401) {
+        localStorage.removeItem('access_token')
+        localStorage.removeItem('user')
+        window.location.reload()
+    }
+    return result
+}
 
 
 export const usersApi = createApi({
     reducerPath: 'usersApi',
     tagTypes: ['Users', "Profiles"],
     keepUnusedDataFor: 60,
-    baseQuery: fetchBaseQuery({
-        baseUrl: BASE_URL,
+    baseQuery: baseQueryWithLoggedOut,
 
-    }),
 
 
     endpoints: (build) => ({
@@ -23,6 +32,10 @@ export const usersApi = createApi({
                     'Authorization': `Bearer ${localStorage.getItem('access_token')}`
                 }
             }),
+
+
+
+
             keepUnusedDataFor: 300,
             providesTags: ["Users"],
         }),
