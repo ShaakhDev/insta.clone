@@ -7,13 +7,14 @@ export const postsApi = createApi({
     keepUnusedDataFor: 60,
     baseQuery: fetchBaseQuery({
         baseUrl: BASE_URL,
-        prepareHeaders: (headers) => {
-            if (localStorage.getItem('access_token')) {
-                headers['Authorization'] = `Bearer ${localStorage.getItem('access_token')}`
-                return headers
-            }
-            return headers
-        }
+        // prepareHeaders: (headers) => {
+        //     const token = localStorage.getItem('access_token');
+        //     if (token !== undefined || token !== null) {
+        //         headers['Authorization'] = `Bearer ${localStorage.getItem('access_token')}`
+        //         return headers
+        //     }
+        //     return headers
+        // }
     }),
     endpoints: (build) => ({
         getAllPosts: build.query({
@@ -40,15 +41,29 @@ export const postsApi = createApi({
         }),
 
         //post/{id} PATCH endpoint for update post
+        updatePost: build.mutation({
+            query: (data) => ({
+                url: `post/${data.id}`,
+                method: 'PATCH',
+                body: data.body,
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+                }
 
+            }),
+            invalidatesTags: [{ type: 'Posts', id: 'LIST' }],
+
+        }),
         //////////
 
         createPost: build.mutation({
             query: (data) => ({
-                url: 'post',
+                url: 'post/',
                 method: 'POST',
                 body: data,
-
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+                }
             }),
             invalidatesTags: [{ type: 'Posts', id: 'LIST' }],
         }),
@@ -58,7 +73,9 @@ export const postsApi = createApi({
                 url: 'post/image',
                 method: 'POST',
                 body: formData,
-
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+                }
             }),
         }),
 
@@ -91,5 +108,5 @@ export const {
     useSavePostImageMutation,
     useSetLikeToPostMutation,
     useDeletePostMutation,
-
+    useUpdatePostMutation,
 } = postsApi

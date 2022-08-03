@@ -11,11 +11,9 @@ import EmojiPicker from "emoji-picker-react";
 import Typography from "@mui/material/Typography";
 import { useSelector } from "react-redux";
 
-function CaptionBox({ getCaption }) {
-    const { user } = useSelector(state => state?.user);
-    const [input, setInput] = useState('')
+function CaptionBox({ getCaption, user, prevCaption }) {
+    const [input, setInput] = useState(prevCaption);
     const [click, setClick] = useState(false);
-
 
     const handleChoseEmoji = (event, emojiObject) => {
         setInput(input + emojiObject.emoji);

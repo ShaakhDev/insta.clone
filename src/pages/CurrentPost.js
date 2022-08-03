@@ -4,16 +4,18 @@ import { useParams } from "react-router-dom";
 import CurrentPostCard from "../components/currentPost/currentPostCard";
 import SkeletonCurrentPost from "../components/currentPost/skeletonCurrentPost";
 import { useGetPostQuery } from '../rtk';
-
+import nprogress from 'nprogress';
 
 function CurrentPost() {
 
     const params = useParams();
-    const { data, isLoading, error, isError } = useGetPostQuery(params.postId);
+    const { data, isLoading } = useGetPostQuery(params.postId);
 
-    if (isError) {
-        return <h1>{error.message}</h1>
-    }
+    useEffect(() => {
+        setInterval(() => {
+            nprogress.done()
+        }, 1000)
+    }, [])
 
     return (
         <Layout>

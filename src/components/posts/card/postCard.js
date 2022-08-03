@@ -8,33 +8,39 @@ import Actions from "./actions";
 import Content from "./content";
 import AddComment from "./addComment";
 import { useSelector } from 'react-redux'
+import { useCopyToClick } from '../../../hooks/useCopyToClick';
+import Popup from '../../popup';
 
 function PostCard({ postData }) {
     const token = useSelector(state => state?.auth?.token)
     const { image_url, user, id, caption, comments, timestamp, likes } = postData;
-
+    const [isCopied, handleCopyClick] = useCopyToClick(id)
 
     return (
-        <Card {...muiStyles.card} className={styles.card}>
+        <>
+            {isCopied && <Popup text='Link copied to clipboard' />}
+            <Card {...muiStyles.card} className={styles.card}>
 
-            <Header imgUrl={image_url} id={id} avatar={user?.avatar_url} user={user?.username} />
+                <Header caption={caption} imgUrl={image_url} id={id} avatar={user?.avatar_url} user={user} />
 
-            <Media className={styles.media} img={image_url} id={id} alt='post' />
+                <Media className={styles.media} img={image_url} id={id} alt='post' />
 
-            <Actions postId={id} />
+                <Actions onClickToShareIcon={handleCopyClick} postId={id} />
 
-            <Content
-                likes={likes}
-                comments={comments}
-                time={timestamp}
-                user={user?.username}
-                caption={caption}
-                postId={id}
-            />
+                <Content
+                    likes={likes}
+                    comments={comments}
+                    time={timestamp}
+                    user={user?.username}
+                    caption={caption}
+                    postId={id}
+                />
 
-            <Divider />
-            {token !== undefined && <AddComment postId={id} />}
-        </Card>
+                <Divider />
+                {token !== undefined && <AddComment postId={id} />}
+            </Card>
+        </>
+
     );
 }
 

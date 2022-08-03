@@ -1,14 +1,15 @@
 import Layout from "../components/layout/MainHeader";
-import { Outlet } from "react-router-dom";
 import Posts from "./Posts";
+import nprogress from "nprogress";
 import { useEffect } from "react";
-import { useGetCurrentUserMutation } from "../rtk/usersApi";
-import { GetToken, CurrentUser } from "../rtk/authSlice";
-
 
 function Home() {
 
-
+    useEffect(() => {
+        setInterval(() => {
+            nprogress.done();
+        }, 1000)
+    }, [])
     return (
         <Layout>
             <Posts />

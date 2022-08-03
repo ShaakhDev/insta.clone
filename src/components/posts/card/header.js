@@ -8,11 +8,9 @@ import { useSelector } from 'react-redux';
 import { Skeleton } from "@mui/material";
 import MoreActionsModal from "../../modals/moreActionsModal";
 
-function Header({ avatar, user: postUser, id, imgUrl }) {
-    // const {user} = useSelector(state=>state?.user)
-    // const {loading} = useSelector(state => state?.post)
-    // const isMyPost = user?.username === postUser
-    const isMyPost = false
+function Header({ avatar, user: postUser, id, imgUrl, caption }) {
+    const { user } = useSelector(state => state?.auth)
+    const isMyPost = user === postUser?.username
     const [openModal, setOpenModal] = useState(false);
 
     const handleOpenModal = () => {
@@ -21,16 +19,31 @@ function Header({ avatar, user: postUser, id, imgUrl }) {
 
     return (
         <>
-            {/* <MoreActionsModal imgUrl id={id} isMyPost={isMyPost} open={openModal} setOpen={setOpenModal} /> */}
+            <MoreActionsModal
+                caption={caption}
+                user={postUser}
+                imgUrl={imgUrl}
+                id={id}
+                isMyPost={isMyPost}
+                open={openModal}
+                setOpen={setOpenModal}
+            />
+
             <CardHeader
                 sx={{ padding: "1.2rem 1.5rem" }}
                 avatar={
                     false ? (
-                        <Skeleton animation="wave" variant="circular" width={40} height={40} />
+                        <Skeleton
+                            animation="wave"
+                            variant="circular"
+                            width={40}
+                            height={40} />
                     ) : (
-                        <Link style={{ color: "#333" }} to={postUser}>
+                        <Link
+                            style={{ color: "#333" }}
+                            to={postUser?.username}>
                             <Avatar>
-                                <img style={{ width: '100%', cursor: "pointer" }} src={avatar} alt="avatar" />
+                                <img style={{ height: '100%', cursor: "pointer" }} src={avatar} alt="avatar" />
                             </Avatar>
                         </Link>
                     )
@@ -51,8 +64,10 @@ function Header({ avatar, user: postUser, id, imgUrl }) {
                             style={{ marginBottom: 6 }}
                         />
                     ) : (
-                        <Link style={{ color: "#333" }} to={postUser}>
-                            <b >{postUser}</b>
+                        <Link
+                            style={{ color: "#333" }}
+                            to={postUser?.username}>
+                            <b >{postUser?.username}</b>
                         </Link>
                     )
                 }

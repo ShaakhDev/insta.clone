@@ -14,16 +14,19 @@ import { useCalculateDate, useCalculatePostedTime } from "../../hooks/useCalcula
 import Actions from "../posts/card/actions";
 import AddComment from "../posts/card/addComment";
 import { useSelector } from "react-redux";
-import Comment from "./comment";
+import Caption from "./caption";
 import MoreActionsModal from "../modals/moreActionsModal";
 import React, { useCallback, useState } from "react";
+import Popup from '../popup';
+import { useCopyToClick } from '../../hooks/useCopyToClick'
 
 function CurrentPostCard({ time, likes, caption, user: postUser, comments, image, id }) {
     const postedTime = useCalculatePostedTime(time)
     const postedDate = useCalculateDate(time)
-    const token = localStorage.getItem('access_token')
-    const isMyPost = false
+    const { token, user } = useSelector(state => state?.auth)
+    const isMyPost = user === postUser?.username
     const [openModal, setOpenModal] = useState(false);
+    const [isCopied, handleCopyClick] = useCopyToClick(id)
 
     const handleOpenModal = () => {
         setOpenModal(true)
@@ -35,7 +38,7 @@ function CurrentPostCard({ time, likes, caption, user: postUser, comments, image
                 <>
                     {
                         comments.map(comment => (
-                            <Comment
+                            <Caption
                                 time={comment.timestamp}
                                 text={comment.text}
                                 user={comment.user}
@@ -51,7 +54,8 @@ function CurrentPostCard({ time, likes, caption, user: postUser, comments, image
 
     return (
         <>
-            {/* <MoreActionsModal imgUrl id={id} isMyPost={isMyPost} open={openModal} setOpen={setOpenModal} /> */}
+            {isCopied && <Popup text='Link copied to clipboard' />}
+            <MoreActionsModal user={postUser} caption={caption} imgUrl={image} id={id} isMyPost={isMyPost} open={openModal} setOpen={setOpenModal} />
             <div className={styles.home}>
                 <div className={styles.box}>
                     <Card {...muiStyles.card}>
@@ -88,12 +92,12 @@ function CurrentPostCard({ time, likes, caption, user: postUser, comments, image
                             />
 
                             <Box className={styles.comments}>
-                                {caption && <Comment time={time} text={caption} user={postUser} />}
+                                {caption && <Caption time={time} text={caption} user={postUser} />}
                                 {comments?.length ? <CommentsBox /> : null}
 
                             </Box>
                             <CardContent className={styles.content}>
-                                <Actions postId={id} />
+                                <Actions onClickToShareIcon={handleCopyClick} postId={id} />
                                 {likes > 0 ? (
                                     <Typography variant="body1">
                                         <b>{likes} likes</b>

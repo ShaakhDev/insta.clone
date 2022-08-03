@@ -1,16 +1,16 @@
+import { useState, useEffect } from "react";
 import Modal from '@mui/material/Modal';
 import Box from "@mui/material/Box";
-import {updateCustomStyles} from "./customMiuStyles";
+import { updateCustomStyles } from "./customMiuStyles";
 import Typography from "@mui/material/Typography";
-import {Button} from "@mui/material";
-import {useDispatch, useSelector} from "react-redux";
-import { editPost} from "../../store/actions/postActions";
-import React, {useState} from "react";
+import { Button } from "@mui/material";
 import CaptionBox from "./captionBox";
+import styles from "../../styles/Modal.module.css";
 
-function EditPostModal({open, setOpen,id,imgUrl}) {
-    const dispatch = useDispatch();
-    const { loading} = useSelector(state => state?.post);
+import { useUpdatePostMutation } from "../../rtk/postsApi";
+
+function EditPostModal({ open, setOpen, imgUrl, id, user, prevCaption }) {
+    const [updatePost, { isLoading, isSuccess }] = useUpdatePostMutation()
     const [caption, setCaption] = useState("");
 
     const handleClose = () => {
@@ -18,40 +18,52 @@ function EditPostModal({open, setOpen,id,imgUrl}) {
     };
     const handleUpdatePost = () => {
         const data = {
-            image_url: imgUrl,
-            caption
+            id,
+            body: {
+                image_url: imgUrl,
+                caption
+            }
         }
-        dispatch(editPost(id,data))
-        setOpen(false)
+        updatePost(data)
     }
+
 
     return (
         <>
             <Modal
                 open={open}
-                BackdropProps={{background: 'rgba(255,255,255,1)'}}
-                closeAfterTransition={true}
-                disableScrollLock={true}
+                BackdropProps={{ background: 'rgba(255,255,255,1)' }}
                 onBackdropClick={handleClose}
             >
                 <Box {...updateCustomStyles.box}>
-                    <Box{...updateCustomStyles.headerBox}>
+                    <Box {...updateCustomStyles.headerBox}>
                         <Typography
                             {...updateCustomStyles.modalTitle}
                             variant="h4"
                         >
                             Edit Info
                         </Typography>
-                        <Button
-                            {...updateCustomStyles.shareBtn}
-                            onClick={handleUpdatePost}>
-                            Done
-                        </Button>
+                        {
+                            (!isSuccess && !isLoading) ? (
+                                <Button
+                                    {...updateCustomStyles.shareBtn}
+                                    onClick={handleUpdatePost}>
+                                    Done
+                                </Button>
+                            ) : (
+                                <Button
+                                    {...updateCustomStyles.shareBtn}
+                                    onClick={() => setOpen(false)}>
+                                    Close
+                                </Button>
+                            )
+                        }
+
 
                     </Box>
-                    {loading && <img alt="loading gif" src={process.env.PUBLIC_URL + 'loader.gif'}/>}
-
-                    <CaptionBox getCaption={caption => setCaption(caption)}/>
+                    {isLoading && <img className={styles.loadingGif} alt="loading gif" src={process.env.PUBLIC_URL + 'loader.gif'} />}
+                    {isSuccess && <img className={styles.loadingGif} alt="loading done" src={process.env.PUBLIC_URL + 'done.gif'} />}
+                    {(!isSuccess && !isLoading) && <CaptionBox prevCaption={prevCaption} user={user} getCaption={caption => setCaption(caption)} />}
                 </Box>
             </Modal>
 

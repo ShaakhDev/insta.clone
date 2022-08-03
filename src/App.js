@@ -11,11 +11,6 @@ function App() {
     return (
         <Suspense fallback={<h1>Loading...</h1>}>
             <Routes>
-                {/* <Route path='/' element={<Home />} />
-                <Route path='/:user' element={<Profile />} />
-                <Route path="/p/:postId" element={<CurrentPost />} />
-                <Route path="/accounts/login" element={<Login />} />
-                <Route path="/accounts/signup" element={<SignUp />} /> */}
                 {
                     ROUTES.map((route, i) => {
                         return (
@@ -28,7 +23,6 @@ function App() {
                 }
             </Routes>
         </Suspense>
-
     );
 }
 

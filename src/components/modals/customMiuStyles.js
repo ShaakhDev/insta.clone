@@ -12,7 +12,8 @@ export const customModalStyle = {
             outline: "none",
             boxShadow: 6,
 
-        }
+        },
+
     },
     headerBox: {
         sx: {
@@ -109,43 +110,78 @@ export const customStyles = {
             overflow: "hidden",
             outline: "none",
             boxShadow: 6,
-            display:'flex',
-            flexDirection:"column",
-            color:"#333",
-            "& a":{
-                textAlign:"center"
+            display: 'flex',
+            flexDirection: "column",
+            color: "#333",
+            "& a": {
+                textAlign: "center"
             }
         }
     },
-    button:{
-        sx:{
-            fontSize:'1.4rem',
-            textTransform:'initial',
-            fontWeight:"400",
-            width:"100%",
-            padding:"1.2rem 0",
-            borderBottom:"1px solid #dbdbdb",
-            "&:hover":{
-                background:"none"
+    button: {
+        sx: {
+            fontSize: '1.4rem',
+            textTransform: 'initial',
+            fontWeight: "400",
+            width: "100%",
+            padding: "1.2rem 0",
+            borderBottom: "1px solid #dbdbdb",
+            "&:hover": {
+                background: "none"
             },
-            "& a":{
-                textDecoration:"none",
-                color:"inherit"
+            "& a": {
+                textDecoration: "none",
+                color: "inherit"
             }
         },
 
+    },
+    dbutton: {
+        sx: {
+            fontSize: '1.5rem',
+            textTransform: 'initial',
+            width: "100%",
+            padding: "1.2rem 0",
+            borderBottom: "1px solid #dbdbdb",
+            fontWeight: "bold",
+            "&:hover": {
+                background: "none"
+            },
+            "& a": {
+                textDecoration: "none",
+                color: "inherit"
+            },
+        },
+
+    },
+    heading: {
+        variant: "h4",
+        sx: {
+            fontWeight: "bold",
+            color: "#333",
+            textAlign: "center",
+            margin: "2rem 0 1rem"
+        }
+    },
+    desc: {
+        variant: "h5",
+        sx: {
+            fontWeight: "400",
+            color: "#8e8e8e",
+            textAlign: "center",
+        }
     }
 }
 
 export const updateCustomStyles = {
-    box:{
+    box: {
         sx: {
             position: 'absolute',
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
             width: "40rem",
-            height:"40rem",
+            height: "40rem",
             borderRadius: 3,
             bgcolor: 'background.paper',
             overflow: "hidden",
@@ -187,7 +223,7 @@ export const updateCustomStyles = {
             display: 'flex',
             flexDirection: "column",
             justifyContent: 'stretch',
-            height:"90%"
+            height: "90%"
         }
     },
     textarea: {
@@ -202,4 +238,60 @@ export const updateCustomStyles = {
             fontSize: '1.4rem'
         }
     },
+}
+
+export const customConfirmModalStyle = {
+    box: {
+        sx: {
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: "30vw",
+            minHeight: "20rem",
+            borderRadius: 3,
+            bgcolor: 'background.paper',
+            overflow: "hidden",
+            outline: "none",
+            boxShadow: 6,
+            padding: '2rem',
+            justifyContent: "space-around",
+            textAlign: "center",
+            color: "#333",
+
+        }
+    },
+
+    deleteBtn: {
+        sx: {
+            fontSize: '1.4rem',
+            textTransform: 'uppercase',
+            fontWeight: "600",
+            background: 'none',
+            border: '2px solid #d32f2f',
+            padding: ".5rem 2.5rem",
+            color: "#d32f2f",
+            margin: "3rem  0 0",
+            "&:hover": {
+                background: "#d32f2f",
+                color: "white"
+            }
+        }
+    },
+    cancelBtn: {
+        sx: {
+            fontSize: '1.4rem',
+            textTransform: 'uppercase',
+            fontWeight: "600",
+            background: 'none',
+            border: '2px solid #0095f6',
+            padding: ".5rem 2.5rem",
+            color: "#0095f6",
+            margin: "3rem 5rem 0 0",
+            "&:hover": {
+                background: "#0095f6",
+                color: "white"
+            }
+        }
+    }
 }

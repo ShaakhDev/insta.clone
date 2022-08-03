@@ -1,70 +1,70 @@
-.card p, .card span{
-    font-size: 1.4rem;
-    color: #333;
+.card p,
+.card span {
+	font-size: 1.4rem;
+	color: #333;
 }
-.card{
-    position: relative;
+.card {
+	position: relative;
 }
-.card button{
-    font-size: 1.4rem;
+.card button {
+	font-size: 1.4rem;
 }
 .card .media {
-    width: 61.4rem;
-    height: 61.4rem !important;
+	width: 61.4rem;
+	height: 61.4rem !important;
 }
-.card  span{
-    font-weight: 800;
-    cursor: pointer;
+.card span {
+	font-weight: 800;
+	cursor: pointer;
 }
-.card svg{
-    color: #333;
+.card svg {
+	color: #333;
 }
-.card a{
-    text-decoration: none;
-    color: #8e8e8e;
+.card a {
+	text-decoration: none;
+	color: #8e8e8e;
 }
-.card .time{
-    font-size: 1.1rem;
-    color: #8e8e8e;
-    cursor: pointer;
+.card .time {
+	font-size: 1.1rem;
+	color: #8e8e8e;
+	cursor: pointer;
 }
-.card .content p{
-    padding: .3rem;
+.card .content p {
+	padding: 0.3rem;
 }
-.card .content{
-    padding-top: 0;
+.card .content {
+	padding-top: 0;
 }
-.card svg:hover{
-    color: #8e8e8e;
-}
-
-.addComment{
-    padding: 1rem 1.5rem 1rem 2rem!important;
-}
-.addComment input{
-    width:100%;
-    border:none;
-    outline:none;
-}
-.addComment button{
-    border: none;
-    outline: none;
-    background:transparent;
-}
-.post{
-    text-transform: capitalize !important;
-    font-size: 1.4rem !important;
-}
-.card .more{
-    color: #8e8e8e;
-    font-weight: 400;
-}
-.card .user{
-    cursor: pointer;
-    color: #333333;
-    margin-right: 0.5rem;
-}
-.card .user:hover{
-    text-decoration: underline;
+.card svg:hover {
+	color: #8e8e8e;
 }
 
+.addComment {
+	padding: 1rem 1.5rem 1rem 2rem !important;
+}
+.addComment input {
+	width: 100%;
+	border: none;
+	outline: none;
+}
+.addComment button {
+	border: none;
+	outline: none;
+	background: transparent;
+}
+.post {
+	text-transform: capitalize !important;
+	font-size: 1.4rem !important;
+}
+.card .more {
+	color: #8e8e8e;
+	font-weight: 400;
+}
+.card .user {
+	cursor: pointer;
+	color: #333333;
+	margin-right: 0.5rem;
+}
+.card .user:hover {
+	text-decoration: underline;
+}

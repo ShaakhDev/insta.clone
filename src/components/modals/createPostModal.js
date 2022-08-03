@@ -21,7 +21,7 @@ function CreatePostModal({ open, setOpen }) {
         if (isSuccess) {
             const body = {
                 caption: caption,
-                image_url: postImagePath
+                image_url: postImagePath?.path
             }
             createPost(body)
             setImg(null)
@@ -29,10 +29,10 @@ function CreatePostModal({ open, setOpen }) {
         }
     }, [isSuccess])
 
-    const handleCreatePost = async () => {
+    const handleCreatePost = (img) => {
         const imageForm = new FormData();
         imageForm.append('file', img);
-        await savePostImage(imageForm);
+        savePostImage(imageForm);
 
     }
 
@@ -54,9 +54,9 @@ function CreatePostModal({ open, setOpen }) {
                         >
                             Create new post
                         </Typography>
-                        {img && (<Button
+                        {img !== null && (<Button
                             {...customModalStyle.shareBtn}
-                            onClick={handleCreatePost}>
+                            onClick={() => handleCreatePost(img)}>
                             Share
                         </Button>)}
 

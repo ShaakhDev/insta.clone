@@ -10,7 +10,12 @@
 	transform: translate(-50%, -50%);
 	padding: 2rem 4rem;
 }
-
+.loadingGif {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
 .heading {
 	padding: 3rem 0;
 }

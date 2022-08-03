@@ -1,23 +1,25 @@
-import { Route, BrowserRouter as Router } from 'react-router-dom';
-import { Component } from 'react';
+import { useEffect, useState } from 'react';
 import nprogress from 'nprogress';
-import 'nprogress/nprogress.css';
 
 
-class FancyRoute extends Component {
-    componentWillMount() {
+
+function FancyRoute(props) {
+    // const [routePath, setRoutePath] = useState(null);
+    useEffect(() => {
         nprogress.start();
-    }
+        // setRoutePath(props.location.pathname);
+        // return () => {
+        //     nprogress.done();
+        // }
+    }, [])
 
-    componentDidMount() {
-        nprogress.done();
-    }
 
-    render() {
-        return (
-            { ...this.props.children } || null
-        );
-    }
+  
+    return (
+        <>
+            {props.children}
+        </>
+    );
 }
 
 export default FancyRoute;
