@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Stack } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import { muiStyles } from "../customMuiStyles";
@@ -7,9 +7,12 @@ import EmojiPicker from "emoji-picker-react";
 import EmojiBtn from "../../emojiBtn";
 import { useDispatch } from "react-redux";
 import { comment } from "../../../store/actions/postActions";
+import { useSetCommentToPostMutation } from '../../../rtk/postsApi'
+
 
 function AddComment({ postId }) {
     const dispatch = useDispatch();
+    const [setCommentToPost, { status }] = useSetCommentToPostMutation();
     const [inputValue, setInputValue] = useState('');
     const [click, setClick] = useState(false);
     const handleInput = (e) => {
@@ -25,14 +28,14 @@ function AddComment({ postId }) {
     }
 
     const handleComment = () => {
-        console.log(inputValue)
         const data = {
             text: inputValue,
             post_id: postId
         }
-        dispatch(comment(data));
+        setCommentToPost(data)
         setInputValue('')
     }
+
 
     return (
         <>

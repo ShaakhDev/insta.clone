@@ -2,10 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Box from "@mui/material/Box";
 import CreatePostIcon from "./createPostIcon";
 import Typography from "@mui/material/Typography";
-import { Button, Input, Stack, TextareaAutosize } from "@mui/material";
+import { Button, Stack, TextareaAutosize } from "@mui/material";
 import { customModalStyle } from "./customMiuStyles";
-import { useDispatch, useSelector } from "react-redux";
-import { uploadImage } from "../../store/actions/postActions";
 import CardHeader from "@mui/material/CardHeader";
 import { Link } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
@@ -19,7 +17,6 @@ import { useSavePostImageMutation } from '../../rtk/postsApi'
 
 function SelectPostImage({ getCaption, getImg }) {
     const { data: user } = useGetCurrentUserQuery(1);
-    const [savePostImage, { data: postImagePath, isLoading: imageLoading }] = useSavePostImageMutation();
     const [img, setImg] = useState(null);
     const [input, setInput] = useState('')
     const [click, setClick] = useState(false);
@@ -38,14 +35,7 @@ function SelectPostImage({ getCaption, getImg }) {
         getImg(e.target.files[0])
     }
 
-    // useEffect(() => {
-    //     if (img !== null) {
-    //         console.log(img)
-    //         const imageForm = new FormData();
-    //         imageForm.append('file', img);
-    //         savePostImage(imageForm)
-    //     }
-    // }, [img, savePostImage]);
+
 
     useEffect(() => {
         getCaption(input)
@@ -53,12 +43,12 @@ function SelectPostImage({ getCaption, getImg }) {
 
     return (<>
         {img && (<Box
-            {...customModalStyle.overviewBox}
+            {...customModalStyle.overview}
         >
             <Box
                 {...customModalStyle.imgBox}
             >
-                <img style={{ width: '100%' }} src={img} alt="img" />
+                <img style={{ width: '100%', objectFit: 'cover' }} src={img} alt="img" />
             </Box>
             <Box //caption box
                 {...customModalStyle.captionBox}

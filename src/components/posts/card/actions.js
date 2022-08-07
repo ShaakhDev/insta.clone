@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import CardActions from "@mui/material/CardActions";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "../../postIcons/favoriteIcon";
@@ -7,14 +7,14 @@ import ShareIcon from "../../postIcons/shareIcon";
 import { muiStyles } from '../customMuiStyles'
 import { Link } from 'react-router-dom'
 
-function Actions({ postId, onClickToShareIcon }) {
+function Actions({ postId, onClickToShareIcon, liked_users }) {
 
 
     return (
         <>
             <CardActions sx={{ paddingBottom: '0' }} disableSpacing>
                 <IconButton {...muiStyles.actions} >
-                    <FavoriteIcon postId={postId} />
+                    <FavoriteIcon likedUsers={liked_users} postId={postId} />
                 </IconButton>
                 <IconButton  {...muiStyles.actions} >
                     <Link to={`/p/${postId}`}>

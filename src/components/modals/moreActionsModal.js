@@ -4,19 +4,17 @@ import Box from "@mui/material/Box";
 import { Button } from "@mui/material";
 import { Link } from 'react-router-dom'
 import { customStyles } from "./customMiuStyles";
-import { useDispatch } from "react-redux";
-import { deletePost } from "../../store/actions/postActions";
 import EditPostModal from "./editPostModal";
 import Popup from "../popup";
 import { useCopyToClick } from '../../hooks/useCopyToClick'
 import ConfirmModal from './confirmModal';
+import { useDeletePostMutation } from '../../rtk/postsApi'
 
-
-function MoreActionsModal({ open, setOpen, isMyPost, id, imgUrl, user, caption }) {
-    const dispatch = useDispatch();
+function MoreActionsModal({ open, setOpen, isMyPost, id, user, caption }) {
     const [editModalOpen, setEditModalOpen] = useState(false)
     const [isCopied, handleCopyClick] = useCopyToClick(id);
     const [confirmModalOpen, setConfirmModalOpen] = useState(false)
+    const [deletePost] = useDeletePostMutation()
 
     const handleEditModalOpen = () => {
         setOpen(false);
@@ -31,7 +29,8 @@ function MoreActionsModal({ open, setOpen, isMyPost, id, imgUrl, user, caption }
     }
 
     const handleDeletePost = () => {
-        dispatch(deletePost(id))
+        deletePost(id);
+        setConfirmModalOpen(false)
     }
 
     return (
@@ -39,7 +38,6 @@ function MoreActionsModal({ open, setOpen, isMyPost, id, imgUrl, user, caption }
             {isCopied && <Popup text='Link copied to clipboard' />}
             <EditPostModal
                 prevCaption={caption}
-                imgUrl={imgUrl}
                 id={id}
                 user={user}
                 open={editModalOpen}

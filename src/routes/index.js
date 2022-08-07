@@ -1,7 +1,4 @@
-// import Home from "../pages/Home";
-// import Profile from "../pages/Profile";
-// import Posts from "../pages/Posts";
-// import CurrentPost from "../pages/CurrentPost";
+
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
 import { lazy } from "react"

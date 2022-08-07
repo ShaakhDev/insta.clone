@@ -22,7 +22,8 @@ function ConfirmModal({ open, setOpen, handleDeletePost }) {
             >
                 <Box {...customStyles.box}>
 
-                    <Typography {...customStyles.heading}>
+                    <Typography
+                        {...customStyles.heading}>
                         Delete post?
                     </Typography>
 

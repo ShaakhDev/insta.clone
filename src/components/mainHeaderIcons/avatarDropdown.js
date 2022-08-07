@@ -10,7 +10,7 @@ import Tooltip from '@mui/material/Tooltip';
 import { Link } from 'react-router-dom'
 import { useGetCurrentUserQuery } from '../../rtk/usersApi';
 
-export default function AvatarDropdown() {
+export default function AvatarDropdown({ onClick, focused }) {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const { data: user } = useGetCurrentUserQuery(1)
@@ -18,7 +18,9 @@ export default function AvatarDropdown() {
 
 
     const logOutHandle = (e) => {
-        localStorage.removeItem('token');
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('user')
+        localStorage.removeItem('user_id')
         console.log('logged out')
         window.location.reload(true)
     }
@@ -30,7 +32,7 @@ export default function AvatarDropdown() {
     };
     return (
         <>
-            <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+            <Box onClick={onClick} sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
                 <Tooltip title="Account settings">
                     <IconButton className={styles.avatarDropdown}
                         onClick={handleClick}
@@ -40,7 +42,24 @@ export default function AvatarDropdown() {
                         aria-expanded={open ? 'true' : undefined}
                     >
                         <Avatar src={user?.avatar_url || process.env.PUBLIC_URL + 'avatar.webp'}
-                            sx={{ width: 32, height: 32, }} />
+                            sx={focused === 'PROFILE'
+                                ? {
+                                    border: '2px solid #333',
+                                    borderRadius: '50%',
+                                    boxSizing: 'content-box',
+                                    padding: '0.1rem',
+                                    width: 36,
+                                    height: 36,
+                                    '& > img': {
+                                        borderRadius: '50%',
+                                    }
+                                }
+                                : {
+                                    width: 32,
+                                    height: 32,
+
+                                }
+                            } />
                     </IconButton>
                 </Tooltip>
             </Box>

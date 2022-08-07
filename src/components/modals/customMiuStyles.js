@@ -5,7 +5,9 @@ export const customModalStyle = {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: "70rem",
+            width: "60rem",
+            minHeight: "30rem",
+            // height: "47rem",
             borderRadius: 3,
             bgcolor: 'background.paper',
             overflow: "hidden",
@@ -14,6 +16,16 @@ export const customModalStyle = {
 
         },
 
+    },
+    overview: {
+        sx: {
+            height: "100%",
+            bgcolor: 'background.paper',
+            overflow: "hidden",
+            outline: "none",
+            boxShadow: 6,
+
+        },
     },
     headerBox: {
         sx: {
@@ -37,26 +49,19 @@ export const customModalStyle = {
             padding: '0.2rem 1.5rem'
         }
     },
-    overviewBox: {
-        sx: {
-            display: 'flex',
-            flexDirection: "row",
-            alignItems: "stretch",
-            justifyContent: "center",
-            overflow: "hidden",
-        }
-    },
+
     imgBox: {
         sx: {
             flex: '3',
-            overflow: "inherit",
+            width: '100%',
         }
     },
     captionBox: {
         sx: {
-            flex: '2',
+            flex: '3',
             padding: " 2rem 2rem ",
             display: 'flex',
+            width: '100%',
             flexDirection: "column",
             justifyContent: 'stretch'
         }
@@ -78,9 +83,10 @@ export const customModalStyle = {
             outline: "none",
             width: "100%",
             height: "90%",
-            padding: "1rem 0",
+            padding: "1.5rem 0",
             fontFamily: 'inherit',
-            fontSize: '1.4rem'
+            fontSize: '1.4rem',
+            minHeight: '7rem',
         }
     },
     shareBtn: {
@@ -93,6 +99,18 @@ export const customModalStyle = {
             fontSize: '1.4rem',
             textTransform: 'capitalize',
             background: 'none'
+        }
+    },
+    successMsg: {
+        sx: {
+            position: 'absolute',
+            textAlign: 'center',
+            top: '75%',
+            fontWeight: "300",
+
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+
         }
     }
 
@@ -238,6 +256,11 @@ export const updateCustomStyles = {
             fontSize: '1.4rem'
         }
     },
+    successMsg: {
+        ...customModalStyle.successMsg,
+
+    }
+
 }
 
 export const customConfirmModalStyle = {

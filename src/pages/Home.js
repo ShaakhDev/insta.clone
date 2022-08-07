@@ -6,7 +6,7 @@ import { useEffect } from "react";
 function Home() {
 
     useEffect(() => {
-        setInterval(() => {
+        setTimeout(() => {
             nprogress.done();
         }, 1000)
     }, [])

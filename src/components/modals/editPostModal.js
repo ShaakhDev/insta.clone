@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Modal from '@mui/material/Modal';
 import Box from "@mui/material/Box";
 import { updateCustomStyles } from "./customMiuStyles";
@@ -9,7 +9,7 @@ import styles from "../../styles/Modal.module.css";
 
 import { useUpdatePostMutation } from "../../rtk/postsApi";
 
-function EditPostModal({ open, setOpen, imgUrl, id, user, prevCaption }) {
+function EditPostModal({ open, setOpen, id, user, prevCaption }) {
     const [updatePost, { isLoading, isSuccess }] = useUpdatePostMutation()
     const [caption, setCaption] = useState("");
 
@@ -20,7 +20,6 @@ function EditPostModal({ open, setOpen, imgUrl, id, user, prevCaption }) {
         const data = {
             id,
             body: {
-                image_url: imgUrl,
                 caption
             }
         }
@@ -62,7 +61,15 @@ function EditPostModal({ open, setOpen, imgUrl, id, user, prevCaption }) {
 
                     </Box>
                     {isLoading && <img className={styles.loadingGif} alt="loading gif" src={process.env.PUBLIC_URL + 'loader.gif'} />}
-                    {isSuccess && <img className={styles.loadingGif} alt="loading done" src={process.env.PUBLIC_URL + 'done.gif'} />}
+
+                    {isSuccess && (
+                        <>
+                            <img className={styles.loadingGif} alt="loading done" src={process.env.PUBLIC_URL + 'done.gif'} />
+                            <Typography {...updateCustomStyles.successMsg} variant="h4">
+                                Your post has been updated.
+                            </Typography>
+                        </>
+                    )}
                     {(!isSuccess && !isLoading) && <CaptionBox prevCaption={prevCaption} user={user} getCaption={caption => setCaption(caption)} />}
                 </Box>
             </Modal>

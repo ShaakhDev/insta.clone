@@ -1,6 +1,6 @@
 export const useCalculatePostedTime = timestamp => {
-    const GMT_5 = 18000 *1000
-    const timePostCreated = new Date(timestamp) ;
+    const GMT_5 = 18000 * 1000
+    const timePostCreated = new Date(timestamp);
     const timeNow = new Date();
     const difference = Math.floor((timeNow.getTime() - (timePostCreated.getTime() + GMT_5)) / 1000);
     const isCurrentYear = !(timeNow.getFullYear() > timePostCreated.getFullYear())
@@ -28,15 +28,15 @@ export const useCalculatePostedTime = timestamp => {
     else if (difference < ONE_DAY) return `${Math.round(difference / ONE_HOUR)} HOURS AGO`;
     else if (difference < ONE_WEEK) return `${Math.floor(difference / ONE_DAY)} DAYS AGO`;
     else return isCurrentYear ?
-            `${MONTHS[timePostCreated.getMonth()]} ${timePostCreated.getDate()}` :
-            `${MONTHS[timePostCreated.getMonth()]} ${timePostCreated.getDate()}, ${timePostCreated.getFullYear()}`
+        `${MONTHS[timePostCreated.getMonth()]} ${timePostCreated.getDate()}` :
+        `${MONTHS[timePostCreated.getMonth()]} ${timePostCreated.getDate()}, ${timePostCreated.getFullYear()}`
 }
 
 export const useCalculateCommentedTime = (timestamp) => {
-    const GMT_5 = 18000 *1000
+    const GMT_5 = 18000 * 1000
     const timeCommentCreated = new Date(timestamp);
     const timeNow = new Date();
-    const difference = (timeNow.getTime() - (timeCommentCreated.getTime())) / 1000;
+    const difference = (timeNow.getTime() - (timeCommentCreated.getTime() + GMT_5)) / 1000;
     const ONE_MINUTE = 60
     const ONE_HOUR = 3600;
     const ONE_DAY = 86400;
@@ -50,7 +50,7 @@ export const useCalculateCommentedTime = (timestamp) => {
 }
 
 export const useCalculateDate = (timestamp) => {
-    const GMT_5 = 18000 *1000
+    const GMT_5 = 18000 * 1000
     const milliseconds = new Date(timestamp).getTime() + GMT_5;
     const timeCommentCreated = new Date(milliseconds);
 

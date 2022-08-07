@@ -50,7 +50,7 @@ function MainHeader(props) {
                             <Link to="/">
                                 <IconButton onClick={() => setFocused(FOCUSED_BTN.home)} disableRipple>
                                     {
-                                        focused === "HOME" ?
+                                        focused === FOCUSED_BTN.home ?
                                             <HomeFilled /> :
                                             <HomeOutlined />
                                     }
@@ -58,12 +58,12 @@ function MainHeader(props) {
                             </Link>
                             <IconButton onClick={() => setFocused(FOCUSED_BTN.addPost)} disableRipple>
                                 {
-                                    focused === "ADD_POST" ?
+                                    focused === FOCUSED_BTN.addPost ?
                                         <AddPostFilled handleOpenModal={handleOpenModal} /> :
                                         <AddPostOutlined handleOpenModal={handleOpenModal} />
                                 }
                             </IconButton>
-                            <AvatarDropdown />
+                            <AvatarDropdown setFocused={(icon) => setFocused(icon)} focused={focused} onClick={() => setFocused(FOCUSED_BTN.profile)} />
                         </div>
                     )}
                     {!token && (

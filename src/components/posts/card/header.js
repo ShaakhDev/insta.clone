@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import { Skeleton } from "@mui/material";
 import MoreActionsModal from "../../modals/moreActionsModal";
 
-function Header({ avatar, user: postUser, id, imgUrl, caption }) {
+function Header({ avatar, user: postUser, id, caption }) {
     const { user } = useSelector(state => state?.auth)
     const isMyPost = user === postUser?.username
     const [openModal, setOpenModal] = useState(false);
@@ -22,7 +22,6 @@ function Header({ avatar, user: postUser, id, imgUrl, caption }) {
             <MoreActionsModal
                 caption={caption}
                 user={postUser}
-                imgUrl={imgUrl}
                 id={id}
                 isMyPost={isMyPost}
                 open={openModal}

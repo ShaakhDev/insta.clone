@@ -1,22 +1,24 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
 import Popup from "../popup";
-import { useDispatch } from "react-redux";
-import { like } from '../../store/actions/postActions';
+import { useSetLikeToPostMutation } from "../../rtk/postsApi"
 
 
-function FavoriteIcon({ postId }) {
-
-    const [click, setClick] = useState(false);
+function FavoriteIcon({ likedUsers, postId }) {
+    const { user_id } = useSelector(state => state?.auth);
+    const [click, setClick] = useState(likedUsers?.some(id => id === user_id));
+    const [setLikeToPost] = useSetLikeToPostMutation();
     const [showPopup, setShowPopup] = useState(false);
     const token = useSelector(state => state?.auth?.token);
 
-
+    useEffect(() => {
+        setClick(likedUsers?.some(id => id === user_id));
+    }, [likedUsers, user_id]);
 
     const handleClick = () => {
 
         if (token) {
-            setClick(!click)
+            setLikeToPost(postId)
 
         } else {
             handleShowPopup()

@@ -5,20 +5,21 @@ import { customModalStyle } from "./customMiuStyles";
 import Typography from "@mui/material/Typography";
 import SelectPostImage from "./selectPostImage";
 import { Button } from '@mui/material';
-import { postActions } from "../../store/reducers/postReducer";
-import { useDispatch } from "react-redux";
-import { createPost } from "../../store/actions/postActions";
 import { useSavePostImageMutation, useCreatePostMutation } from "../../rtk/postsApi";
+import styles from "../../styles/Modal.module.css";
+
+
 
 function CreatePostModal({ open, setOpen }) {
-    const [savePostImage, { data: postImagePath, isLoading: imageLoading, isSuccess }] = useSavePostImageMutation();
-    const [createPost] = useCreatePostMutation();
+    const [savePostImage, { data: postImagePath, isLoading: imageLoading, isSuccess: isImageSuccess }] = useSavePostImageMutation();
+    const [createPost, { isLoading, isSuccess }] = useCreatePostMutation();
     const [caption, setCaption] = useState("");
     const [img, setImg] = useState(null);
+    const [hideSelectImage, setHideSelectImage] = useState(false);
 
 
     useEffect(() => {
-        if (isSuccess) {
+        if (isImageSuccess) {
             const body = {
                 caption: caption,
                 image_url: postImagePath?.path
@@ -27,47 +28,69 @@ function CreatePostModal({ open, setOpen }) {
             setImg(null)
             setCaption("")
         }
-    }, [isSuccess])
+    }, [isImageSuccess])
 
     const handleCreatePost = (img) => {
+        setHideSelectImage(true)
         const imageForm = new FormData();
         imageForm.append('file', img);
         savePostImage(imageForm);
 
     }
+    const handleClose = () => {
+        setOpen(false);
+        setImg(null)
+        setCaption("")
+        setHideSelectImage(false)
+
+    }
+
 
     return (
-        <div>
 
-            <Modal
-                open={open}
-                BackdropProps={{ background: 'rgba(255,255,255,1)' }}
-                closeAfterTransition={true}
-                disableScrollLock={true}
-                onBackdropClick={(e) => setOpen(false)}
-            >
-                <Box {...customModalStyle.box}>
-                    <Box {...customModalStyle.headerBox}>
-                        <Typography
-                            {...customModalStyle.modalTitle}
-                            variant="h4"
-                        >
-                            Create new post
-                        </Typography>
-                        {img !== null && (<Button
-                            {...customModalStyle.shareBtn}
-                            onClick={() => handleCreatePost(img)}>
-                            Share
-                        </Button>)}
 
-                    </Box>
-                    {imageLoading && <img alt="loading gif" src={process.env.PUBLIC_URL + 'loader.gif'} />}
+        <Modal
+            open={open}
+            BackdropProps={{ background: 'rgba(255,255,255,1)' }}
+            closeAfterTransition={true}
+            disableScrollLock={true}
+            onBackdropClick={handleClose}
+        >
+            <Box {...customModalStyle.box}>
+                <Box {...customModalStyle.headerBox}>
+                    <Typography
+                        {...customModalStyle.modalTitle}
+                        variant="h4"
+                    >
+                        Create new post
+                    </Typography>
+                    {img !== null && (<Button
+                        {...customModalStyle.shareBtn}
+                        onClick={() => handleCreatePost(img)}>
+                        Share
+                    </Button>)}
 
-                    <SelectPostImage getImg={(image) => setImg(image)} getCaption={data => setCaption(data)} />
                 </Box>
-            </Modal>
+                {(imageLoading || isLoading) && <img className={styles.loadingGif} alt="loading gif" src={process.env.PUBLIC_URL + 'loader.gif'} />}
+                {isSuccess && (
+                    <>
+                        <img className={styles.loadingGif} alt="loading done" src={process.env.PUBLIC_URL + 'done.gif'} />
+                        <Typography {...customModalStyle.successMsg} variant="h4">
+                            Your post has been shared.
+                        </Typography>
+                    </>
+                )}
 
-        </div>
+                {!hideSelectImage && (
+                    <SelectPostImage
+                        getImg={(image) => setImg(image)}
+                        getCaption={data => setCaption(data)}
+                    />
+                )}
+            </Box>
+        </Modal>
+
+
     );
 }
 

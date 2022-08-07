@@ -1,4 +1,5 @@
 import Card from '@mui/material/Card';
+import { forwardRef } from 'react';
 import Divider from "@mui/material/Divider";
 import { muiStyles } from '../customMuiStyles'
 import styles from '../../../styles/Card.module.css'
@@ -11,21 +12,21 @@ import { useSelector } from 'react-redux'
 import { useCopyToClick } from '../../../hooks/useCopyToClick';
 import Popup from '../../popup';
 
-function PostCard({ postData }) {
+const PostCard = forwardRef(({ postData }, ref) => {
     const token = useSelector(state => state?.auth?.token)
-    const { image_url, user, id, caption, comments, timestamp, likes } = postData;
+    const { image_url, user, id, caption, comments, timestamp, likes, liked_users } = postData;
     const [isCopied, handleCopyClick] = useCopyToClick(id)
 
     return (
         <>
             {isCopied && <Popup text='Link copied to clipboard' />}
-            <Card {...muiStyles.card} className={styles.card}>
+            <Card ref={ref} {...muiStyles.card} className={styles.card}>
 
-                <Header caption={caption} imgUrl={image_url} id={id} avatar={user?.avatar_url} user={user} />
+                <Header caption={caption} id={id} avatar={user?.avatar_url} user={user} />
 
                 <Media className={styles.media} img={image_url} id={id} alt='post' />
 
-                <Actions onClickToShareIcon={handleCopyClick} postId={id} />
+                <Actions liked_users={liked_users} onClickToShareIcon={handleCopyClick} postId={id} />
 
                 <Content
                     likes={likes}
@@ -42,6 +43,6 @@ function PostCard({ postData }) {
         </>
 
     );
-}
+});
 
 export default PostCard

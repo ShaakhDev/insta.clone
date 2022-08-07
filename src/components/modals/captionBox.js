@@ -9,7 +9,7 @@ import { Stack, TextareaAutosize } from "@mui/material";
 import EmojiBtn from "../emojiBtn";
 import EmojiPicker from "emoji-picker-react";
 import Typography from "@mui/material/Typography";
-import { useSelector } from "react-redux";
+;
 
 function CaptionBox({ getCaption, user, prevCaption }) {
     const [input, setInput] = useState(prevCaption);

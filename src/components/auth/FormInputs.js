@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from "react-redux";
 import { useLoginMutation, useSignUpMutation } from '../../rtk/usersApi';
-import { setCredentials } from '../../rtk/authSlice';
 import { Button } from "@mui/material";
 import Username from "./username";
 import Password from "./password";
@@ -14,12 +12,12 @@ import { useNavigate } from 'react-router-dom'
 
 function FormInputs({ authType, button }) {
     const [login, { data: loginData, isSuccess: loginIsSuccess, isLoading: loginIsLoading }] = useLoginMutation();
-    const [signUp, { data: signUpData, isSuccess: signUpIsSuccess, isLoading: signUpIsLoading }] = useSignUpMutation();
+    const [signUp, { isSuccess: signUpIsSuccess, isLoading: signUpIsLoading }] = useSignUpMutation();
     const [isDisableButton, setIsDisableButton] = useState(true)
     const [username, setUsername] = useState()
     const [password, setPassword] = useState()
     const [email, setEmail] = useState()
-    const dispatch = useDispatch()
+
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -40,6 +38,7 @@ function FormInputs({ authType, button }) {
         if (loginIsSuccess) {
             localStorage.setItem('access_token', loginData?.access_token)
             localStorage.setItem('user', loginData?.username)
+            localStorage.setItem('user_id', loginData?.user_id)
             console.log(loginData)
             navigate('/')
         }

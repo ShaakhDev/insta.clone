@@ -7,18 +7,10 @@ export const postsApi = createApi({
     keepUnusedDataFor: 60,
     baseQuery: fetchBaseQuery({
         baseUrl: BASE_URL,
-        // prepareHeaders: (headers) => {
-        //     const token = localStorage.getItem('access_token');
-        //     if (token !== undefined || token !== null) {
-        //         headers['Authorization'] = `Bearer ${localStorage.getItem('access_token')}`
-        //         return headers
-        //     }
-        //     return headers
-        // }
     }),
     endpoints: (build) => ({
         getAllPosts: build.query({
-            query: () => 'post/all',
+            query: (page) => `post/all?page=${page}&size=4`,
             providesTags: (result) =>
                 result
                     ? [
@@ -26,9 +18,6 @@ export const postsApi = createApi({
                         { type: 'Posts', id: 'LIST' },
                     ]
                     : [{ type: 'Posts', id: 'LIST' }],
-            transformResponse: (result) => {
-                return result?.items?.sort((a, b) => b.id - a.id)
-            }
         }),
 
         //post/some endpoint
@@ -40,7 +29,7 @@ export const postsApi = createApi({
             providesTags: [{ type: 'Posts', id: 'single' }],
         }),
 
-        //post/{id} PATCH endpoint for update post
+
         updatePost: build.mutation({
             query: (data) => ({
                 url: `post/${data.id}`,
@@ -54,7 +43,7 @@ export const postsApi = createApi({
             invalidatesTags: [{ type: 'Posts', id: 'LIST' }],
 
         }),
-        //////////
+
 
         createPost: build.mutation({
             query: (data) => ({
@@ -80,12 +69,12 @@ export const postsApi = createApi({
         }),
 
         setLikeToPost: build.mutation({
-            query: (data) => ({
-                url: `post/${data.id}/like`,
+            query: (id) => ({
+                url: `post/${id}/like`,
                 method: 'POST',
-                params: {
-                    status: data.status
-                },
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+                }
             }),
             invalidatesTags: [{ type: 'Posts', id: 'single' }],
         }),
@@ -94,8 +83,24 @@ export const postsApi = createApi({
             query: (id) => ({
                 url: `post/delete/${id}`,
                 method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+                }
             }),
             invalidatesTags: [{ type: 'Posts', id: 'LIST' }],
+        }),
+
+        setCommentToPost: build.mutation({
+            query: (data) => ({
+                url: `comment/`,
+                method: 'POST',
+                body: data,
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+                }
+            }),
+            invalidatesTags: [{ type: 'Posts', id: 'single' }],
+
         })
     })
 })
@@ -109,4 +114,5 @@ export const {
     useSetLikeToPostMutation,
     useDeletePostMutation,
     useUpdatePostMutation,
+    useSetCommentToPostMutation,
 } = postsApi

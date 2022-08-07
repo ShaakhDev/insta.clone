@@ -1,17 +1,17 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { rtkQueryErrorLogger } from './errorHandler';
 const BASE_URL = process.env.REACT_APP_BASE_URL;
-
 
 const baseQuery = fetchBaseQuery({ baseUrl: BASE_URL })
 const baseQueryWithLoggedOut = async (args, api) => {
     let result = await baseQuery(args, api)
-    if (result.error && result.error.status === 401) {
+    if (result?.error && result?.error.status === 401) {
         localStorage.removeItem('access_token')
         localStorage.removeItem('user')
-        window.location.reload()
     }
-    return result
+    else {
+
+        return result
+    }
 }
 
 
@@ -25,28 +25,40 @@ export const usersApi = createApi({
 
     endpoints: (build) => ({
         getCurrentUser: build.query({
-            query: () => ({
-                url: 'profile',
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+            query: () => {
+                // if (localStorage.getItem('access_token')) {
+                return {
+                    url: 'profile',
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+                    }
                 }
-            }),
+                // } else {
+                // return;
+                // }
+            },
 
 
 
 
             keepUnusedDataFor: 300,
-            providesTags: ["Users"],
+            providesTags: [{ type: 'Users', id: 'special' }, { type: "Profiles", id: 'special' }],
         }),
-        getProfileSubscriptions: build.mutation({
-            query: () => ({
-                url: 'my_subscriptions',
-                method: "GET",
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+        getProfileSubscriptions: build.query({
+            query: () => {
+                if (localStorage.getItem('access_token')) {
+                    return {
+                        url: 'my_subscriptions',
+                        method: "GET",
+                        headers: {
+                            'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+                        }
+                    }
+                } else {
+                    return null
                 }
-            }),
+            },
             providesTags: [{ type: 'Profiles', id: 'Subs' }]
 
         }),
@@ -75,7 +87,7 @@ export const usersApi = createApi({
                 url: username,
                 method: "GET",
             }),
-            providesTags: [{ type: 'Profiles', id: 'List' }],
+            providesTags: [{ type: 'Profiles', id: 'profile' }],
         }),
 
 
@@ -92,7 +104,16 @@ export const usersApi = createApi({
         }),
 
         //{username}/subscribe endpoint
-
+        subscribe: build.mutation({
+            query: (username) => ({
+                url: `${username}/subscribe`,
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+                }
+            }),
+            invalidatesTags: [{ type: 'Profiles', id: 'Subs' }, { type: 'Profiles', id: 'profile' }],
+        }),
         /////////
 
         //delete endpoint 
@@ -118,5 +139,6 @@ export const {
     useSaveAvatarUrlMutation,
     useUpdateUserMutation,
     useGetProfileDetailsQuery,
-    useGetProfileSubscriptionsMutation,
+    useGetProfileSubscriptionsQuery,
+    useSubscribeMutation,
 } = usersApi;
