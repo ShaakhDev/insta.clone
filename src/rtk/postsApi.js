@@ -10,14 +10,12 @@ export const postsApi = createApi({
     }),
     endpoints: (build) => ({
         getAllPosts: build.query({
-            query: (page) => `post/all?page=${page}&size=4`,
-            providesTags: (result) =>
-                result
-                    ? [
-                        ...result.map(({ id }) => ({ type: 'Posts', id })),
-                        { type: 'Posts', id: 'LIST' },
-                    ]
-                    : [{ type: 'Posts', id: 'LIST' }],
+            query: (page = 1) => `post/all?page=${page}&size=10`,
+            providesTags: () => [{ type: 'Posts', id: 'LIST' }],
+            transformResponse: response => {
+                const items = response.items.sort((a, b) => b.id - a.id)
+                return { ...response, ...items }
+            }
         }),
 
         //post/some endpoint

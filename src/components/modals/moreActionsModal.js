@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import { Button } from "@mui/material";
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { customStyles } from "./customMiuStyles";
 import EditPostModal from "./editPostModal";
 import Popup from "../popup";
@@ -11,6 +11,7 @@ import ConfirmModal from './confirmModal';
 import { useDeletePostMutation } from '../../rtk/postsApi'
 
 function MoreActionsModal({ open, setOpen, isMyPost, id, user, caption }) {
+    const navigate = useNavigate()
     const [editModalOpen, setEditModalOpen] = useState(false)
     const [isCopied, handleCopyClick] = useCopyToClick(id);
     const [confirmModalOpen, setConfirmModalOpen] = useState(false)
@@ -31,6 +32,10 @@ function MoreActionsModal({ open, setOpen, isMyPost, id, user, caption }) {
     const handleDeletePost = () => {
         deletePost(id);
         setConfirmModalOpen(false)
+        setTimeout(() => {
+            navigate('/',)
+
+        }, 1500)
     }
 
     return (
