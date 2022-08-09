@@ -11,7 +11,6 @@ import { muiStyles } from "../currentPost/customMuiStyles";
 import EmojiBtn from "../emojiBtn";
 import EmojiPicker from "emoji-picker-react";
 import { useGetCurrentUserQuery } from '../../rtk/usersApi'
-import { useSavePostImageMutation } from '../../rtk/postsApi'
 
 
 
