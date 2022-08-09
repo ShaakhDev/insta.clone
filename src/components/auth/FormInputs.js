@@ -4,8 +4,8 @@ import { Button } from "@mui/material";
 import Username from "./username";
 import Password from "./password";
 import Email from "./email";
-import Loader from './loader'
 import { useNavigate } from 'react-router-dom'
+import { WhiteSpinner } from '../spinner';
 
 
 
@@ -85,7 +85,7 @@ function FormInputs({ authType, button }) {
                 onClick={handleSubmit}
                 variant="contained"
             >
-                {loginIsLoading || signUpIsLoading ? (<Loader />) : button}
+                {loginIsLoading || signUpIsLoading ? (<WhiteSpinner />) : button}
             </Button>
         </>
     );

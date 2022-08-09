@@ -18,7 +18,7 @@ const PAGES = {
 
 function Posts() {
     const [page, setPage] = useState(1);
-    const { data, isLoading, error, isSuccess, isFetching } = useGetAllPostsQuery(page, 1);
+    const { data, isLoading } = useGetAllPostsQuery(page, 1);
     const [posts, setPosts] = useState([]);
     const [lastElement, setLastElement] = useState(null);
 
@@ -43,10 +43,24 @@ function Posts() {
     }, [data])
 
     //set posts from response 
+    const filterAndSetData = (postsData) => {
+        const all = [...posts, ...postsData.items];
+        const uniqueIds = []
+        const uniquePosts = all.filter(post => {
+            if (!uniqueIds.includes(post.id)) {
+                uniqueIds.push(post.id)
+                return true
+            }
+            return false
+        })
+            .sort((a, b) => b.id - a.id);
+        setPosts(uniquePosts);
+    };
+
+    //set posts from response
     useEffect(() => {
         if (data) {
-            let all = new Set([...posts, ...data.items]);
-            setPosts([...all]);
+            filterAndSetData(data);
         }
     }, [data]);
 
@@ -58,7 +72,7 @@ function Posts() {
 
         return () => currentElement && currentObserver.unobserve(currentElement);
 
-    }, [lastElement]);
+    }, [lastElement, data]);
 
 
     return (
@@ -79,6 +93,7 @@ function Posts() {
                                     ? <div
                                         ref={setLastElement}
                                         key={`${post.user.username}-${post.id}-${index}`}
+                                        lenght={`${posts.length}`}
                                     >
                                         <PostCard
                                             postData={post}

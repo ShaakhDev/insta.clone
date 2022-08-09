@@ -16,7 +16,13 @@ function CreatePostModal({ open, setOpen }) {
     const [caption, setCaption] = useState("");
     const [img, setImg] = useState(null);
     const [hideSelectImage, setHideSelectImage] = useState(false);
+    const [isDone, setIsDone] = useState(false);
 
+    useEffect(() => {
+        if (isSuccess) {
+            setIsDone(true);
+        }
+    }, [isSuccess])
 
     useEffect(() => {
         if (isImageSuccess) {
@@ -42,7 +48,7 @@ function CreatePostModal({ open, setOpen }) {
         setImg(null)
         setCaption("")
         setHideSelectImage(false)
-
+        setIsDone(false)
     }
 
 
@@ -72,7 +78,7 @@ function CreatePostModal({ open, setOpen }) {
 
                 </Box>
                 {(imageLoading || isLoading) && <img className={styles.loadingGif} alt="loading gif" src={process.env.PUBLIC_URL + 'loader.gif'} />}
-                {isSuccess && (
+                {isDone && (
                     <>
                         <img className={styles.loadingGif} alt="loading done" src={process.env.PUBLIC_URL + 'done.gif'} />
                         <Typography {...customModalStyle.successMsg} variant="h4">

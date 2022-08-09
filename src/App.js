@@ -3,13 +3,14 @@ import React, { Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { ROUTES } from './routes'
 import FancyRoute from "./components/tools/FancyRoute";
+import Loader from "./components/loader";
 
 
 
 function App() {
 
     return (
-        <Suspense fallback={<h1>Loading...</h1>}>
+        <Suspense fallback={<Loader />}>
             <Routes>
                 {
                     ROUTES.map((route, i) => {
