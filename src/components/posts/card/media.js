@@ -1,7 +1,7 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import CardMedia from "@mui/material/CardMedia";
 
-function Media({img}) {
+function Media({ img }) {
     const [url, setUrl] = useState('')
 
     useEffect(() => {
@@ -13,13 +13,23 @@ function Media({img}) {
                 return (
                     <CardMedia
                         component="img"
-                        height="614rem"
+                        height="auto"
                         image={url}
                         alt="post"
+                        sx={{
+                            '@media (max-width: 600px)': {
+                                height: '90vw',
+                            },
+                            '@media (min-width: 600px)': {
+                                maxHeight: '61.4rem',
+                                height: '61.4rem',
+                            }
+
+                        }}
                     />
                 )
             }, [url])
-                // <Memo/>
+
             }
         </>
     );

@@ -11,7 +11,7 @@
 }
 .card .media {
 	width: 61.4rem;
-	height: 61.4rem !important;
+	min-height: 61.4rem !important;
 }
 .card span {
 	font-weight: 800;
@@ -42,6 +42,7 @@
 .addComment {
 	padding: 1rem 1.5rem 1rem 2rem !important;
 }
+
 .addComment input {
 	width: 100%;
 	border: none;
@@ -67,4 +68,13 @@
 }
 .card .user:hover {
 	text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+	.card {
+		margin-top: 0;
+	}
+	.addComment {
+		display: none;
+	}
 }

@@ -20,3 +20,13 @@
 	color: #fff;
 	z-index: 99999999999;
 }
+
+@media (max-width: 600px) {
+	.home {
+		margin-top: 7rem;
+	}
+	.box {
+		max-width: 100%;
+		width: 100%;
+	}
+}

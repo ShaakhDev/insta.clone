@@ -1,10 +1,10 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput} from "@mui/material";
-import {customStyles} from "./customMuiStyles";
+import React, { useEffect, useRef, useState } from 'react';
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
+import styles from '../../styles/Auth.module.css'
 
-function Password({getValue}) {
+
+function Password({ getValue, showWarning }) {
     const passRef = useRef();
     const password = passRef.current?.value
     const [values, setValues] = useState({
@@ -17,59 +17,44 @@ function Password({getValue}) {
     })
 
     const handlePasswordChange = (prop) => (event) => {
-        setValues({...values, [prop]: event.target.value});
+        setValues({ ...values, [prop]: event.target.value });
     };
 
-    const handleClickShowPassword = () => {
+    const handleClickShowPassword = (e) => {
+        e.preventDefault()
         setValues({
             ...values,
             showPassword: !values.showPassword,
         });
     };
-    const handleMouseDownPassword = (event) => {
-        event.preventDefault();
-    };
+
     return (
         <>
-            <FormControl
-                {...customStyles.passwordInput}
-                variant="outlined"
-            >
-                <InputLabel
-                    {...customStyles.label}
-                    htmlFor="outlined-adornment-password"
-                >Password</InputLabel>
-                <OutlinedInput
-                    {...customStyles.passwordInput}
-                    {...customStyles.label}
-                    id="outlined-adornment-password"
+            <div className={styles.passwordBox}>
+                <input
                     type={values.showPassword ? 'text' : 'password'}
                     value={values.password}
-                    inputRef={passRef}
                     onChange={handlePasswordChange('password')}
-                    endAdornment={
-                        <InputAdornment position="end">
-                            <IconButton
-                                aria-label="toggle password visibility"
-                                onClick={handleClickShowPassword}
-                                onMouseDown={handleMouseDownPassword}
-                                edge="end"
-                            >
-                                {values.showPassword ?
-                                    <VisibilityOff
-                                        fontSize='large'
-                                        color="action"
-                                    /> :
-                                    <Visibility
-                                        fontSize='large'
-                                        color="action"
-                                    />}
-                            </IconButton>
-                        </InputAdornment>
-                    }
-                    label="Password"
+                    ref={passRef}
+                    required
+                    className={showWarning ? styles.warnInput : ""}
+                    placeholder="Password"
                 />
-            </FormControl>
+                <button
+                    onClick={handleClickShowPassword}
+                    className={styles.showPassword}
+                >
+                    {values.showPassword
+                        ? <VisibilityOff
+                            fontSize='large'
+                            color="action"
+                        />
+                        : <Visibility
+                            fontSize='large'
+                            color="action"
+                        />}
+                </button>
+            </div>
         </>
     );
 }

@@ -1,8 +1,7 @@
 import React, { useEffect, useRef } from 'react';
-import { TextField } from "@mui/material";
-import { customStyles } from "./customMuiStyles";
+import styles from '../../styles/Auth.module.css'
 
-function Username({ getValue }) {
+function Username({ getValue, showWarning }) {
     const usernameRef = useRef();
     const username = (usernameRef.current?.value)?.toLowerCase();
     useEffect(() => {
@@ -10,11 +9,13 @@ function Username({ getValue }) {
     })
     return (
         <>
-            <TextField
-                {...customStyles.userNameInput}
-                inputRef={usernameRef}
-                id="outlined-required"
-                label='Username'
+            <input
+                type="text"
+                ref={usernameRef}
+                required
+                placeholder="Username"
+                className={showWarning ? styles.warnInput : ''}
+
             />
         </>
     );

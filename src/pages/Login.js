@@ -1,9 +1,16 @@
 import FormInputs from "../components/auth/FormInputs";
 import styles from '../styles/Auth.module.css'
-import { Link, useNavigate } from 'react-router-dom'
-
+import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
+import nprogress from "nprogress";
 
 function Login() {
+
+    useEffect(() => {
+        setTimeout(() => {
+            nprogress.done()
+        }, 1000)
+    }, [])
 
     return (
         <form className={styles.auth}>

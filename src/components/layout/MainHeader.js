@@ -40,32 +40,34 @@ function MainHeader(props) {
                             <img src={process.env.PUBLIC_URL + '/brand.webp'} alt="brand" />
                         </Link>
                     </div>
-                    <div className={styles.search}>
-                        <label htmlFor='search'>
-                            <input placeholder="Search" name="search" type="text" />
-                        </label>
-                    </div>
-                    {token && (
-                        <div className={styles.icons}>
-                            <Link to="/">
-                                <IconButton onClick={() => setFocused(FOCUSED_BTN.home)} disableRipple>
+                    <div className={styles.secondPart} >
+                        <div className={styles.search}>
+                            <label htmlFor='search'>
+                                <input placeholder="Search" name="search" type="text" />
+                            </label>
+                        </div>
+                        {token && (
+                            <div className={styles.icons}>
+                                <Link to="/">
+                                    <IconButton onClick={() => setFocused(FOCUSED_BTN.home)} disableRipple>
+                                        {
+                                            focused === FOCUSED_BTN.home ?
+                                                <HomeFilled /> :
+                                                <HomeOutlined />
+                                        }
+                                    </IconButton>
+                                </Link>
+                                <IconButton onClick={() => setFocused(FOCUSED_BTN.addPost)} disableRipple>
                                     {
-                                        focused === FOCUSED_BTN.home ?
-                                            <HomeFilled /> :
-                                            <HomeOutlined />
+                                        focused === FOCUSED_BTN.addPost ?
+                                            <AddPostFilled handleOpenModal={handleOpenModal} /> :
+                                            <AddPostOutlined handleOpenModal={handleOpenModal} />
                                     }
                                 </IconButton>
-                            </Link>
-                            <IconButton onClick={() => setFocused(FOCUSED_BTN.addPost)} disableRipple>
-                                {
-                                    focused === FOCUSED_BTN.addPost ?
-                                        <AddPostFilled handleOpenModal={handleOpenModal} /> :
-                                        <AddPostOutlined handleOpenModal={handleOpenModal} />
-                                }
-                            </IconButton>
-                            <AvatarDropdown setFocused={(icon) => setFocused(icon)} focused={focused} onClick={() => setFocused(FOCUSED_BTN.profile)} />
-                        </div>
-                    )}
+                                <AvatarDropdown setFocused={(icon) => setFocused(icon)} focused={focused} onClick={() => setFocused(FOCUSED_BTN.profile)} />
+                            </div>
+                        )}
+                    </div>
                     {!token && (
                         <div className={styles.buttons}>
                             <Button onClick={() => navigate('/accounts/login')} variant="contained">
@@ -78,7 +80,7 @@ function MainHeader(props) {
                     )}
                 </div>
             </nav>
-            {/* <div className={styles.behind} /> */}
+
             {props.children}
         </>
     );

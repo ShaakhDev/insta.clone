@@ -1,22 +1,29 @@
 import { useState, useEffect } from 'react';
 import { useLoginMutation, useSignUpMutation } from '../../rtk/usersApi';
-import { Button } from "@mui/material";
+import Button from "./button";
 import Username from "./username";
 import Password from "./password";
 import Email from "./email";
 import { useNavigate } from 'react-router-dom'
 import { WhiteSpinner } from '../spinner';
-
-
+import styles from '../../styles/Auth.module.css'
 
 
 function FormInputs({ authType, button }) {
-    const [login, { data: loginData, isSuccess: loginIsSuccess, isLoading: loginIsLoading }] = useLoginMutation();
+    const [login, {
+        data: loginData,
+        isSuccess: loginIsSuccess,
+        isLoading: loginIsLoading,
+        isError: loginIsError,
+        error: loginError
+    }] = useLoginMutation();
     const [signUp, { isSuccess: signUpIsSuccess, isLoading: signUpIsLoading }] = useSignUpMutation();
     const [isDisableButton, setIsDisableButton] = useState(true)
-    const [username, setUsername] = useState()
-    const [password, setPassword] = useState()
-    const [email, setEmail] = useState()
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('');
+    const [showWarning, setShowWarning] = useState(false);
+    const [warningMessage, setWarningMessage] = useState('');
 
     const navigate = useNavigate()
 
@@ -42,7 +49,16 @@ function FormInputs({ authType, button }) {
             console.log(loginData)
             navigate('/')
         }
-    })
+    }, [loginIsSuccess])
+
+    useEffect(() => {
+        if (loginIsError) {
+            setShowWarning(true)
+            console.log(loginError)
+            setWarningMessage(loginError?.data?.detail)
+        }
+    }, [loginIsError])
+
 
     const signUpHandle = () => {
 
@@ -71,19 +87,20 @@ function FormInputs({ authType, button }) {
 
     return (
         <>
-            <Username getValue={data => setUsername(data)} />
+            <Username showWarning={showWarning} getValue={data => setUsername(data)} />
 
-            {authType === 'SIGNUP' ? <Email getValue={data => setEmail(data)} /> : ""}
+            {authType === 'SIGNUP' ? <Email showWarning={showWarning} getValue={data => setEmail(data)} /> : ""}
 
-            <Password getValue={data => setPassword(data)} />
+            <Password showWarning={showWarning} getValue={data => setPassword(data)} />
 
-
+            {showWarning ? <Warning message={warningMessage} /> : ""}
 
             <Button
-                fullWidth
-                disabled={isDisableButton}
-                onClick={handleSubmit}
-                variant="contained"
+                loginIsLoading={loginIsLoading}
+                signUpIsLoading={signUpIsLoading}
+                button={button}
+                isDisable={isDisableButton}
+                handleSubmit={handleSubmit}
             >
                 {loginIsLoading || signUpIsLoading ? (<WhiteSpinner />) : button}
             </Button>
@@ -91,4 +108,13 @@ function FormInputs({ authType, button }) {
     );
 }
 
+
+const Warning = ({ message }) => {
+
+    return (
+        <div className={styles.warning}>
+            <p>{message}</p>
+        </div>
+    )
+}
 export default FormInputs;

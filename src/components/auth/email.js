@@ -1,8 +1,7 @@
-import React, {useEffect, useRef} from 'react';
-import {customStyles} from "./customMuiStyles";
-import {TextField} from "@mui/material";
+import React, { useEffect, useRef } from 'react';
+import styles from '../../styles/Auth.module.css'
 
-function Email({getValue}) {
+function Email({ getValue, showWarning }) {
     const emailRef = useRef();
     const email = emailRef.current?.value;
 
@@ -12,10 +11,13 @@ function Email({getValue}) {
 
     return (
         <>
-            <TextField
-                {...customStyles.userNameInput}
-                inputRef={emailRef}
-                label='Email'
+
+            <input
+                type="text"
+                placeholder='Email'
+                ref={emailRef}
+                required
+                className={showWarning ? styles.warnInput : ''}
             />
         </>
     );

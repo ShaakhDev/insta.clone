@@ -5,14 +5,12 @@ import { muiStyles } from "../customMuiStyles";
 import styles from '../../../styles/Card.module.css'
 import EmojiPicker from "emoji-picker-react";
 import EmojiBtn from "../../emojiBtn";
-import { useDispatch } from "react-redux";
-import { comment } from "../../../store/actions/postActions";
 import { useSetCommentToPostMutation } from '../../../rtk/postsApi'
 
 
 function AddComment({ postId }) {
-    const dispatch = useDispatch();
-    const [setCommentToPost, { status }] = useSetCommentToPostMutation();
+
+    const [setCommentToPost] = useSetCommentToPostMutation();
     const [inputValue, setInputValue] = useState('');
     const [click, setClick] = useState(false);
     const handleInput = (e) => {
@@ -50,7 +48,7 @@ function AddComment({ postId }) {
                     <button onClick={handleEmojiClick}>
                         <EmojiBtn />
                     </button>
-                    <input onChange={e => handleInput(e)} value={inputValue} type="text"
+                    <input style={{ fontSize: '1.5rem' }} onChange={e => handleInput(e)} value={inputValue} type="text"
                         placeholder="Add a comment..." />
                     <Button onClick={handleComment} className={styles.post} disabled={inputValue === ''} disableRipple={true}
                         variant="text">Post</Button>
