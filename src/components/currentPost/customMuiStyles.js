@@ -24,9 +24,14 @@ export const muiStyles = {
     header: {
         sx: {
             borderBottom: '.5px solid #dbdbdb',
-            padding: '1rem 1.2rem',
+            padding: '1.8rem 1.2rem 1rem',
             display: 'flex',
-            alignItems: 'center'
+            alignItems: 'start'
+        }
+    },
+    subheader: {
+        sx: {
+            marginTop: '1.5rem',
         }
     },
     avatar: {

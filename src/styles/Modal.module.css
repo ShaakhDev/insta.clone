@@ -76,3 +76,20 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+.closeButton {
+	position: absolute;
+	top: 0;
+	color: #333333;
+	left: 0;
+	cursor: pointer;
+}
+.closeButton > svg {
+	width: 3rem;
+	height: 3rem;
+}
+@media (max-width: 600px) {
+	.box {
+		max-width: 80vw;
+		width: 80vw;
+	}
+}

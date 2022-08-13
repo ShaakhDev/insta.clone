@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import { customModalStyle } from "./customMiuStyles";
 import Typography from "@mui/material/Typography";
 import SelectPostImage from "./selectPostImage";
+import ClearIcon from '@mui/icons-material/Clear';
 import { Button } from '@mui/material';
 import { useSavePostImageMutation, useCreatePostMutation } from "../../rtk/postsApi";
 import styles from "../../styles/Modal.module.css";
@@ -64,6 +65,12 @@ function CreatePostModal({ open, setOpen }) {
         >
             <Box {...customModalStyle.box}>
                 <Box {...customModalStyle.headerBox}>
+
+                    <Button
+                        className={styles.closeButton}
+                        onClick={handleClose}>
+                        <ClearIcon />
+                    </Button>
                     <Typography
                         {...customModalStyle.modalTitle}
                         variant="h4"

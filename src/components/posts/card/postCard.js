@@ -24,7 +24,7 @@ const PostCard = forwardRef(({ postData }, ref) => {
 
                 <Header caption={caption} id={id} avatar={user?.avatar_url} user={user} />
 
-                <Media className={styles.media} img={image_url} id={id} alt='post' />
+                <Media className={styles.media} img={image_url} postId={id} alt='post' />
 
                 <Actions liked_users={liked_users} onClickToShareIcon={handleCopyClick} postId={id} />
 

@@ -48,7 +48,7 @@ function CurrentPostCard({ time, likes, caption, user: postUser, comments, image
                 </>
             )
         },
-        [comments],
+        [comments]
     );
 
 
@@ -85,14 +85,25 @@ function CurrentPostCard({ time, likes, caption, user: postUser, comments, image
                                     </IconButton>
                                 }
                                 title={
-                                    <Link style={{ color: "#333" }} to={`/${postUser?.username}`}>
-                                        <b>{postUser?.username}</b>
-                                    </Link>
+                                    <>
+                                        <Link style={{ color: "#333", }} to={`/${postUser?.username}`}>
+                                            <b
+                                            >{postUser?.username}</b>
+                                        </Link>
+
+                                    </>
+                                }
+                                subheader={
+                                    <Typography
+                                        title={postedDate}
+                                        variant="h5"
+                                        {...muiStyles.subheader}
+                                    >{caption}</Typography>
                                 }
                             />
 
                             <Box className={styles.comments}>
-                                {caption && <Caption time={time} text={caption} user={postUser} />}
+
                                 {comments?.length ? <CommentsBox /> : null}
 
                             </Box>

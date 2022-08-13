@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { isMobile } from 'react-device-detect';
 import Box from "@mui/material/Box";
 import CreatePostIcon from "./createPostIcon";
 import Typography from "@mui/material/Typography";
@@ -77,7 +78,7 @@ function SelectPostImage({ getCaption, getImg }) {
                 />
 
                 <Stack direction="row" justifyContent="space-between">
-                    <EmojiBtn click={() => setClick(!click)} />
+                    {!isMobile && <EmojiBtn click={() => setClick(!click)} />}
 
                     {click && <EmojiPicker
                         pickerStyle={{ position: 'absolute', bottom: '7rem', height: '20rem' }}
@@ -104,7 +105,7 @@ function SelectPostImage({ getCaption, getImg }) {
                 <input onChange={e => handleImage(e)} style={{ display: "none" }} accept="image/*"
                     id="contained-button-file" type="file" />
                 <Button {...customModalStyle.selectBtn} variant="contained" component="span">
-                    Select from computer
+                    Select from device
                 </Button>
             </label>
         </Box>)}

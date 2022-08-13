@@ -54,6 +54,9 @@
 	align-items: center;
 	justify-content: flex-end;
 	height: 100%;
+	position: absolute;
+	top: 0;
+	right: 15%;
 }
 .buttons > button {
 	margin-left: 2.5rem;
@@ -83,7 +86,25 @@
 .search label input::placeholder {
 	font-weight: 300 !important;
 }
+@media (max-width: 1000px) {
+	.search {
+		display: none;
+	}
+	.box {
+		grid-template-columns: 1fr;
+		grid-template-rows: 1fr;
+		justify-content: center;
+		height: 5rem;
+	}
+	.brand {
+		margin: 0 auto;
 
+		height: 5rem;
+	}
+	.brand img {
+		height: 6.2rem;
+	}
+}
 @media (max-width: 600px) {
 	.nav {
 		min-height: 5rem;
@@ -91,7 +112,16 @@
 	.box {
 		grid-template-columns: 1fr;
 		grid-template-rows: 1fr;
+		justify-content: center;
 		height: 5rem;
+	}
+	.buttons button:nth-child(2) {
+		display: none;
+	}
+	.buttons button:nth-child(1) {
+		position: absolute;
+		top: 1.2rem;
+		right: -1rem;
 	}
 	.secondPart {
 		position: fixed;
@@ -115,15 +145,13 @@
 	.secondPart .icons button {
 		margin: 0 1.5rem 0;
 	}
-	.search {
-		display: none;
-	}
-	.brand {
+
+	/* .brand {
 		margin: 0 auto;
+
 		height: 5rem;
 	}
 	.brand img {
 		height: 6.2rem;
-		margin: 0;
-	}
+	} */
 }

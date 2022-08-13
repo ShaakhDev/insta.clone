@@ -9,7 +9,7 @@ import { Stack, TextareaAutosize } from "@mui/material";
 import EmojiBtn from "../emojiBtn";
 import EmojiPicker from "emoji-picker-react";
 import Typography from "@mui/material/Typography";
-;
+import { isMobile } from 'react-device-detect';
 
 function CaptionBox({ getCaption, user, prevCaption }) {
     const [input, setInput] = useState(prevCaption);
@@ -57,7 +57,9 @@ function CaptionBox({ getCaption, user, prevCaption }) {
                 />
 
                 <Stack direction="row" justifyContent="space-between">
-                    <EmojiBtn click={() => setClick(!click)} />
+                    {!isMobile
+                        && <EmojiBtn click={() => setClick(!click)} />
+                    }
 
                     {click && <EmojiPicker
                         pickerStyle={{ position: 'absolute', bottom: '7rem', height: '20rem' }}

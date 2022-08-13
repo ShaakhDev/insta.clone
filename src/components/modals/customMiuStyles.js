@@ -1,3 +1,5 @@
+
+
 export const customModalStyle = {
     box: {
         sx: {
@@ -13,7 +15,11 @@ export const customModalStyle = {
             overflow: "hidden",
             outline: "none",
             boxShadow: 6,
-
+            '@media (max-width:600px)': {
+                width: "100%",
+                height: "100%",
+                borderRadius: 0,
+            }
         },
 
     },
@@ -63,7 +69,10 @@ export const customModalStyle = {
             display: 'flex',
             width: '100%',
             flexDirection: "column",
-            justifyContent: 'stretch'
+            justifyContent: 'stretch',
+            '@media (max-width:600px)': {
+                height: "50%",
+            }
         }
     },
     uploadBox: {
@@ -87,6 +96,10 @@ export const customModalStyle = {
             fontFamily: 'inherit',
             fontSize: '1.4rem',
             minHeight: '7rem',
+            '@media (max-width:600px)': {
+                height: 'auto'
+            }
+
         }
     },
     shareBtn: {
@@ -99,6 +112,19 @@ export const customModalStyle = {
             fontSize: '1.4rem',
             textTransform: 'capitalize',
             background: 'none'
+        }
+    },
+    closeBtn: {
+        variant: "text",
+        disableRipple: true,
+
+        style: {
+            left: 0,
+            top: 0,
+            position: 'absolute',
+            background: 'none',
+            color: "#333",
+
         }
     },
     successMsg: {
@@ -133,6 +159,9 @@ export const customStyles = {
             color: "#333",
             "& a": {
                 textAlign: "center"
+            },
+            '@media (max-width:600px)': {
+                width: "70%",
             }
         }
     },
@@ -234,6 +263,7 @@ export const updateCustomStyles = {
             background: 'none'
         }
     },
+
     captionBox: {
         sx: {
             flex: '2',

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { isMobile, isDesktop } from 'react-device-detect';
 import Box from '@mui/material/Box';
 import { Avatar } from '@mui/material';
 import Menu from '@mui/material/Menu';
@@ -9,23 +10,27 @@ import styles from '../../styles/MainHeader.module.css'
 import Tooltip from '@mui/material/Tooltip';
 import { Link } from 'react-router-dom'
 import { useGetCurrentUserQuery } from '../../rtk/usersApi';
+import { useNavigate } from 'react-router-dom';
 
 export default function AvatarDropdown({ onClick, focused }) {
+    const navigate = useNavigate()
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const { data: user } = useGetCurrentUserQuery(1)
-
+    console.log(navigator.userAgent)
 
 
     const logOutHandle = (e) => {
         localStorage.removeItem('access_token');
         localStorage.removeItem('user')
         localStorage.removeItem('user_id')
-        console.log('logged out')
         window.location.reload(true)
     }
     const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
+        if (isDesktop)
+            setAnchorEl(event.currentTarget);
+        else if (isMobile)
+            navigate(`/${user?.username}`)
     };
     const handleClose = () => {
         setAnchorEl(null);
