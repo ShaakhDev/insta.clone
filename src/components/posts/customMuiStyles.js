@@ -11,10 +11,32 @@ export const muiStyles = {
         }
     },
     stack: {
-        sx: { width: '100%' },
+        sx: {
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+
+        },
         spacing: 2,
         direction: "row",
 
+    },
+    innerStack: {
+        sx: {
+            width: '100%',
+            height: '5rem',
+            overflow: 'hidden',
+            display: 'flex',
+            padding: '0',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            border: '1px solid #dbdbdb',
+            borderRadius: '3.5rem',
+            backgroundColor: '#fff',
+        },
+        spacing: 2,
+        direction: "row",
     },
     actions: {
         disableTouchRipple: true,

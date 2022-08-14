@@ -3,14 +3,14 @@ import Layout from "../components/layout/MainHeader";
 import { useParams } from "react-router-dom";
 import CurrentPostCard from "../components/currentPost/currentPostCard";
 import SkeletonCurrentPost from "../components/currentPost/skeletonCurrentPost";
-import { useGetPostQuery } from '../rtk';
+import { useGetCurrentUserQuery, useGetPostQuery } from '../rtk';
 import nprogress from 'nprogress';
 
 function CurrentPost() {
 
     const params = useParams();
     const { data, isLoading } = useGetPostQuery(params.postId);
-
+    const { data: currentUser } = useGetCurrentUserQuery(1);
     useEffect(() => {
         setInterval(() => {
             nprogress.done()
@@ -28,6 +28,7 @@ function CurrentPost() {
                     image={data?.image_url}
                     likes={data?.likes}
                     id={data?.id}
+                    currentUser={currentUser}
                 />
             )}
         </Layout>

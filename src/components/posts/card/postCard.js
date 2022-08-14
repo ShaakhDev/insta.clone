@@ -11,6 +11,7 @@ import AddComment from "./addComment";
 import { useSelector } from 'react-redux'
 import { useCopyToClick } from '../../../hooks/useCopyToClick';
 import Popup from '../../popup';
+import { BrowserView } from 'react-device-detect';
 
 const PostCard = forwardRef(({ postData }, ref) => {
     const token = useSelector(state => state?.auth?.token)
@@ -38,7 +39,9 @@ const PostCard = forwardRef(({ postData }, ref) => {
                 />
 
                 <Divider />
-                {token !== undefined && <AddComment postId={id} />}
+                <BrowserView>
+                    {token !== undefined && <AddComment postId={id} />}
+                </BrowserView>
             </Card>
         </>
 

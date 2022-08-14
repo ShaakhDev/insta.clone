@@ -22,10 +22,16 @@ function Caption({ user, time, text }) {
                 <Link style={{ color: "#333" }} to={`/${user?.username}`}>
                     <b>{user?.username}</b>
                 </Link>
-                <Typography className={styles.caption} variant="caption">
+                <Typography
+                    className={styles.caption}
+                    variant="caption">
                     {text}
                 </Typography>
-                <Typography title={commentedDate} className={styles.time} variant="body1" color='info'>
+                <Typography
+                    title={commentedDate}
+                    className={styles.time}
+                    variant="body1"
+                    color='info'>
                     {commentedTime}
                 </Typography>
             </div>

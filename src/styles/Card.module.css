@@ -75,6 +75,6 @@
 		margin-top: 0;
 	}
 	.addComment {
-		display: none;
+		background: rgb(239, 239, 239);
 	}
 }

@@ -65,3 +65,34 @@
 .box svg:hover {
 	color: #8e8e8e;
 }
+.noComments {
+	text-align: center;
+}
+@media (max-width: 600px) {
+	.comments {
+		padding: 2rem 1.2rem;
+	}
+	.comment .time {
+		font-size: 1.6rem;
+	}
+	.comment .caption {
+		font-size: 1.6rem;
+	}
+	.noComment {
+		font-size: 1.7rem !important;
+		text-align: center;
+	}
+	.noComment a {
+		color: #1976d2;
+	}
+	.backButton {
+		position: fixed !important;
+		top: 0.5rem;
+		color: #333 !important;
+		z-index: 100;
+	}
+	.backButton svg {
+		width: 3rem;
+		height: 3rem;
+	}
+}
