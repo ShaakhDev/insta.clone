@@ -65,7 +65,6 @@ function CreatePostModal({ open, setOpen }) {
         >
             <Box {...customModalStyle.box}>
                 <Box {...customModalStyle.headerBox}>
-
                     <Button
                         className={styles.closeButton}
                         onClick={handleClose}>
