@@ -19,7 +19,7 @@ export function useCopyToClick(postId) {
                 setIsCopied(true);
                 setTimeout(() => {
                     setIsCopied(false)
-                }, 3500)
+                }, 5000)
             })
             .catch(err => {
                 console.log(err);

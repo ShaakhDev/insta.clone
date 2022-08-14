@@ -5,6 +5,7 @@ import { customModalStyle } from "./customMiuStyles";
 import styles from '../../styles/Modal.module.css'
 import UploadButton from "./uploadBtn";
 import { Button } from "@mui/material";
+import ClearIcon from "@mui/icons-material/Clear";
 import { useSaveAvatarUrlMutation, useUpdateUserMutation } from "../../rtk/usersApi";
 
 
@@ -88,7 +89,16 @@ export default function BasicModal({ open, setOpen, profile }) {
                 onClose={handleClose}
                 BackdropProps={{ background: 'rgba(0,0,0,0.65)' }}
             >
-                <Box {...customModalStyle.box} className={styles.box}>
+
+                <Box
+                    {...customModalStyle.box}
+                    className={styles.box}>
+                    <Button
+                        className={styles.backButton}
+                        onClick={handleClose}
+                    >
+                        <ClearIcon />
+                    </Button>
                     <div className={styles.heading}>
                         <h2>Edit your profile</h2>
                         <p>You can edit and update your profile details.</p>
@@ -143,7 +153,9 @@ export default function BasicModal({ open, setOpen, profile }) {
                         <span className={styles.upload}>{img?.name}</span>
                         <UploadButton getValue={data => setImg(data)} />
                     </label>
-                    <Button sx={{ width: "100%", fontSize: "1.6rem", marginTop: '4rem' }} disabled={saveAvatarUrlLoading || updateUserLoading} variant="contained"
+                    <Button
+                        sx={{ width: "100%", fontSize: "1.6rem", marginTop: '4rem' }}
+                        disabled={saveAvatarUrlLoading || updateUserLoading} variant="contained"
                         onClick={handleUpload}>{updateUserLoading || saveAvatarUrlLoading ? "sending..." : 'update'}</Button>
                 </Box>
             </Modal>

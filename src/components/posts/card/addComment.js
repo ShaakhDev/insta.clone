@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button, Stack, Avatar } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import { muiStyles } from "../customMuiStyles";
 import styles from '../../../styles/Card.module.css'
 import EmojiPicker from "emoji-picker-react";
 import EmojiBtn from "../../emojiBtn";
-import { Link } from 'react-router-dom';
 import { useSetCommentToPostMutation } from '../../../rtk/postsApi'
 import { BrowserView, MobileView } from 'react-device-detect';
 
@@ -57,9 +56,7 @@ function AddComment({ postId, currentUser }) {
                     </BrowserView>
 
                     <MobileView>
-                        <Avatar
-                            disableRipple={true}
-                        >
+                        <Avatar>
                             <img
                                 style={{ height: '100%', cursor: "pointer" }} src={currentUser?.avatar_url}
                                 alt="avatar" />

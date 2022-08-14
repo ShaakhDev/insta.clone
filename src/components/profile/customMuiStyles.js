@@ -10,7 +10,10 @@ export const profileMuiStyles = {
             color: "#333",
             fontSize: '1.3rem',
             textTransform: 'capitalize',
-            fontWeight: '500'
+            fontWeight: '500',
+            '@media (max-width: 600px)': {
+                marginTop: '1rem !important',
+            }
         }
     },
     followButton: {
@@ -20,7 +23,10 @@ export const profileMuiStyles = {
             fontWeight: '500',
             fontSize: '1.4rem',
             padding: "0 2rem !important",
-            margin: "0.5rem 0"
+            margin: "0.5rem 0",
+            '@media (max-width: 600px)': {
+                marginTop: '1rem !important',
+            }
         }
     },
     bodyStack: {

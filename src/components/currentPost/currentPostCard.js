@@ -1,3 +1,4 @@
+import React, { useCallback, useState, useEffect } from "react";
 import {
     Card, CardMedia,
     Box,
@@ -8,21 +9,22 @@ import {
     Typography,
     Button
 } from '@mui/material'
-import { useEffect } from 'react';
 import styles from "../../styles/CurrentPost.module.css";
 import { muiStyles } from './customMuiStyles'
 import { Link, useNavigate } from "react-router-dom";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import { useCalculateDate, useCalculatePostedTime } from "../../hooks/useCalculateTime";
+import {
+    useCalculateDate,
+    useCalculatePostedTime
+} from "../../hooks/useCalculateTime";
+import { useCopyToClick } from '../../hooks/useCopyToClick'
 import Actions from "../posts/card/actions";
 import AddComment from "../posts/card/addComment";
 import { useSelector } from "react-redux";
 import Caption from "./caption";
 import MoreActionsModal from "../modals/moreActionsModal";
-import React, { useCallback, useState } from "react";
 import Popup from '../popup';
-import { useCopyToClick } from '../../hooks/useCopyToClick'
 import { MobileView, BrowserView } from 'react-device-detect'
 
 function CurrentPostCard({

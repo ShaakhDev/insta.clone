@@ -17,7 +17,6 @@ export default function AvatarDropdown({ onClick, focused }) {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const { data: user } = useGetCurrentUserQuery(1)
-    console.log(navigator.userAgent)
 
 
     const logOutHandle = (e) => {
