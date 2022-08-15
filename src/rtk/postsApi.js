@@ -38,7 +38,7 @@ export const postsApi = createApi({
                 }
 
             }),
-            invalidatesTags: [{ type: 'Posts', id: 'LIST' }],
+            invalidatesTags: [{ type: 'Posts', id: 'LIST' }, { type: 'Posts', id: 'single' }],
 
         }),
 

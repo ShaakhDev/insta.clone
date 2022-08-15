@@ -12,7 +12,6 @@ import { useUpdatePostMutation } from "../../rtk/postsApi";
 function EditPostModal({ open, setOpen, id, user, prevCaption }) {
     const [updatePost, { isLoading, isSuccess }] = useUpdatePostMutation()
     const [caption, setCaption] = useState("");
-
     const handleClose = () => {
         setOpen(false)
     };
@@ -60,11 +59,11 @@ function EditPostModal({ open, setOpen, id, user, prevCaption }) {
 
 
                     </Box>
-                    {isLoading && <img className={styles.loadingGif} alt="loading gif" src={process.env.PUBLIC_URL + 'loader.gif'} />}
+                    {isLoading && <img className={styles.loadingGif} alt="loading gif" src={process.env.PUBLIC_URL + '/loader.gif'} />}
 
                     {isSuccess && (
                         <>
-                            <img className={styles.loadingGif} alt="loading done" src={process.env.PUBLIC_URL + 'done.gif'} />
+                            <img className={styles.loadingGif} alt="loading done" src={process.env.PUBLIC_URL + '/done.gif'} />
                             <Typography {...updateCustomStyles.successMsg} variant="h4">
                                 Your post has been updated.
                             </Typography>
