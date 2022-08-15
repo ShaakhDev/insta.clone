@@ -4,16 +4,23 @@
 	left: 0;
 	width: 100%;
 	background: #333;
-	padding: 2rem 3rem 8rem;
+	padding: 1.5rem;
 	color: #fff;
 	text-align: left;
-	font-size: 2rem;
+	font-size: 1.7rem;
 	z-index: 98;
 	animation: popup 5s ease-in-out forwards;
 	-webkit-animation: popup 5s ease-in-out forwards;
 	-moz-animation: popup 5s ease-in-out forwards;
 	-o-animation: popup 5s ease-in-out forwards;
 	-ms-animation: popup 5s ease-in-out forwards;
+}
+
+@media (max-width: 600px) {
+	.popup {
+		padding: 1rem 3rem 8rem;
+		font-size: 2rem;
+	}
 }
 
 @keyframes popup {

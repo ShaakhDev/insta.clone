@@ -31,9 +31,12 @@ export const muiStyles = {
             padding: '0',
             justifyContent: 'space-between',
             alignItems: 'center',
-            border: '1px solid #dbdbdb',
-            borderRadius: '3.5rem',
             backgroundColor: '#fff',
+            '@media (max-width: 600px)': {
+                border: '1px solid #dbdbdb',
+                borderRadius: '3.5rem',
+
+            }
         },
         spacing: 2,
         direction: "row",
