@@ -6,6 +6,7 @@ import styles from '../../styles/Modal.module.css'
 import UploadButton from "./uploadBtn";
 import { Button } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
+import { MobileView } from "react-device-detect";
 import { useSaveAvatarUrlMutation, useUpdateUserMutation } from "../../rtk/usersApi";
 
 
@@ -93,12 +94,14 @@ export default function BasicModal({ open, setOpen, profile }) {
                 <Box
                     {...customModalStyle.box}
                     className={styles.box}>
-                    <Button
-                        className={styles.backButton}
-                        onClick={handleClose}
-                    >
-                        <ClearIcon />
-                    </Button>
+                    <MobileView>
+                        <Button
+                            className={styles.backButton}
+                            onClick={handleClose}
+                        >
+                            <ClearIcon />
+                        </Button>
+                    </MobileView>
                     <div className={styles.heading}>
                         <h2>Edit your profile</h2>
                         <p>You can edit and update your profile details.</p>

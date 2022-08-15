@@ -7,13 +7,11 @@ import {
     IconButton,
     CardContent,
     Typography,
-    Button
 } from '@mui/material'
 import styles from "../../styles/CurrentPost.module.css";
 import { muiStyles } from './customMuiStyles'
 import { Link, useNavigate } from "react-router-dom";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import {
     useCalculateDate,
     useCalculatePostedTime
@@ -26,6 +24,7 @@ import Caption from "./caption";
 import MoreActionsModal from "../modals/moreActionsModal";
 import Popup from '../popup';
 import { MobileView, BrowserView } from 'react-device-detect'
+import BackButton from "../backButton";
 
 function CurrentPostCard({
     time,
@@ -188,12 +187,7 @@ function CurrentPostCard({
 
             {/*This section will  only render on MOBILE  */}
             <MobileView>
-                <Button
-                    onClick={() => navigate(-1)}
-                    className={styles.backButton}
-                >
-                    <ArrowBackIosIcon />
-                </Button>
+                <BackButton />
 
                 <Card
                     {...muiStyles.card}

@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import CardMedia from "@mui/material/CardMedia";
 import { Link } from 'react-router-dom'
-
+import { isMobile } from 'react-device-detect'
 
 function Media({ img, postId }) {
     const [url, setUrl] = useState('')
@@ -14,7 +14,7 @@ function Media({ img, postId }) {
             {useMemo(() => {
 
                 return (
-                    <Link to={`/p/${postId}`}>
+                    <Link to={isMobile ? `/p/view/${postId}` : `/p/${postId}`}>
                         <CardMedia
                             component="img"
                             height="auto"

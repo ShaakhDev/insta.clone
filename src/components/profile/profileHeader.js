@@ -228,40 +228,42 @@ function ProfileHeader({ profile }) {
 
                     </section>
                 }
-                <Stack
-                    direction="row"
-                    mt={'2rem'}
-                    spacing={5}
-                    width='100%'
-                    sx={{
-                        display: 'flex',
-                        borderTop: '1.5px solid #dbdbdb',
-                        justifyContent: 'space-evenly',
-                        textAlign: 'center',
-                        padding: '1rem 0  0'
-                    }}
-                >
-
-                    <Typography
-                        variant='h5'
+                {isMobile
+                    && <Stack
+                        direction="row"
+                        mt={'2rem'}
+                        spacing={5}
+                        width='100%'
+                        sx={{
+                            display: 'flex',
+                            borderTop: '1.5px solid #dbdbdb',
+                            justifyContent: 'space-evenly',
+                            textAlign: 'center',
+                            padding: '1rem 0  0'
+                        }}
                     >
-                        <b>{profile?.items?.length}</b>
-                        <p style={{ color: 'rgb(142,142,142)' }}>post</p>
-                    </Typography>
-                    <Typography
-                        variant='h5'>
-                        <b>{profile?.subscribers}</b>
-                        <p style={{ color: 'rgb(142,142,142)' }}>followers</p>
-                    </Typography>
-                    {isMyProfile
-                        && <Typography
+
+                        <Typography
                             variant='h5'
                         >
-                            <b>{mySubscriptions?.length || 0}</b>
-                            <p style={{ color: 'rgb(142,142,142)' }}>following</p>
-                        </Typography>}
+                            <b>{profile?.items?.length}</b>
+                            <p style={{ color: 'rgb(142,142,142)' }}>post</p>
+                        </Typography>
+                        <Typography
+                            variant='h5'>
+                            <b>{profile?.subscribers}</b>
+                            <p style={{ color: 'rgb(142,142,142)' }}>followers</p>
+                        </Typography>
+                        {isMyProfile
+                            && <Typography
+                                variant='h5'
+                            >
+                                <b>{mySubscriptions?.length || 0}</b>
+                                <p style={{ color: 'rgb(142,142,142)' }}>following</p>
+                            </Typography>}
 
-                </Stack>
+                    </Stack>
+                }
             </Box>
         </>
     );

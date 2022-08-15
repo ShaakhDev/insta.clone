@@ -132,6 +132,7 @@
 		background-color: #fff;
 		border-top: #dbdbdb 0.5px solid;
 		width: 100%;
+		z-index: 99;
 		display: flex;
 		justify-content: center;
 	}

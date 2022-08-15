@@ -9,7 +9,7 @@ export const customModalStyle = {
             transform: 'translate(-50%, -50%)',
             width: "60rem",
             minHeight: "30rem",
-            // height: "47rem",
+            height: "98vh",
             borderRadius: 3,
             bgcolor: 'background.paper',
             overflow: "hidden",

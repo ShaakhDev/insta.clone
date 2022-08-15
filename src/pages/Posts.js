@@ -93,7 +93,7 @@ function Posts() {
                                     ? <div
                                         ref={setLastElement}
                                         key={`${post.user.username}-${post.id}-${index}`}
-                                        lenght={`${posts.length}`}
+
                                     >
                                         <PostCard
                                             postData={post}

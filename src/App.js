@@ -4,8 +4,8 @@ import { Routes, Route } from 'react-router-dom'
 import { ROUTES } from './routes'
 import FancyRoute from "./components/tools/FancyRoute";
 import Loader from "./components/loader";
-
-
+import { isMobile } from 'react-device-detect'
+import MobileCurrentPost from "./pages/MobileCurrentPost";
 
 function App() {
 
@@ -22,6 +22,14 @@ function App() {
                         )
                     })
                 }
+                {isMobile && (
+                    <Route path='/p/view/:postId' element={
+                        <FancyRoute>
+                            <MobileCurrentPost />
+                        </FancyRoute>
+
+                    } />
+                )}
             </Routes>
         </Suspense>
     );

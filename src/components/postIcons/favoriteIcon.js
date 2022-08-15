@@ -4,16 +4,13 @@ import Popup from "../popup";
 import { useSetLikeToPostMutation } from "../../rtk/postsApi"
 
 
-function FavoriteIcon({ likedUsers, postId }) {
-    const { user_id } = useSelector(state => state?.auth);
-    const [click, setClick] = useState(likedUsers?.some(id => id === user_id));
+function FavoriteIcon({ isLiked, likedUsers, postId }) {
+
     const [setLikeToPost] = useSetLikeToPostMutation();
     const [showPopup, setShowPopup] = useState(false);
     const token = useSelector(state => state?.auth?.token);
 
-    useEffect(() => {
-        setClick(likedUsers?.some(id => id === user_id));
-    }, [likedUsers, user_id]);
+
 
     const handleClick = () => {
 
@@ -35,7 +32,7 @@ function FavoriteIcon({ likedUsers, postId }) {
     return (
         <>
             {showPopup && <Popup text="Please login to like or comment" />}
-            {click ? (
+            {isLiked ? (
                 <svg className="likeAnimation" onClick={handleClick} aria-label="Like" color="#ed4956" fill="#ed4956"
                     height="24" role="img"
                     viewBox="0 0 48 48" width="24">

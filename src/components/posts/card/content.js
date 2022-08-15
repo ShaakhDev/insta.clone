@@ -8,7 +8,7 @@ import { useCalculateDate, useCalculatePostedTime } from "../../../hooks/useCalc
 function Content({ postId, user, caption, comments, time, likes }) {
     const postedTime = useCalculatePostedTime(time);
     const postedDate = useCalculateDate(time);
-    const [like, setLike] = useState(likes);
+    const [like] = useState(likes);
     const [more, setMore] = useState(false)
     const CAPTION_CHAR_LIMIT = 65;
 

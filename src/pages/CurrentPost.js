@@ -9,7 +9,7 @@ import nprogress from 'nprogress';
 function CurrentPost() {
 
     const params = useParams();
-    const { data, isLoading } = useGetPostQuery(params.postId);
+    const { data, isLoading } = useGetPostQuery(params.postId, 1);
     const { data: currentUser } = useGetCurrentUserQuery(1);
     useEffect(() => {
         setInterval(() => {

@@ -4,11 +4,11 @@
 	left: 0;
 	width: 100%;
 	background: #333;
-	padding: 2rem 3rem;
+	padding: 2rem 3rem 8rem;
 	color: #fff;
 	text-align: left;
 	font-size: 2rem;
-	z-index: 99;
+	z-index: 98;
 	animation: popup 5s ease-in-out forwards;
 	-webkit-animation: popup 5s ease-in-out forwards;
 	-moz-animation: popup 5s ease-in-out forwards;
