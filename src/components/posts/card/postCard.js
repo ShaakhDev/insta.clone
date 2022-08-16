@@ -1,5 +1,5 @@
 import Card from '@mui/material/Card';
-import { forwardRef } from 'react';
+import { forwardRef, useState } from 'react';
 import Divider from "@mui/material/Divider";
 import { muiStyles } from '../customMuiStyles'
 import styles from '../../../styles/Card.module.css'
@@ -13,10 +13,19 @@ import { useCopyToClick } from '../../../hooks/useCopyToClick';
 import Popup from '../../popup';
 import { BrowserView } from 'react-device-detect';
 
+
 const PostCard = forwardRef(({ postData }, ref) => {
     const token = useSelector(state => state?.auth?.token)
-    const { image_url, user, id, caption, comments, timestamp, likes, liked_users } = postData;
+    const { image_url, user, id, caption, comments, timestamp, likes: postLikes, liked_users } = postData;
     const [isCopied, handleCopyClick] = useCopyToClick(id)
+    const [likes, setLikes] = useState(postLikes)
+
+
+    const onClickToLikeIcon = (isLiked) => {
+        if (isLiked) setLikes(likes => likes + 1)
+        else setLikes(likes => likes - 1)
+
+    }
 
     return (
         <>
@@ -27,7 +36,12 @@ const PostCard = forwardRef(({ postData }, ref) => {
 
                 <Media className={styles.media} img={image_url} postId={id} alt='post' />
 
-                <Actions liked_users={liked_users} onClickToShareIcon={handleCopyClick} postId={id} />
+                <Actions
+                    liked_users={liked_users}
+                    onClickToShareIcon={handleCopyClick}
+                    postId={id}
+                    onClickToLikeIcon={(isLiked) => onClickToLikeIcon(isLiked)}
+                />
 
                 <Content
                     likes={likes}

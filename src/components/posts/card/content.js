@@ -8,16 +8,16 @@ import { useCalculateDate, useCalculatePostedTime } from "../../../hooks/useCalc
 function Content({ postId, user, caption, comments, time, likes }) {
     const postedTime = useCalculatePostedTime(time);
     const postedDate = useCalculateDate(time);
-    const [like] = useState(likes);
+    const [like, setLike] = useState(likes);
     const [more, setMore] = useState(false)
     const CAPTION_CHAR_LIMIT = 65;
 
     return (
         <>
             <CardContent className={styles.content}>
-                {like > 0 ? (
+                {likes > 0 ? (
                     <Typography variant="body1">
-                        <b>{like} likes</b>
+                        <b>{likes} likes</b>
                     </Typography>
                 ) : null}
                 {
