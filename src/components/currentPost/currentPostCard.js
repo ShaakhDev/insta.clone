@@ -28,12 +28,13 @@ import BackButton from "../backButton";
 
 function CurrentPostCard({
     time,
-    likes,
+    likes: like,
     caption,
     user: postUser,
     comments,
     image,
     id,
+    liked_users,
     currentUser
 }) {
     const postedTime = useCalculatePostedTime(time)
@@ -42,8 +43,7 @@ function CurrentPostCard({
     const isMyPost = user === postUser?.username
     const [openModal, setOpenModal] = useState(false);
     const [isCopied, handleCopyClick] = useCopyToClick(id)
-    const navigate = useNavigate()
-
+    const [likes, setLikes] = useState(like)
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -78,6 +78,11 @@ function CurrentPostCard({
         ), [comments]
     );
 
+    const onClickToLikeIcon = (isLiked) => {
+        if (isLiked) setLikes(likes => likes + 1)
+        else setLikes(likes => likes - 1)
+
+    }
 
     return (
         <>
@@ -149,7 +154,11 @@ function CurrentPostCard({
                                 </Box>
                                 <CardContent className={styles.content}>
                                     <Actions
-                                        onClickToShareIcon={handleCopyClick} postId={id}
+                                        onClickToShareIcon={handleCopyClick}
+                                        postId={id}
+                                        liked_users={liked_users}
+                                        onClickToLikeIcon={(isLiked) => onClickToLikeIcon(isLiked)}
+
                                     />
                                     {likes > 0 ? (
                                         <Typography variant="body1">

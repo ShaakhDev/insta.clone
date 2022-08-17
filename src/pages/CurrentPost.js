@@ -27,6 +27,7 @@ function CurrentPost() {
                     time={data?.timestamp}
                     image={data?.image_url}
                     likes={data?.likes}
+                    liked_users={data?.liked_users}
                     id={data?.id}
                     currentUser={currentUser}
                 />

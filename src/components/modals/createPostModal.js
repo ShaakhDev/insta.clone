@@ -50,7 +50,10 @@ function CreatePostModal({ open, setOpen }) {
         setCaption("")
         setHideSelectImage(false)
         setIsDone(false)
+        document.body.style.overflow = 'unset'
     }
+
+
 
 
     return (
@@ -83,10 +86,19 @@ function CreatePostModal({ open, setOpen }) {
                     </Button>)}
 
                 </Box>
-                {(imageLoading || isLoading) && <img className={styles.loadingGif} alt="loading gif" src={process.env.PUBLIC_URL + 'loader.gif'} />}
+                {(imageLoading || isLoading)
+                    && <img
+                        className={styles.loadingGif}
+                        alt="loading gif"
+                        src={process.env.PUBLIC_URL + 'loader.gif'}
+                    />}
                 {isDone && (
                     <>
-                        <img className={styles.loadingGif} alt="loading done" src={process.env.PUBLIC_URL + 'done.gif'} />
+                        <img
+                            className={styles.loadingGif}
+                            alt="loading done"
+                            src={process.env.PUBLIC_URL + 'done.gif'}
+                        />
                         <Typography {...customModalStyle.successMsg} variant="h4">
                             Your post has been shared.
                         </Typography>

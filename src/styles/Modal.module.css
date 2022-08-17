@@ -10,6 +10,7 @@
 	transform: translate(-50%, -50%);
 	padding: 2rem 4rem;
 }
+
 .loadingGif {
 	position: absolute;
 	top: 50%;
@@ -91,6 +92,7 @@
 	.box {
 		min-width: 100vw;
 		padding: 2rem 1rem;
+		overflow: scroll;
 	}
 	.backButton {
 		position: absolute !important;

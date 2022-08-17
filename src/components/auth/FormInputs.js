@@ -68,7 +68,6 @@ function FormInputs({ authType, button }) {
             password,
             avatar_url: ""
         }
-        console.log(formData)
         signUp(formData)
     }
 

@@ -21,7 +21,14 @@ function MainHeader(props) {
     const token = localStorage.getItem('access_token')
     const [focused, setFocused] = useState(FOCUSED_BTN.home)
 
-    const handleOpenModal = () => setOpenModal(true);
+    const handleOpenModal = () => {
+        // if (typeof window != 'undefined' && window.document) {
+        // document.body.style.overflow = 'hidden !important'
+        // }
+        setOpenModal(true)
+    };
+
+
 
     useEffect(() => {
         if (!openModal) {
