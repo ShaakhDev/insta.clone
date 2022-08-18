@@ -19,13 +19,19 @@ export const ROUTES = [
     },
     {
         path: '/login',
-        // element: lazy(() => import('../pages/Login')),
         element: Login
     },
     {
         path: '/signup',
         element: SignUp,
     },
-
+    {
+        path: '/404',
+        element: lazy(() => import('../pages/404'))
+    },
+    {
+        path: '*',
+        element: lazy(() => import('../pages/404'))
+    }
 
 ]

@@ -8,6 +8,9 @@ const baseQueryWithLoggedOut = async (args, api) => {
         localStorage.removeItem('access_token')
         localStorage.removeItem('user')
     }
+    else if (result?.error && result?.error.status === 404) {
+        window.location.href = '/404'
+    }
     else {
 
         return result
@@ -26,7 +29,6 @@ export const usersApi = createApi({
     endpoints: (build) => ({
         getCurrentUser: build.query({
             query: () => {
-                // if (localStorage.getItem('access_token')) {
                 return {
                     url: 'profile',
                     method: 'GET',
@@ -34,9 +36,7 @@ export const usersApi = createApi({
                         'Authorization': `Bearer ${localStorage.getItem('access_token')}`
                     }
                 }
-                // } else {
-                // return;
-                // }
+
             },
 
 
