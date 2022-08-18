@@ -6,11 +6,10 @@ import CommentIcon from "../../postIcons/commentIcon";
 import ShareIcon from "../../postIcons/shareIcon";
 import { muiStyles } from '../customMuiStyles'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 
 
 function Actions({ postId, onClickToShareIcon, liked_users, onClickToLikeIcon }) {
-    const { user_id } = useSelector(state => state?.auth);
+    const user_id = localStorage.getItem('user_id');
     const [isLiked, setIsLiked] = useState(false);
 
 
@@ -38,7 +37,7 @@ function Actions({ postId, onClickToShareIcon, liked_users, onClickToLikeIcon })
                     />
                 </IconButton>
                 <IconButton  {...muiStyles.actions} >
-                    <Link to={`/p/${postId}`}>
+                    <Link to={`/post/${postId}`}>
                         <CommentIcon />
                     </Link>
                 </IconButton>

@@ -10,7 +10,7 @@ import {
 } from '@mui/material'
 import styles from "../../styles/CurrentPost.module.css";
 import { muiStyles } from './customMuiStyles'
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import {
     useCalculateDate,
@@ -19,7 +19,6 @@ import {
 import { useCopyToClick } from '../../hooks/useCopyToClick'
 import Actions from "../posts/card/actions";
 import AddComment from "../posts/card/addComment";
-import { useSelector } from "react-redux";
 import Caption from "./caption";
 import MoreActionsModal from "../modals/moreActionsModal";
 import Popup from '../popup';
@@ -39,8 +38,8 @@ function CurrentPostCard({
 }) {
     const postedTime = useCalculatePostedTime(time)
     const postedDate = useCalculateDate(time)
-    const { token, user } = useSelector(state => state?.auth)
-    const isMyPost = user === postUser?.username
+    const token = localStorage.getItem('access_token')
+    const isMyPost = localStorage.getItem('user') === postUser?.username
     const [openModal, setOpenModal] = useState(false);
     const [isCopied, handleCopyClick] = useCopyToClick(id)
     const [likes, setLikes] = useState(like)
@@ -48,6 +47,7 @@ function CurrentPostCard({
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])
+
 
     const handleOpenModal = () => {
         setOpenModal(true)
@@ -181,7 +181,7 @@ function CurrentPostCard({
                                     : (
                                         <Typography
                                             className={styles.noComment}>
-                                            <Link to="/accounts/login">
+                                            <Link to="/login">
                                                 Log in
                                             </Link>
                                             &nbsp; to like or comment.
@@ -211,7 +211,7 @@ function CurrentPostCard({
                                 :
                                 <Typography
                                     className={styles.noComment}>
-                                    <Link to="/accounts/login">
+                                    <Link to="/login">
                                         Log in
                                     </Link>
                                     &nbsp; to write a comment.

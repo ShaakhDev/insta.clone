@@ -23,7 +23,7 @@ function App() {
                     })
                 }
                 {isMobile && (
-                    <Route path='/p/view/:postId' element={
+                    <Route path='/post/view/:postId' element={
                         <FancyRoute>
                             <MobileCurrentPost />
                         </FancyRoute>

@@ -4,12 +4,11 @@ import IconButton from "@mui/material/IconButton";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import CardHeader from '@mui/material/CardHeader';
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux';
 import { Skeleton } from "@mui/material";
 import MoreActionsModal from "../../modals/moreActionsModal";
 
 function Header({ avatar, user: postUser, id, caption }) {
-    const { user } = useSelector(state => state?.auth)
+    const user = localStorage.getItem('user');
     const isMyPost = user === postUser?.username
     const [openModal, setOpenModal] = useState(false);
 

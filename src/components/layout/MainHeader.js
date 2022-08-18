@@ -77,10 +77,10 @@ function MainHeader(props) {
                     </div>
                     {!token && (
                         <div className={styles.buttons}>
-                            <Button onClick={() => navigate('/accounts/login')} variant="contained">
+                            <Button onClick={() => navigate('/login')} variant="contained">
                                 Log In
                             </Button>
-                            <Button onClick={() => navigate('/accounts/signup')} variant="outlined">
+                            <Button onClick={() => navigate('/signup')} variant="outlined">
                                 Sign Up
                             </Button>
                         </div>

@@ -8,14 +8,13 @@ import Media from "./media";
 import Actions from "./actions";
 import Content from "./content";
 import AddComment from "./addComment";
-import { useSelector } from 'react-redux'
 import { useCopyToClick } from '../../../hooks/useCopyToClick';
 import Popup from '../../popup';
 import { BrowserView } from 'react-device-detect';
 
 
 const PostCard = forwardRef(({ postData }, ref) => {
-    const token = useSelector(state => state?.auth?.token)
+    const token = localStorage.getItem('access_token');
     const { image_url, user, id, caption, comments, timestamp, likes: postLikes, liked_users } = postData;
     const [isCopied, handleCopyClick] = useCopyToClick(id)
     const [likes, setLikes] = useState(postLikes)

@@ -67,7 +67,7 @@ function MoreActionsModal({ open, setOpen, isMyPost, id, user, caption }) {
                             Edit
                         </Button>
                     </>}
-                    <Link {...customStyles.button} to={`/p/${id}`}>
+                    <Link {...customStyles.button} to={`/post/${id}`}>
                         <Button {...customStyles.button} color="inherit" variant="text">
                             Go to post
                         </Button>

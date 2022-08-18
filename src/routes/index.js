@@ -14,16 +14,16 @@ export const ROUTES = [
         element: lazy(() => import('../pages/Profile')),
     },
     {
-        path: '/p/:postId',
+        path: '/post/:postId',
         element: lazy(() => import('../pages/CurrentPost')),
     },
     {
-        path: '/accounts/login',
+        path: '/login',
         // element: lazy(() => import('../pages/Login')),
         element: Login
     },
     {
-        path: '/accounts/signup',
+        path: '/signup',
         element: SignUp,
     },
 

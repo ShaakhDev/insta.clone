@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useSelector } from "react-redux";
 import Popup from "../popup";
 import { useSetLikeToPostMutation } from "../../rtk/postsApi"
 
@@ -8,7 +7,7 @@ function FavoriteIcon({ isLiked, setIsLiked, postId }) {
 
     const [setLikeToPost] = useSetLikeToPostMutation();
     const [showPopup, setShowPopup] = useState(false);
-    const token = useSelector(state => state?.auth?.token);
+    const token = localStorage.getItem('access_token');
 
 
 

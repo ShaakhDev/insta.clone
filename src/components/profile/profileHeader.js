@@ -4,7 +4,6 @@ import { profileMuiStyles } from "./customMuiStyles";
 import styles from '../../styles/Profile.module.css'
 import { Button, Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import { useSelector } from "react-redux";
 import BasicModal from "../modals/editProfileModal";
 import Popup from "../popup";
 import nprogress from 'nprogress';
@@ -14,16 +13,15 @@ import {
     useSubscribeMutation,
     useGetProfileSubscriptionsQuery
 } from '../../rtk/usersApi'
-import { margin } from '@mui/system';
 
 function ProfileHeader({ profile }) {
     const { data: mySubscriptions, isLoading: subsIsLoading } = useGetProfileSubscriptionsQuery(1);
     const [subscribe, { isLoading }] = useSubscribeMutation();
     const [showPopup, setShowPopup] = useState(false)
     const [isMyProfile, setIsMyProfile] = useState(false)
-    const { token } = useSelector(state => state?.auth);
-    const { user } = useSelector(state => state?.auth);
     const [openModal, setOpenModal] = useState(false);
+    const token = localStorage.getItem('access_token')
+    const user = localStorage.getItem('user');
 
 
 

@@ -14,11 +14,12 @@ function AddComment({ postId, currentUser }) {
     const [setCommentToPost] = useSetCommentToPostMutation();
     const [inputValue, setInputValue] = useState('');
     const [click, setClick] = useState(false);
+
     const handleInput = (e) => {
         setInputValue(e.target.value)
     }
 
-    const handleEmojiClick = (event) => {
+    const handleEmojiClick = () => {
         setClick(!click)
     }
 

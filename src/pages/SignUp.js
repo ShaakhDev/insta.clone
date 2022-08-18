@@ -22,7 +22,7 @@ function SignUp() {
                     className={styles.brand} alt="brand" />
                 <FormInputs authType='SIGNUP' button="sign up" />
             </div>
-            <p className={styles.questionText} >Already have an account? <Link to="/accounts/login">Login</Link></p>
+            <p className={styles.questionText} >Already have an account? <Link to="/login">Login</Link></p>
         </form>
     );
 }

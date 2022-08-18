@@ -14,7 +14,7 @@ function Media({ img, postId }) {
             {useMemo(() => {
 
                 return (
-                    <Link to={isMobile ? `/p/view/${postId}` : `/p/${postId}`}>
+                    <Link to={isMobile ? `/post/view/${postId}` : `/post/${postId}`}>
                         <CardMedia
                             component="img"
                             height="auto"

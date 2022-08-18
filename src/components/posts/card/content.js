@@ -32,11 +32,11 @@ function Content({ postId, user, caption, comments, time, likes }) {
                 {comments.length > 0 ? (
                     <Typography variant="body1">
                         {comments.length > 1 ? (
-                            <Link to={`/p/${postId}/`}>
+                            <Link to={`/post/${postId}/`}>
                                 View all {comments.length} comments
                             </Link>
                         ) : (
-                            <Link to={`/p/${postId}/`}>
+                            <Link to={`/post/${postId}/`}>
                                 View {comments.length} comment
                             </Link>
                         )}
