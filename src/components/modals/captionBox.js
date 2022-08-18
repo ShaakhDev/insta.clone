@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Box from "@mui/material/Box";
 import { updateCustomStyles } from "./customMiuStyles";
 import CardHeader from "@mui/material/CardHeader";
@@ -10,10 +10,12 @@ import EmojiBtn from "../emojiBtn";
 import EmojiPicker from "emoji-picker-react";
 import Typography from "@mui/material/Typography";
 import { isMobile } from 'react-device-detect';
+import { WindowTwoTone } from '@mui/icons-material';
 
 function CaptionBox({ getCaption, user, prevCaption }) {
     const [input, setInput] = useState(prevCaption);
     const [click, setClick] = useState(false);
+    const ref = useRef()
 
     const handleChoseEmoji = (event, emojiObject) => {
         setInput(input + emojiObject.emoji);
@@ -26,6 +28,14 @@ function CaptionBox({ getCaption, user, prevCaption }) {
         getCaption(input)
     }, [input, getCaption])
 
+    useEffect(() => {
+        window.addEventListener('click', (e) => {
+            if (ref?.current?.contains(e.target)) {
+                return
+            }
+            setClick(false)
+        })
+    }, [])
 
     return (
         <>
@@ -56,7 +66,7 @@ function CaptionBox({ getCaption, user, prevCaption }) {
                     onChange={(e) => handleCaption(e)}
                 />
 
-                <Stack direction="row" justifyContent="space-between">
+                <Stack direction="row" ref={ref} justifyContent="space-between">
                     {!isMobile
                         && <EmojiBtn click={() => setClick(!click)} />
                     }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Button, Stack, Avatar } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import { muiStyles } from "../customMuiStyles";
@@ -14,12 +14,15 @@ function AddComment({ postId, currentUser }) {
     const [setCommentToPost] = useSetCommentToPostMutation();
     const [inputValue, setInputValue] = useState('');
     const [click, setClick] = useState(false);
+    const asideRef = useRef();
+
+
 
     const handleInput = (e) => {
         setInputValue(e.target.value)
     }
 
-    const handleEmojiClick = () => {
+    const handleEmojiClick = (e) => {
         setClick(!click)
     }
 
@@ -36,15 +39,30 @@ function AddComment({ postId, currentUser }) {
         setInputValue('')
     }
 
+    useEffect(() => {
+
+        window.addEventListener('click', (e) => {
+            if (asideRef?.current?.contains(e.target)) {
+                return;
+            }
+            setClick(false)
+        })
+    }, [])
+
 
     return (
         <>
-            <CardContent className={styles.addComment}>
+            <CardContent ref={asideRef} className={styles.addComment}>
                 <BrowserView>
                     {click
-                        && <EmojiPicker
-                            pickerStyle={{ position: 'absolute', bottom: '7rem' }}
+                        &&
+                        <EmojiPicker
+                            pickerStyle={{
+                                position: 'absolute',
+                                bottom: '7rem',
+                            }}
                             disableSearchBar={true}
+                            preload={true}
                             onEmojiClick={handleChosenEmoji} />
                     }
                 </BrowserView>

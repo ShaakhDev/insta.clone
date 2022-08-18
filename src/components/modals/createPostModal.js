@@ -12,7 +12,11 @@ import styles from "../../styles/Modal.module.css";
 
 
 function CreatePostModal({ open, setOpen }) {
-    const [savePostImage, { data: postImagePath, isLoading: imageLoading, isSuccess: isImageSuccess }] = useSavePostImageMutation();
+    const [savePostImage, {
+        data: postImagePath,
+        isLoading: imageLoading,
+        isSuccess: isImageSuccess
+    }] = useSavePostImageMutation();
     const [createPost, { isLoading, isSuccess }] = useCreatePostMutation();
     const [caption, setCaption] = useState("");
     const [img, setImg] = useState(null);
@@ -22,6 +26,9 @@ function CreatePostModal({ open, setOpen }) {
     useEffect(() => {
         if (isSuccess) {
             setIsDone(true);
+            setTimeout(() => {
+                handleClose()
+            }, 3000)
         }
     }, [isSuccess])
 
@@ -90,14 +97,14 @@ function CreatePostModal({ open, setOpen }) {
                     && <img
                         className={styles.loadingGif}
                         alt="loading gif"
-                        src={process.env.PUBLIC_URL + 'loader.gif'}
+                        src={process.env.PUBLIC_URL + '/loader.gif'}
                     />}
                 {isDone && (
                     <>
                         <img
                             className={styles.loadingGif}
                             alt="loading done"
-                            src={process.env.PUBLIC_URL + 'done.gif'}
+                            src={process.env.PUBLIC_URL + '/done.gif'}
                         />
                         <Typography {...customModalStyle.successMsg} variant="h4">
                             Your post has been shared.

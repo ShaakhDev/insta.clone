@@ -46,7 +46,6 @@ function FormInputs({ authType, button }) {
             localStorage.setItem('access_token', loginData?.access_token)
             localStorage.setItem('user', loginData?.username)
             localStorage.setItem('user_id', loginData?.user_id)
-            console.log(loginData)
             navigate('/')
         }
     }, [loginIsSuccess])
