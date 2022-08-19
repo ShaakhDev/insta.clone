@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import Layout from '../components/layout/MainHeader'
+import Layout from '../components/layout/Layout'
 import { Link } from 'react-router-dom'
 import nprogress from 'nprogress'
 

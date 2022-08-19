@@ -8,6 +8,8 @@ import { Button, IconButton } from "@mui/material";
 import { useEffect, useState } from "react";
 import CreatePostModal from "../modals/createPostModal";
 import AddPostFilled from "../mainHeaderIcons/addPostFilled";
+import ReactHelmet from './ReactHelmet'
+
 
 const FOCUSED_BTN = {
     home: "HOME",
@@ -15,16 +17,13 @@ const FOCUSED_BTN = {
     profile: "PROFILE"
 }
 
-function MainHeader(props) {
+function Layout(props) {
     const [openModal, setOpenModal] = useState(false)
     const navigate = useNavigate()
     const token = localStorage.getItem('access_token')
     const [focused, setFocused] = useState(FOCUSED_BTN.home)
 
     const handleOpenModal = () => {
-        // if (typeof window != 'undefined' && window.document) {
-        // document.body.style.overflow = 'hidden !important'
-        // }
         setOpenModal(true)
     };
 
@@ -39,6 +38,7 @@ function MainHeader(props) {
 
     return (
         <>
+            <ReactHelmet {...props} />
             <CreatePostModal open={openModal} setOpen={setOpenModal} />
             <nav className={styles.nav}>
                 <div className={styles.box}>
@@ -93,4 +93,4 @@ function MainHeader(props) {
     );
 }
 
-export default MainHeader;
+export default Layout;

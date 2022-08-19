@@ -1,7 +1,14 @@
-import Layout from "../components/layout/MainHeader";
+import Layout from "../components/layout/Layout";
 import Posts from "./Posts";
 import nprogress from "nprogress";
 import { useEffect } from "react";
+
+const meta = {
+    title: "Instagram",
+    description: "Instagram clone is a photo-sharing platform where users can upload, view, and share photos.",
+
+
+}
 
 function Home() {
 
@@ -11,7 +18,7 @@ function Home() {
         }, 1000)
     }, [])
     return (
-        <Layout>
+        <Layout {...meta}>
             <Posts />
         </Layout>
     );

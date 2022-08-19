@@ -11,6 +11,7 @@ function MobileCurrentPost() {
             nprogress.done()
         }, 1000)
     }, [])
+    
     return (
         <MobileCurrentPostcard />
     )

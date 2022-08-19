@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import Layout from "../components/layout/MainHeader";
+import Layout from "../components/layout/Layout";
 import { useParams } from "react-router-dom";
 import CurrentPostCard from "../components/currentPost/currentPostCard";
 import SkeletonCurrentPost from "../components/currentPost/skeletonCurrentPost";
@@ -11,14 +11,33 @@ function CurrentPost() {
     const params = useParams();
     const { data, isLoading } = useGetPostQuery(params.postId, 1);
     const { data: currentUser } = useGetCurrentUserQuery(1);
+
     useEffect(() => {
         setInterval(() => {
             nprogress.done()
         }, 1000)
     }, [])
 
+    const _description = data?.caption
+        ? `${data?.user?.username} shared a post on Instagram: "${data?.caption}. Follow their account to see more posts"`
+        : `${data?.user?.username} shared a photo on Instagram. Follow their account to see more posts.`;
+
+    const _title = data?.caption
+        ? `${data?.user?.username} on Instagram: "${data?.caption}"`
+        : `Instagram photo by ${data?.user?.username}`;
+
+
+    const meta = {
+        title: _title,
+        description: _description,
+        image: data?.image_url,
+        ogTitle: _title,
+        ogDescription: _description,
+    }
+
+
     return (
-        <Layout>
+        <Layout {...meta}>
             {isLoading ? (<SkeletonCurrentPost />) : (
                 <CurrentPostCard
                     user={data?.user}
