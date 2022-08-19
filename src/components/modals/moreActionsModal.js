@@ -6,14 +6,14 @@ import { Link, useNavigate } from 'react-router-dom'
 import { customStyles } from "./customMiuStyles";
 import EditPostModal from "./editPostModal";
 import Popup from "../popup";
-import { useCopyToClick } from '../../hooks/useCopyToClick'
+import { useCopyOnClick } from '../../hooks/useCopyOnClick'
 import ConfirmModal from './confirmModal';
 import { useDeletePostMutation } from '../../rtk/postsApi'
 
 function MoreActionsModal({ open, setOpen, isMyPost, id, user, caption }) {
     const navigate = useNavigate()
     const [editModalOpen, setEditModalOpen] = useState(false)
-    const [isCopied, handleCopyClick] = useCopyToClick(id);
+    const [isCopied, handleCopyClick] = useCopyOnClick(id);
     const [confirmModalOpen, setConfirmModalOpen] = useState(false)
     const [deletePost] = useDeletePostMutation()
 

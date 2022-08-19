@@ -15,7 +15,10 @@ import {
 } from '../../rtk/usersApi'
 
 function ProfileHeader({ profile }) {
-    const { data: mySubscriptions, isLoading: subsIsLoading } = useGetProfileSubscriptionsQuery(1);
+    const {
+        data: mySubscriptions,
+        isLoading: subsIsLoading
+    } = useGetProfileSubscriptionsQuery(1);
     const [subscribe, { isLoading }] = useSubscribeMutation();
     const [showPopup, setShowPopup] = useState(false)
     const [isMyProfile, setIsMyProfile] = useState(false)
@@ -38,10 +41,19 @@ function ProfileHeader({ profile }) {
             subscribe(profile?.username)
         }
     }
+
     const handleUnfollow = () => {
         subscribe(profile?.username)
 
     }
+
+    const handleLogout = () => {
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('user');
+        localStorage.removeItem('user_id');
+        window.location.reload();
+    }
+
     useEffect(() => {
         setTimeout(() => {
             nprogress.done()
@@ -54,7 +66,6 @@ function ProfileHeader({ profile }) {
         if (user === profile?.username)
             setIsMyProfile(true);
         else setIsMyProfile(false)
-
 
     }, [user, profile]);
 
@@ -176,11 +187,26 @@ function ProfileHeader({ profile }) {
                                 {profile?.username}
                             </Typography>
                             {isMyProfile && (
-                                <Button
-                                    onClick={handleOpenModal}
-                                    title="edit your profile" {...profileMuiStyles.editButton} >
-                                    edit profile
-                                </Button>
+                                <Stack
+                                    direction="row"
+                                    spacing={2}
+                                    sx={{ marginTop: '0 !important' }}
+                                >
+                                    <Button
+                                        onClick={handleOpenModal}
+                                        title="edit your profile"
+                                        {...profileMuiStyles.editButton}
+                                    >
+                                        edit profile
+                                    </Button>
+                                    <Button
+                                        title='logout'
+                                        onClick={handleLogout}
+                                        {...profileMuiStyles.editButton}
+                                    >
+                                        Log Out
+                                    </Button>
+                                </Stack>
                             )}
                             {!isMyProfile && (
                                 mySubscriptions

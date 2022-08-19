@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 
-export function useCopyToClick(postId) {
+export function useCopyOnClick(postId) {
     const [isCopied, setIsCopied] = useState(false)
 
     const copyLinkToClipboard = async (link) => {

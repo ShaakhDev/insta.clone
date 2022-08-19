@@ -8,7 +8,7 @@ import Media from "./media";
 import Actions from "./actions";
 import Content from "./content";
 import AddComment from "./addComment";
-import { useCopyToClick } from '../../../hooks/useCopyToClick';
+import { useCopyOnClick } from '../../../hooks/useCopyOnClick';
 import Popup from '../../popup';
 import { BrowserView } from 'react-device-detect';
 
@@ -16,7 +16,7 @@ import { BrowserView } from 'react-device-detect';
 const PostCard = forwardRef(({ postData }, ref) => {
     const token = localStorage.getItem('access_token');
     const { image_url, user, id, caption, comments, timestamp, likes: postLikes, liked_users } = postData;
-    const [isCopied, handleCopyClick] = useCopyToClick(id)
+    const [isCopied, handleCopyClick] = useCopyOnClick(id)
     const [likes, setLikes] = useState(postLikes)
 
 

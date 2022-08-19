@@ -1,4 +1,8 @@
-import React, { useCallback, useState, useEffect } from "react";
+import React, {
+    useCallback,
+    useState,
+    useEffect
+} from "react";
 import {
     Card, CardMedia,
     Box,
@@ -16,7 +20,7 @@ import {
     useCalculateDate,
     useCalculatePostedTime
 } from "../../hooks/useCalculateTime";
-import { useCopyToClick } from '../../hooks/useCopyToClick'
+import { useCopyOnClick } from '../../hooks/useCopyOnClick'
 import Actions from "../posts/card/actions";
 import AddComment from "../posts/card/addComment";
 import Caption from "./caption";
@@ -41,7 +45,7 @@ function CurrentPostCard({
     const token = localStorage.getItem('access_token')
     const isMyPost = localStorage.getItem('user') === postUser?.username
     const [openModal, setOpenModal] = useState(false);
-    const [isCopied, handleCopyClick] = useCopyToClick(id)
+    const [isCopied, handleCopyClick] = useCopyOnClick(id)
     const [likes, setLikes] = useState(like)
 
     useEffect(() => {
