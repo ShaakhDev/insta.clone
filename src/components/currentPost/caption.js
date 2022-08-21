@@ -1,16 +1,48 @@
-import React from 'react';
-import { Avatar } from "@mui/material";
+import React, { useState, useEffect } from 'react';
+import { Avatar, IconButton } from "@mui/material";
 import { Link } from "react-router-dom";
 import styles from '../../styles/CurrentPost.module.css'
 import Typography from "@mui/material/Typography";
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { useCalculateCommentedTime, useCalculateDate } from "../../hooks/useCalculateTime";
+import { useDeleteCommentMutation } from '../../rtk/postsApi';
+import DeleteCommentModal from '../modals/deleteCommentModal';
 
-function Caption({ user, time, text }) {
+function Caption({
+    user,
+    time,
+    text,
+    id,
+    currentUser
+}) {
     const commentedTime = useCalculateCommentedTime(time)
     const commentedDate = useCalculateDate(time)
+    const isMyComment = user?.username === currentUser?.username
+    const [openModal, setOpenModal] = useState(false)
+    const [deleteComment, { isSuccess }] = useDeleteCommentMutation();
+
+    const handleDeleteComment = () => deleteComment(id);
+
+    useEffect(() => {
+        if (isSuccess) {
+            setTimeout(() => {
+                setOpenModal(false)
+            }, 3000)
+        }
+        return () => {
+            setOpenModal(false)
+        }
+    }, [isSuccess]);
+
 
     return (
         <div className={styles.commentWrapper}>
+            <DeleteCommentModal
+                open={openModal}
+                setOpen={setOpenModal}
+                handleDeleteComment={handleDeleteComment}
+
+            />
             <Link to={`/${user?.username}`}>
                 <Avatar
                     alt={user?.username}
@@ -33,7 +65,19 @@ function Caption({ user, time, text }) {
                     variant="body1"
                     color='info'>
                     {commentedTime}
+                    {
+                        isMyComment && (
+                            <IconButton
+                                disableRipple={true}
+                                onClick={() => setOpenModal(true)}
+                            >
+                                <MoreHorizIcon
+                                    fontSize='medium'
+                                />
+                            </IconButton>)
+                    }
                 </Typography>
+
             </div>
         </div>
     );

@@ -99,6 +99,17 @@ export const postsApi = createApi({
             }),
             invalidatesTags: [{ type: 'Posts', id: 'single' }],
 
+        }),
+
+        deleteComment: build.mutation({
+            query: (id) => ({
+                url: `comment/${id}`,
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+                }
+            }),
+            invalidatesTags: [{ type: 'Posts', id: 'single' }],
         })
     })
 })
@@ -113,4 +124,5 @@ export const {
     useDeletePostMutation,
     useUpdatePostMutation,
     useSetCommentToPostMutation,
+    useDeleteCommentMutation,
 } = postsApi

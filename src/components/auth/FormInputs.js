@@ -17,7 +17,12 @@ function FormInputs({ authType, button }) {
         isError: loginIsError,
         error: loginError
     }] = useLoginMutation();
-    const [signUp, { isSuccess: signUpIsSuccess, isLoading: signUpIsLoading }] = useSignUpMutation();
+    const [
+        signUp,
+        {
+            isSuccess: signUpIsSuccess,
+            isLoading: signUpIsLoading
+        }] = useSignUpMutation();
     const [isDisableButton, setIsDisableButton] = useState(true)
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -53,7 +58,6 @@ function FormInputs({ authType, button }) {
     useEffect(() => {
         if (loginIsError) {
             setShowWarning(true)
-            console.log(loginError)
             setWarningMessage(loginError?.data?.detail)
         }
     }, [loginIsError])

@@ -54,7 +54,6 @@ export default function BasicModal({ open, setOpen, profile }) {
 
             const imgForm = new FormData()
             imgForm.append('file', img)
-            console.log(imgForm)
             await saveAvatarUrl(imgForm).unwrap();
             setImg(null)
             setOpen(false)

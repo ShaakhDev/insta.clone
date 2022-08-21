@@ -15,7 +15,7 @@ import {
 import styles from "../../styles/CurrentPost.module.css";
 import { muiStyles } from './customMuiStyles'
 import { Link } from "react-router-dom";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import {
     useCalculateDate,
     useCalculatePostedTime
@@ -66,20 +66,27 @@ function CurrentPostCard({
         )
     }
 
+
+
     const CommentsBox = useCallback(
         () => (
             <>
                 {
                     comments.map(comment => (
+
                         <Caption
+                            currentUser={currentUser}
                             time={comment.timestamp}
                             text={comment.text}
                             user={comment.user}
-                            key={comment.id} />
+                            id={comment.id}
+                            key={comment.id}
+
+                        />
                     ))
                 }
             </>
-        ), [comments]
+        ), [comments, currentUser]
     );
 
     const onClickToLikeIcon = (isLiked) => {
@@ -128,7 +135,7 @@ function CurrentPostCard({
                                     action={
                                         <IconButton
                                             onClick={handleOpenModal} aria-label="settings">
-                                            <MoreHorizIcon
+                                            <MoreVertIcon
                                                 fontSize='large'
                                             />
                                         </IconButton>

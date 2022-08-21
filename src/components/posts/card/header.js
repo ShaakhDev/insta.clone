@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import CardHeader from '@mui/material/CardHeader';
 import { Link } from 'react-router-dom'
 import { Skeleton } from "@mui/material";
@@ -49,7 +49,7 @@ function Header({ avatar, user: postUser, id, caption }) {
                 action={
                     false ? null : (
                         <IconButton onClick={handleOpenModal}>
-                            <MoreHorizIcon fontSize="large" />
+                            <MoreVertIcon fontSize="large" />
                         </IconButton>
                     )
                 }
