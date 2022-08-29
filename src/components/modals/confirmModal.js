@@ -1,17 +1,13 @@
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
-import { customStyles } from "./customMiuStyles";
-import Button from "@mui/material/Button";
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
+import { customStyles } from './customMiuStyles';
+import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-
-
 function ConfirmModal({ open, setOpen, handleDeletePost }) {
-
     const handleClose = () => {
-        setOpen(false)
-    }
-
+        setOpen(false);
+    };
 
     return (
         <>
@@ -21,9 +17,7 @@ function ConfirmModal({ open, setOpen, handleDeletePost }) {
                 onBackdropClick={handleClose}
             >
                 <Box {...customStyles.box}>
-
-                    <Typography
-                        {...customStyles.heading}>
+                    <Typography {...customStyles.heading}>
                         Delete post?
                     </Typography>
 
@@ -35,7 +29,8 @@ function ConfirmModal({ open, setOpen, handleDeletePost }) {
                         onClick={handleDeletePost}
                         variant="text"
                         color="error"
-                        {...customStyles.dbutton}>
+                        {...customStyles.dbutton}
+                    >
                         Delete
                     </Button>
 
@@ -43,13 +38,14 @@ function ConfirmModal({ open, setOpen, handleDeletePost }) {
                         onClick={handleClose}
                         variant="text"
                         color="inherit"
-                        {...customStyles.button}>
+                        {...customStyles.button}
+                    >
                         Cancel
                     </Button>
                 </Box>
             </Modal>
         </>
-    )
+    );
 }
 
 export default ConfirmModal;

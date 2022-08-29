@@ -1,37 +1,37 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import Modal from '@mui/material/Modal';
-import Box from "@mui/material/Box";
-import { updateCustomStyles } from "./customMiuStyles";
-import Typography from "@mui/material/Typography";
-import { Button } from "@mui/material";
-import CaptionBox from "./captionBox";
-import styles from "../../styles/Modal.module.css";
+import Box from '@mui/material/Box';
+import { updateCustomStyles } from './customMiuStyles';
+import Typography from '@mui/material/Typography';
+import { Button } from '@mui/material';
+import CaptionBox from './captionBox';
+import styles from '../../styles/Modal.module.css';
 
-import { useUpdatePostMutation } from "../../rtk/postsApi";
+import { useUpdatePostMutation } from '../../rtk/postsApi';
 
 function EditPostModal({ open, setOpen, id, user, prevCaption }) {
-    const [updatePost, { isLoading, isSuccess }] = useUpdatePostMutation()
-    const [caption, setCaption] = useState("");
+    const [updatePost, { isLoading, isSuccess }] = useUpdatePostMutation();
+    const [caption, setCaption] = useState('');
     const handleClose = () => {
-        setOpen(false)
+        setOpen(false);
     };
     const handleUpdatePost = () => {
         const data = {
             id,
             body: {
-                caption
-            }
-        }
-        updatePost(data)
-    }
+                caption,
+            },
+        };
+        updatePost(data);
+    };
 
     useEffect(() => {
         if (isSuccess) {
             setTimeout(() => {
-                handleClose()
-            }, 3000)
+                handleClose();
+            }, 3000);
         }
-    }, [isSuccess])
+    }, [isSuccess]);
 
     return (
         <>
@@ -48,30 +48,29 @@ function EditPostModal({ open, setOpen, id, user, prevCaption }) {
                         >
                             Edit Info
                         </Typography>
-                        {
-                            (!isSuccess && !isLoading) ? (
-                                <Button
-                                    {...updateCustomStyles.shareBtn}
-                                    onClick={handleUpdatePost}>
-                                    Done
-                                </Button>
-                            ) : (
-                                <Button
-                                    {...updateCustomStyles.shareBtn}
-                                    onClick={() => setOpen(false)}>
-                                    Close
-                                </Button>
-                            )
-                        }
-
-
+                        {!isSuccess && !isLoading ? (
+                            <Button
+                                {...updateCustomStyles.shareBtn}
+                                onClick={handleUpdatePost}
+                            >
+                                Done
+                            </Button>
+                        ) : (
+                            <Button
+                                {...updateCustomStyles.shareBtn}
+                                onClick={() => setOpen(false)}
+                            >
+                                Close
+                            </Button>
+                        )}
                     </Box>
-                    {isLoading
-                        && <img
+                    {isLoading && (
+                        <img
                             className={styles.loadingGif}
                             alt="loading gif"
                             src={process.env.PUBLIC_URL + '/loader.gif'}
-                        />}
+                        />
+                    )}
 
                     {isSuccess && (
                         <>
@@ -80,21 +79,23 @@ function EditPostModal({ open, setOpen, id, user, prevCaption }) {
                                 alt="loading done"
                                 src={process.env.PUBLIC_URL + '/done.gif'}
                             />
-                            <Typography {...updateCustomStyles.successMsg} variant="h4">
+                            <Typography
+                                {...updateCustomStyles.successMsg}
+                                variant="h4"
+                            >
                                 Your post has been updated.
                             </Typography>
                         </>
                     )}
-                    {(!isSuccess && !isLoading)
-                        && <CaptionBox
+                    {!isSuccess && !isLoading && (
+                        <CaptionBox
                             prevCaption={prevCaption}
                             user={user}
-                            getCaption={caption => setCaption(caption)}
-                        />}
-
+                            getCaption={(caption) => setCaption(caption)}
+                        />
+                    )}
                 </Box>
             </Modal>
-
         </>
     );
 }

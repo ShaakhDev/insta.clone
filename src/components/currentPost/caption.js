@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Avatar, IconButton } from "@mui/material";
 import { Link } from "react-router-dom";
 import styles from '../../styles/CurrentPost.module.css'
-import Typography from "@mui/material/Typography";
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import { useCalculateCommentedTime, useCalculateDate } from "../../hooks/useCalculateTime";
 import { useDeleteCommentMutation } from '../../rtk/postsApi';
 import DeleteCommentModal from '../modals/deleteCommentModal';
+import {
+    useCalculateCommentedTime,
+    useCalculateDate
+} from "../../hooks/useCalculateTime";
+import {
+    Avatar,
+    IconButton,
+    Typography
+} from "@mui/material";
 
 function Caption({
     user,

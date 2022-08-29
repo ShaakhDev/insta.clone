@@ -1,22 +1,11 @@
-import React from 'react'
-import {
-    Modal,
-    Box,
-    Button
-} from '@mui/material';
+import React from 'react';
+import { Modal, Box, Button } from '@mui/material';
 import { customStyles } from './customMiuStyles';
 
-
-
-function DeleteCommentModal({
-    open,
-    setOpen,
-    handleDeleteComment
-}) {
-
+function DeleteCommentModal({ open, setOpen, handleDeleteComment }) {
     const handleClose = () => {
-        setOpen(false)
-    }
+        setOpen(false);
+    };
 
     return (
         <>
@@ -30,7 +19,8 @@ function DeleteCommentModal({
                         onClick={handleDeleteComment}
                         variant="text"
                         color="error"
-                        {...customStyles.dbutton}>
+                        {...customStyles.dbutton}
+                    >
                         Delete comment
                     </Button>
 
@@ -38,13 +28,14 @@ function DeleteCommentModal({
                         onClick={handleClose}
                         variant="text"
                         color="inherit"
-                        {...customStyles.button}>
+                        {...customStyles.button}
+                    >
                         Cancel
                     </Button>
                 </Box>
             </Modal>
         </>
-    )
+    );
 }
 
-export default DeleteCommentModal
+export default DeleteCommentModal;

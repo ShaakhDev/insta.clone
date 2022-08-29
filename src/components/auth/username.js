@@ -1,7 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import styles from '../../styles/Auth.module.css'
 
-function Username({ getValue, showWarning }) {
+function Username({
+    getValue,
+    showWarning
+}) {
     const usernameRef = useRef();
     const username = (usernameRef.current?.value)?.toLowerCase();
     useEffect(() => {

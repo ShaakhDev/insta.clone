@@ -1,10 +1,17 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {
+    useEffect,
+    useRef,
+    useState
+} from 'react';
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
 import styles from '../../styles/Auth.module.css'
 
 
-function Password({ getValue, showWarning }) {
+function Password({
+    getValue,
+    showWarning
+}) {
     const passRef = useRef();
     const password = passRef.current?.value
     const [values, setValues] = useState({

@@ -1,41 +1,40 @@
 import React, { useEffect, useState, useRef } from 'react';
-import Box from "@mui/material/Box";
-import { updateCustomStyles } from "./customMiuStyles";
-import CardHeader from "@mui/material/CardHeader";
-import { Link } from "react-router-dom";
-import Avatar from "@mui/material/Avatar";
-import { muiStyles } from "../currentPost/customMuiStyles";
-import { Stack, TextareaAutosize } from "@mui/material";
-import EmojiBtn from "../emojiBtn";
-import EmojiPicker from "emoji-picker-react";
-import Typography from "@mui/material/Typography";
+import Box from '@mui/material/Box';
+import { updateCustomStyles } from './customMiuStyles';
+import CardHeader from '@mui/material/CardHeader';
+import { Link } from 'react-router-dom';
+import Avatar from '@mui/material/Avatar';
+import { muiStyles } from '../currentPost/customMuiStyles';
+import { Stack, TextareaAutosize } from '@mui/material';
+import EmojiBtn from '../emojiBtn';
+import EmojiPicker from 'emoji-picker-react';
+import Typography from '@mui/material/Typography';
 import { isMobile } from 'react-device-detect';
-import { WindowTwoTone } from '@mui/icons-material';
 
 function CaptionBox({ getCaption, user, prevCaption }) {
     const [input, setInput] = useState(prevCaption);
     const [click, setClick] = useState(false);
-    const ref = useRef()
+    const ref = useRef();
 
     const handleChoseEmoji = (event, emojiObject) => {
         setInput(input + emojiObject.emoji);
-    }
+    };
     const handleCaption = (e) => {
         setInput(e.target.value);
-    }
+    };
 
     useEffect(() => {
-        getCaption(input)
-    }, [input, getCaption])
+        getCaption(input);
+    }, [input, getCaption]);
 
     useEffect(() => {
         window.addEventListener('click', (e) => {
             if (ref?.current?.contains(e.target)) {
-                return
+                return;
             }
-            setClick(false)
-        })
-    }, [])
+            setClick(false);
+        });
+    }, []);
 
     return (
         <>
@@ -51,11 +50,16 @@ function CaptionBox({ getCaption, user, prevCaption }) {
                                 alt={user?.username}
                                 src={user?.avatar_url}
                             />
-                        </Link>}
+                        </Link>
+                    }
                     title={
-                        <Link style={{ color: "#000", fontSize: '1.5rem' }} to={`/${user?.username}`}>
+                        <Link
+                            style={{ color: '#000', fontSize: '1.5rem' }}
+                            to={`/${user?.username}`}
+                        >
                             <b>{user?.username}</b>
-                        </Link>}
+                        </Link>
+                    }
                 />
                 <TextareaAutosize
                     {...updateCustomStyles.textarea}
@@ -67,23 +71,25 @@ function CaptionBox({ getCaption, user, prevCaption }) {
                 />
 
                 <Stack direction="row" ref={ref} justifyContent="space-between">
-                    {!isMobile
-                        && <EmojiBtn click={() => setClick(!click)} />
-                    }
+                    {!isMobile && <EmojiBtn click={() => setClick(!click)} />}
 
-                    {click && <EmojiPicker
-                        pickerStyle={{ position: 'absolute', bottom: '7rem', height: '20rem' }}
-                        disableSearchBar={true}
-                        onEmojiClick={handleChoseEmoji}
-                    />}
+                    {click && (
+                        <EmojiPicker
+                            pickerStyle={{
+                                position: 'absolute',
+                                bottom: '7rem',
+                                height: '20rem',
+                            }}
+                            disableSearchBar={true}
+                            onEmojiClick={handleChoseEmoji}
+                        />
+                    )}
 
                     <Typography variant="body1">
                         {`${input.length}/2,200`}
                     </Typography>
-
                 </Stack>
             </Box>
-
         </>
     );
 }

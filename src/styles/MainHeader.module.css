@@ -1,160 +1,223 @@
 .nav {
-	min-height: 5rem;
-	position: fixed;
-	width: 100%;
-	top: 0;
-	left: 0;
-	display: flex;
-	align-items: center;
-	border-bottom: 0.1rem solid #e0e0e0;
-	background: #fff;
-	z-index: 99;
+    min-height: 5rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-bottom: 0.1rem solid #e0e0e0;
+    background: #fff;
+    z-index: 99;
 }
 
 .box {
-	margin: 0 auto;
-	width: 98%;
-	max-width: 98rem;
-	height: 100%;
-	display: grid;
-	grid-template-columns: 1fr 2fr;
-	grid-template-rows: 1fr;
-	align-items: center;
+    margin: 0 auto;
+    width: 98%;
+    max-width: 98rem;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr;
+    align-items: center;
 }
 .secondPart {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
-.brand a img {
-	width: 15rem;
-}
+
 .icons {
-	display: flex;
-	align-items: center;
-	justify-content: flex-end;
-	padding-right: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 1.5rem;
 }
 .icons a {
-	text-decoration: none;
+    text-decoration: none;
 }
 .icons svg,
 .icons > div > button > div,
 .icons > div > button {
-	width: 2.6rem;
-	height: 2.6rem;
-	margin: 0;
+    width: 2.6rem;
+    height: 2.6rem;
+    margin: 0;
 }
 .icons svg,
 .icons > div {
-	margin-left: 2.5rem;
+    margin-left: 2.5rem;
 }
 .buttons {
-	display: flex;
-	align-items: center;
-	justify-content: flex-end;
-	height: 100%;
-	position: absolute;
-	top: 0;
-	right: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    position: absolute;
+
+    right: 15%;
 }
 .buttons > button {
-	margin-left: 2.5rem;
-	font-size: 1.3rem;
-	text-transform: capitalize;
-	padding: 0.2rem 0.5rem;
+    margin-left: 2.5rem;
+    font-size: 1.3rem;
+    text-transform: capitalize;
+    padding: 0.2rem 0.5rem;
 }
 .avatarDropdown svg {
-	margin-left: 0 !important;
+    margin-left: 0 !important;
 }
 .search label {
-	background: #efefef;
-	padding: 1.3rem 1.5rem;
-	width: 100%;
-	height: 100%;
-	border-radius: 7px;
+    background: #efefef;
+    padding: 1.3rem 1.5rem;
+    width: 100%;
+    height: 100%;
+    border-radius: 7px;
 }
 .search label input {
-	border: none;
-	background: transparent;
-	padding: 0.5rem;
-	color: #333;
-	font-size: 1.6rem;
-	outline: none;
-	height: 100%;
+    border: none;
+    background: transparent;
+    padding: 0.5rem;
+    color: #333;
+    font-size: 1.6rem;
+    outline: none;
+    height: 100%;
 }
 .search label input::placeholder {
-	font-weight: 300 !important;
+    font-weight: 300 !important;
 }
-@media (max-width: 1000px) {
-	.search {
-		display: none;
-	}
-	.box {
-		grid-template-columns: 1fr;
-		grid-template-rows: 1fr;
-		justify-content: center;
-		height: 5rem;
-	}
-	.brand {
-		margin: 0 auto;
 
-		height: 5rem;
-	}
-	.brand img {
-		height: 6.2rem;
-	}
+/* warning */
+
+.warning {
+    background-color: #ffdc80;
+    font-size: 1.6rem;
+    padding: 1rem;
+    border-left: 10px solid #faa631;
+    border-right: 10px solid #fcaf45;
+    display: flex;
+    position: static;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    /* justify-content: space-between; */
+}
+.attention {
+    font-weight: 800;
+    font-size: 1.8rem;
+}
+.warning svg {
+    flex: 0 0 1rem;
+    width: 4rem;
+    height: 4rem;
+}
+.warning > div {
+    padding-left: 5rem;
+}
+.ok {
+    flex: 1;
+    padding: 1rem 2rem;
+    font-size: 1.6rem;
+    background-color: #fcaf45;
+    border: none;
+    border-radius: 5px;
+    position: absolute;
+    top: 1.5rem;
+    cursor: pointer;
+    right: 6rem;
+}
+@media (min-width: 601px) and (max-width: 1000px) {
+    .search {
+        display: none;
+    }
+    .box {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        justify-content: center;
+        height: 5rem;
+    }
+    .brand {
+        margin: 0 auto;
+
+        height: 5rem;
+    }
+    .brand img {
+        height: 6.2rem;
+    }
 }
 @media (max-width: 600px) {
-	.nav {
-		min-height: 5rem;
-		width: 100% !important;
-	}
-	.box {
-		grid-template-columns: 1fr;
-		grid-template-rows: 1fr;
-		justify-content: center;
-		height: 5rem;
-	}
-	.buttons button:nth-child(2) {
-		display: none;
-	}
-	.buttons button:nth-child(1) {
-		position: absolute;
-		top: 1.2rem;
-		right: -1rem;
-	}
-	.secondPart {
-		position: fixed;
-		padding: 0.4rem 0;
-		bottom: 0;
-		left: 0;
-		background-color: #fff;
-		border-top: #dbdbdb 0.5px solid;
-		width: 100%;
-		z-index: 99;
-		display: flex;
-		justify-content: center;
-	}
-	.secondPart .icons {
-		display: flex;
-		justify-content: space-between;
-		margin-left: -4rem;
-	}
-	.secondPart svg {
-		width: 3rem;
-		height: 3rem;
-	}
-	.secondPart .icons button {
-		margin: 0 1.5rem 0;
-	}
+    .nav {
+        min-height: 5rem;
+        width: 100% !important;
+    }
+    .box {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+        text-align: center;
+    }
+    .buttons button:nth-child(2) {
+        display: none;
+    }
+    .buttons button:nth-child(1) {
+        position: absolute;
+        top: 1.2rem;
+        right: -1rem;
+    }
+    .secondPart {
+        position: fixed;
+        padding: 0.4rem 0;
+        bottom: 0;
+        left: 0;
+        background-color: #fff;
+        border-top: #dbdbdb 0.5px solid;
+        width: 100%;
+        z-index: 99;
+        display: flex;
+        justify-content: center;
+    }
+    .secondPart .icons {
+        display: flex;
+        justify-content: space-between;
+        margin-left: -4rem;
+    }
+    .secondPart svg {
+        width: 3rem;
+        height: 3rem;
+    }
+    .secondPart .icons button {
+        margin: 0 1.5rem 0;
+    }
 
-	/* .brand {
-		margin: 0 auto;
-
-		height: 5rem;
-	}
-	.brand img {
-		height: 6.2rem;
-	} */
+    .brand {
+        margin: 0 auto;
+        text-align: center;
+        /* height: 5rem; */
+    }
+    .brand img {
+        height: 6.2rem;
+    }
+    .warning {
+        border-left: 5px solid #faa631;
+        border-right: 5px solid #faa631;
+    }
+    .warning > div {
+        padding-left: 1rem;
+    }
+    .warning > div p:nth-child(2) {
+        width: 85%;
+    }
+    .warning svg {
+        width: 3rem;
+        height: 3rem;
+    }
+    .ok {
+        top: 1.5rem;
+        right: 1.5rem;
+    }
+    .search {
+        display: none;
+    }
 }

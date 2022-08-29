@@ -1,22 +1,22 @@
-import { WhiteSpinner } from "../spinner"
-import styles from '../../styles/Auth.module.css'
+import { WhiteSpinner } from '../spinner';
+import styles from 'styles/Auth.module.css';
 
 function Button({
     button,
     isDisable,
     handleSubmit,
-    loginIsLoading, signUpIsLoading
+    loginIsLoading,
+    signUpIsLoading,
 }) {
-
     return (
         <button
             disabled={isDisable}
             onClick={handleSubmit}
             className={styles.submit}
         >
-            {loginIsLoading || signUpIsLoading ? (<WhiteSpinner />) : button}
+            {loginIsLoading || signUpIsLoading ? <WhiteSpinner /> : button}
         </button>
-    )
+    );
 }
 
-export default Button
+export default Button;

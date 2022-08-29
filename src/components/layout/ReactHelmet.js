@@ -1,16 +1,9 @@
-import { Helmet } from "react-helmet";
+import { Helmet } from 'react-helmet';
 
-
-import React from 'react'
+import React from 'react';
 
 function ReactHelmet(props) {
-    const {
-        title,
-        description,
-        image,
-        ogTitle,
-        ogDescription
-    } = props
+    const { title, description, image, ogTitle, ogDescription } = props;
 
     return (
         <Helmet>
@@ -21,10 +14,12 @@ function ReactHelmet(props) {
             <meta property="og:description" content={ogDescription} />
             <meta property="og:type" content="website" />
             <meta content="summary_large_image" name="twitter:card" />
-            <meta property="og:image" content={image || "%PUBLIC_URL%/logo.png"} />
-
+            <meta
+                property="og:image"
+                content={image || '%PUBLIC_URL%/icon.png'}
+            />
         </Helmet>
-    )
+    );
 }
 
-export default ReactHelmet
+export default ReactHelmet;

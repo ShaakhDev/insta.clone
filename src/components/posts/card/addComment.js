@@ -1,61 +1,54 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Button, Stack, Avatar } from "@mui/material";
-import CardContent from "@mui/material/CardContent";
-import { muiStyles } from "../customMuiStyles";
-import styles from '../../../styles/Card.module.css'
-import EmojiPicker from "emoji-picker-react";
-import EmojiBtn from "../../emojiBtn";
-import { useSetCommentToPostMutation } from '../../../rtk/postsApi'
+import { Button, Stack, Avatar } from '@mui/material';
+import CardContent from '@mui/material/CardContent';
+import { muiStyles } from '../customMuiStyles';
+import styles from '../../../styles/Card.module.css';
+import EmojiPicker from 'emoji-picker-react';
+import EmojiBtn from '../../emojiBtn';
+import { useSetCommentToPostMutation } from '../../../rtk/postsApi';
 import { BrowserView, MobileView } from 'react-device-detect';
 
-
 function AddComment({ postId, currentUser }) {
-
     const [setCommentToPost] = useSetCommentToPostMutation();
     const [inputValue, setInputValue] = useState('');
     const [click, setClick] = useState(false);
     const asideRef = useRef();
 
-
-
     const handleInput = (e) => {
-        setInputValue(e.target.value)
-    }
+        setInputValue(e.target.value);
+    };
 
     const handleEmojiClick = (e) => {
-        setClick(!click)
-    }
+        setClick(!click);
+    };
 
     const handleChosenEmoji = (event, emojiObject) => {
         setInputValue(inputValue + emojiObject.emoji);
-    }
+    };
 
     const handleComment = () => {
         const data = {
             text: inputValue,
-            post_id: postId
-        }
-        setCommentToPost(data)
-        setInputValue('')
-    }
+            post_id: postId,
+        };
+        setCommentToPost(data);
+        setInputValue('');
+    };
 
     useEffect(() => {
-
         window.addEventListener('click', (e) => {
             if (asideRef?.current?.contains(e.target)) {
                 return;
             }
-            setClick(false)
-        })
-    }, [])
-
+            setClick(false);
+        });
+    }, []);
 
     return (
         <>
             <CardContent ref={asideRef} className={styles.addComment}>
                 <BrowserView>
-                    {click
-                        &&
+                    {click && (
                         <EmojiPicker
                             pickerStyle={{
                                 position: 'absolute',
@@ -63,13 +56,13 @@ function AddComment({ postId, currentUser }) {
                             }}
                             disableSearchBar={true}
                             preload={true}
-                            onEmojiClick={handleChosenEmoji} />
-                    }
+                            onEmojiClick={handleChosenEmoji}
+                        />
+                    )}
                 </BrowserView>
                 <Stack {...muiStyles.stack}>
                     <BrowserView>
-                        <button
-                            onClick={handleEmojiClick}>
+                        <button onClick={handleEmojiClick}>
                             <EmojiBtn />
                         </button>
                     </BrowserView>
@@ -77,19 +70,19 @@ function AddComment({ postId, currentUser }) {
                     <MobileView>
                         <Avatar>
                             <img
-                                style={{ height: '100%', cursor: "pointer" }} src={currentUser?.avatar_url}
-                                alt="avatar" />
+                                style={{ height: '100%', cursor: 'pointer' }}
+                                src={currentUser?.avatar_url}
+                                alt="avatar"
+                            />
                         </Avatar>
                     </MobileView>
 
-
-                    <Stack
-                        {...muiStyles.innerStack}
-                    >
+                    <Stack {...muiStyles.innerStack}>
                         <input
                             style={{ fontSize: '1.5rem' }}
-                            onChange={e => handleInput(e)}
-                            value={inputValue} type="text"
+                            onChange={(e) => handleInput(e)}
+                            value={inputValue}
+                            type="text"
                             placeholder="Add a comment..."
                         />
                         <Button

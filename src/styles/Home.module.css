@@ -1,33 +1,33 @@
 .home {
-	width: 100%;
-	height: 100%;
-	margin-top: 10rem;
-	position: relative;
+    width: 100%;
+    height: 100%;
+    margin-top: 16rem;
+    position: relative;
 }
 .box {
-	max-width: 70%;
-	width: 70%;
-	margin: 0 auto;
+    max-width: 70%;
+    width: 70%;
+    margin: 0 auto;
 }
 .home .error {
-	position: fixed;
-	width: 100%;
-	left: 0;
-	top: 0;
-	text-align: center;
-	padding: 1rem;
-	background: #ff0000;
-	color: #fff;
-	z-index: 99999999999;
+    position: fixed;
+    width: 100%;
+    left: 0;
+    top: 0;
+    text-align: center;
+    padding: 1rem;
+    background: #ff0000;
+    color: #fff;
+    z-index: 99999999999;
 }
 
 @media (max-width: 600px) {
-	.home {
-		margin-top: 7rem;
-	}
-	.box {
-		max-width: 100%;
-		width: 100%;
-		padding-bottom: 6rem;
-	}
+    .home {
+        margin-top: 7rem;
+    }
+    .box {
+        max-width: 100%;
+        width: 100%;
+        padding-bottom: 6rem;
+    }
 }

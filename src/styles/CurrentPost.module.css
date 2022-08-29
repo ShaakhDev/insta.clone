@@ -1,98 +1,138 @@
 .home {
-	width: 100%;
-	height: 100%;
-	padding: 7rem 0 4rem 0;
+    width: 100%;
+    height: 100%;
+    padding: 15rem 0 4rem 0;
+}
+.card {
+    max-height: 80vh;
+    height: 80vh;
+    display: flex;
+    justify-content: flex-end;
+    width: 70vw;
+    margin: 0 auto;
 }
 
 .box {
-	max-width: 95rem;
-	width: 98%;
-	margin: 1.5rem auto;
+    max-width: 70vw;
+    width: 98%;
+    margin: 1.5rem auto;
 }
 
-.box b {
-	font-size: 1.4rem;
-	font-weight: bold;
+b {
+    font-size: 1.6rem;
+    font-weight: bold;
 }
 
-.box svg {
-	color: #333;
+svg {
+    color: #333;
 }
-.box .content {
-	padding: 0 1rem 2rem 0;
-	border-top: 0.5px solid #dbdbdb;
-	border-bottom: 0.5px solid #dbdbdb;
+.content {
+    padding: 0 1rem 2rem 0;
+    border-top: 0.5px solid #dbdbdb;
+    border-bottom: 0.5px solid #dbdbdb;
 }
-.box .content p {
-	padding-left: 2rem;
+.content p {
+    padding-left: 2rem;
 }
 .time {
-	font-size: 1rem;
-	margin-top: 0.5rem;
-	color: #8e8e8e;
-	cursor: pointer;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    color: #8e8e8e;
+    cursor: pointer;
 }
 
 .comments {
-	height: 100%;
-	overflow-y: scroll;
-	padding: 2rem 1.2rem;
+    height: 100%;
+    overflow-y: scroll;
+    padding: 2rem 1.2rem;
 }
 .comments::-webkit-scrollbar {
-	display: none;
+    display: none;
 }
 .commentWrapper {
-	display: flex;
-	flex-direction: row;
-	align-items: flex-start;
-	padding-right: 2.5rem;
-	margin-bottom: 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding-right: 2.5rem;
+    margin-bottom: 2rem;
 }
 .comment .caption {
-	font-size: 1.4rem;
-	margin-left: 0.5rem;
-	font-weight: 400;
-	line-height: 1.7rem;
+    font-size: 1.4rem;
+    margin-left: 0.5rem;
+    font-weight: 400;
+    line-height: 1.7rem;
 }
-.box .noComment {
-	padding: 0.2rem 2rem;
-	font-size: 1.4rem;
-	color: #8e8e8e;
+.noComment {
+    padding: 0.2rem 2rem;
+    font-size: 1.6rem !important;
+    color: #8e8e8e;
 }
-.box .noComment a {
-	color: #1976d2;
+
+.noComment a {
+    color: #1976d2;
 }
-.box svg:hover {
-	color: #8e8e8e;
+svg:hover {
+    color: #8e8e8e;
 }
 .noComments {
-	text-align: center;
+    text-align: center;
 }
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 70%;
+    width: 70%;
+
+    min-height: 80%;
+    height: 80%;
+}
+.modal > div {
+    min-height: 100% !important;
+}
+
 @media (max-width: 600px) {
-	.comments {
-		padding: 2rem 1.2rem;
-	}
-	.comment .time {
-		font-size: 1.6rem;
-	}
-	.comment .caption {
-		font-size: 1.6rem;
-	}
-	.noComment {
-		font-size: 1.7rem !important;
-		text-align: center;
-	}
-	.noComment a {
-		color: #1976d2;
-	}
-	.backButton {
-		position: fixed !important;
-		top: 0.5rem;
-		color: #333 !important;
-		z-index: 100;
-	}
-	.backButton svg {
-		width: 3rem;
-		height: 3rem;
-	}
+    .home {
+        padding: 0;
+        width: 100%;
+        height: 100vh;
+    }
+    .box {
+        margin: 0;
+        width: 100%;
+        height: 100vh;
+        max-width: none;
+    }
+    .box > div {
+        width: 100%;
+        height: 100%;
+    }
+
+    .comments {
+        padding: 2rem 1.2rem;
+    }
+    .comment .time {
+        font-size: 1.6rem;
+    }
+    .comment .caption {
+        font-size: 1.6rem;
+    }
+    .noComment {
+        font-size: 1.7rem !important;
+        text-align: center;
+    }
+    .noComment a {
+        color: #1976d2;
+    }
+    .backButton {
+        position: fixed !important;
+        top: 0.5rem;
+        color: #333 !important;
+        z-index: 100;
+    }
+    .backButton svg {
+        width: 3rem;
+        height: 3rem;
+    }
 }
