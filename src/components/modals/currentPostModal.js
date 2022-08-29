@@ -1,6 +1,5 @@
 import { memo } from 'react';
-import { Modal, Box } from '@mui/material';
-import { customModalStyle } from './customMiuStyles';
+import { Modal } from '@mui/material';
 import CurrentPostCard from 'components/currentPost/currentPostCard';
 import { useGetCurrentUserQuery } from '../../rtk/usersApi';
 import styles from '../../styles/CurrentPost.module.css';
