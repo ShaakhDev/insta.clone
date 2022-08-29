@@ -163,7 +163,6 @@
     }
     .buttons button:nth-child(1) {
         position: absolute;
-        top: 1.2rem;
         right: -1rem;
     }
     .secondPart {
