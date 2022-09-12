@@ -3,9 +3,14 @@ import { useParams } from 'react-router-dom';
 import MetaLayout from '../components/layout/MetaLayout';
 import CurrentPostCard from '../components/currentPost/currentPostCard';
 import SkeletonCurrentPost from '../components/currentPost/skeletonCurrentPost';
-import { useGetCurrentUserQuery, useGetPostQuery } from '../rtk';
+import {
+    useGetCurrentUserQuery,
+    useGetPostQuery,
+    useGetProfileDetailsQuery,
+} from '../rtk';
 import nprogress from 'nprogress';
 import styles from '../styles/CurrentPost.module.css';
+import PostItem from 'components/profile/postItem';
 
 function CurrentPost() {
     const params = useParams();

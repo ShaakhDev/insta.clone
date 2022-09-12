@@ -58,10 +58,10 @@
     right: 15%;
 }
 .buttons > button {
-    margin-left: 2.5rem;
-    font-size: 1.3rem;
+    margin-left: 1.5rem;
+    font-size: 2rem;
     text-transform: capitalize;
-    padding: 0.2rem 0.5rem;
+    padding: 0.5rem 2.5rem;
 }
 .avatarDropdown svg {
     margin-left: 0 !important;
@@ -164,6 +164,8 @@
     .buttons button:nth-child(1) {
         position: absolute;
         right: -1rem;
+        font-size: 1.5rem;
+        padding: 0.3rem 0.5rem;
     }
     .secondPart {
         position: fixed;
