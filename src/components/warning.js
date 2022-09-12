@@ -1,7 +1,7 @@
 import React from 'react';
 import WarningIcon from '@mui/icons-material/Warning';
 import styles from '../styles/MainHeader.module.css';
-// import ClearIcon
+
 function Warning({ onClick }) {
     return (
         <div className={styles.warning}>
