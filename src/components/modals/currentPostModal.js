@@ -1,9 +1,8 @@
 import { memo } from 'react';
-import { Modal, Button } from '@mui/material';
+import { Modal } from '@mui/material';
 import CurrentPostCard from 'components/currentPost/currentPostCard';
 import { useGetCurrentUserQuery } from '../../rtk/usersApi';
 import styles from '../../styles/CurrentPost.module.css';
-import ClearIcon from '@mui/icons-material/Clear';
 
 const CurrentPostModal = memo(({ open, setOpen, postData }) => {
     const { data: currentUser } = useGetCurrentUserQuery(1);
@@ -38,9 +37,6 @@ const CurrentPostModal = memo(({ open, setOpen, postData }) => {
                         liked_users={liked_users}
                         currentUser={currentUser}
                     />
-                    <Button onClick={handleClose} className={styles.close}>
-                        <ClearIcon />
-                    </Button>
                 </div>
             </Modal>
         </>
