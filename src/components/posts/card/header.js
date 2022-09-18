@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
-import Avatar from "@mui/material/Avatar";
-import IconButton from "@mui/material/IconButton";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+import Avatar from '@mui/material/Avatar';
+import IconButton from '@mui/material/IconButton';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CardHeader from '@mui/material/CardHeader';
-import { Link } from 'react-router-dom'
-import { Skeleton } from "@mui/material";
-import MoreActionsModal from "../../modals/moreActionsModal";
+import { Link } from 'react-router-dom';
+import { Skeleton } from '@mui/material';
+import MoreActionsModal from '../../modals/moreActionsModal';
 
 function Header({ avatar, user: postUser, id, caption }) {
     const user = localStorage.getItem('user');
-    const isMyPost = user === postUser?.username
+    const isMyPost = user === postUser?.username;
     const [openModal, setOpenModal] = useState(false);
 
     const handleOpenModal = () => {
-        setOpenModal(true)
-    }
-
+        setOpenModal(true);
+    };
+    console.log(avatar);
     return (
         <>
             <MoreActionsModal
@@ -28,21 +28,21 @@ function Header({ avatar, user: postUser, id, caption }) {
             />
 
             <CardHeader
-                sx={{ padding: "1.2rem 1.5rem" }}
+                sx={{ padding: '1.2rem 1.5rem' }}
                 avatar={
                     false ? (
                         <Skeleton
                             animation="wave"
                             variant="circular"
                             width={40}
-                            height={40} />
+                            height={40}
+                        />
                     ) : (
-                        <Link
-                            style={{ color: "#333" }}
-                            to={postUser?.username}>
-                            <Avatar>
-                                <img style={{ height: '100%', cursor: "pointer" }} src={avatar} alt="avatar" />
-                            </Avatar>
+                        <Link style={{ color: '#333' }} to={postUser?.username}>
+                            <Avatar
+                                alt={`${postUser?.username}'s avatar`}
+                                src={avatar || '/avatar.webp'}
+                            />
                         </Link>
                     )
                 }
@@ -62,14 +62,11 @@ function Header({ avatar, user: postUser, id, caption }) {
                             style={{ marginBottom: 6 }}
                         />
                     ) : (
-                        <Link
-                            style={{ color: "#333" }}
-                            to={postUser?.username}>
-                            <b >{postUser?.username}</b>
+                        <Link style={{ color: '#333' }} to={postUser?.username}>
+                            <b>{postUser?.username}</b>
                         </Link>
                     )
                 }
-
             />
         </>
     );

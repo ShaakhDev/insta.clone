@@ -1,15 +1,16 @@
 import React, { useEffect, useRef } from 'react';
-import styles from '../../styles/Auth.module.css'
+import styles from '../../styles/Auth.module.css';
 
-function Username({
-    getValue,
-    showWarning
-}) {
+function Username({ getValue, showWarning }) {
     const usernameRef = useRef();
-    const username = (usernameRef.current?.value)?.toLowerCase();
+    const username = usernameRef.current?.value
+        ?.toLowerCase()
+        .trim()
+        .replace(/\s/g, '_');
+
     useEffect(() => {
-        getValue(username)
-    })
+        getValue(username);
+    });
     return (
         <>
             <input
@@ -18,7 +19,6 @@ function Username({
                 required
                 placeholder="Username"
                 className={showWarning ? styles.warnInput : ''}
-
             />
         </>
     );

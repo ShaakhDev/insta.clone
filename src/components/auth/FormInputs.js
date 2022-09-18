@@ -1,101 +1,115 @@
 import { useState, useEffect } from 'react';
 import { useLoginMutation, useSignUpMutation } from '../../rtk/usersApi';
-import Button from "./button";
-import Username from "./username";
-import Password from "./password";
-import Email from "./email";
-import { useNavigate } from 'react-router-dom'
+import Button from './button';
+import Username from './username';
+import Password from './password';
+import Email from './email';
+import { useNavigate } from 'react-router-dom';
 import { WhiteSpinner } from '../spinner';
-import styles from '../../styles/Auth.module.css'
-
+import styles from '../../styles/Auth.module.css';
 
 function FormInputs({ authType, button }) {
-    const [login, {
-        data: loginData,
-        isSuccess: loginIsSuccess,
-        isLoading: loginIsLoading,
-        isError: loginIsError,
-        error: loginError
-    }] = useLoginMutation();
     const [
-        signUp,
+        login,
         {
-            isSuccess: signUpIsSuccess,
-            isLoading: signUpIsLoading
-        }] = useSignUpMutation();
-    const [isDisableButton, setIsDisableButton] = useState(true)
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
+            data: loginData,
+            isSuccess: loginIsSuccess,
+            isLoading: loginIsLoading,
+            isError: loginIsError,
+            error: loginError,
+        },
+    ] = useLoginMutation();
+    const [signUp, { isSuccess: signUpIsSuccess, isLoading: signUpIsLoading }] =
+        useSignUpMutation();
+    const [isDisableButton, setIsDisableButton] = useState(true);
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [showWarning, setShowWarning] = useState(false);
     const [warningMessage, setWarningMessage] = useState('');
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (
             (username && password?.length > 7 && email) ||
             (username && password?.length > 7)
-        ) setIsDisableButton(false);
+        )
+            setIsDisableButton(false);
         else setIsDisableButton(true);
-    }, [username, password, email])
+    }, [username, password, email]);
 
     useEffect(() => {
         if (signUpIsSuccess) {
-            loginHandle()
+            loginHandle();
         }
-    }, [signUpIsSuccess])
+    }, [signUpIsSuccess]);
 
     useEffect(() => {
         if (loginIsSuccess) {
-            localStorage.setItem('access_token', loginData?.access_token)
-            localStorage.setItem('user', loginData?.username)
-            localStorage.setItem('user_id', loginData?.user_id)
-            navigate('/')
+            localStorage.setItem('access_token', loginData?.access_token);
+            localStorage.setItem('user', loginData?.username);
+            localStorage.setItem('user_id', loginData?.user_id);
+            navigate('/');
         }
-    }, [loginIsSuccess])
+    }, [loginIsSuccess]);
 
     useEffect(() => {
         if (loginIsError) {
-            setShowWarning(true)
-            setWarningMessage(loginError?.data?.detail)
+            setShowWarning(true);
+            setWarningMessage(loginError?.data?.detail);
         }
-    }, [loginIsError])
-
+    }, [loginIsError]);
 
     const signUpHandle = () => {
-
         const formData = {
             username,
             email,
             password,
-            avatar_url: ""
-        }
-        signUp(formData)
-    }
+            avatar_url: '',
+        };
+        signUp(formData);
+    };
 
     const loginHandle = () => {
         const formData = new FormData();
         formData.append('username', username);
         formData.append('password', password);
-        login(formData)
-    }
+        login(formData);
+    };
 
     const handleSubmit = (e) => {
-        e.preventDefault()
-        if (authType === "SIGNUP") signUpHandle();
+        e.preventDefault();
+        if (authType === 'SIGNUP')
+            // console.log({
+            //     username: username,
+            // });
+            signUpHandle();
         else loginHandle();
-    }
+    };
 
     return (
         <>
-            <Username showWarning={showWarning} getValue={data => setUsername(data)} />
+            <Username
+                showWarning={showWarning}
+                getValue={(data) => setUsername(data)}
+            />
 
-            {authType === 'SIGNUP' ? <Email showWarning={showWarning} getValue={data => setEmail(data)} /> : ""}
+            {authType === 'SIGNUP' ? (
+                <Email
+                    showWarning={showWarning}
+                    getValue={(data) => setEmail(data)}
+                />
+            ) : (
+                ''
+            )}
 
-            <Password showWarning={showWarning} getValue={data => setPassword(data)} />
+            <Password
+                showWarning={showWarning}
+                getValue={(data) => setPassword(data)}
+            />
 
-            {showWarning ? <Warning message={warningMessage} /> : ""}
+            {showWarning ? <Warning message={warningMessage} /> : ''}
 
             <Button
                 loginIsLoading={loginIsLoading}
@@ -104,19 +118,17 @@ function FormInputs({ authType, button }) {
                 isDisable={isDisableButton}
                 handleSubmit={handleSubmit}
             >
-                {loginIsLoading || signUpIsLoading ? (<WhiteSpinner />) : button}
+                {loginIsLoading || signUpIsLoading ? <WhiteSpinner /> : button}
             </Button>
         </>
     );
 }
 
-
 const Warning = ({ message }) => {
-
     return (
         <div className={styles.warning}>
             <p>{message}</p>
         </div>
-    )
-}
+    );
+};
 export default FormInputs;
